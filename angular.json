@@ -25,9 +25,14 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/bootstrap-5/dist/css/bootstrap.min.css",
+              "src/assets/fontawesome-free/css/all.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/fontawesome-free/js/all.js",
+              "src/assets/bootstrap-5/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {

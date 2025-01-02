@@ -1,1 +1,258 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  body{
+    background-color: darkgray;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  main{
+    border: 2px solid gray;
+    height: 100vh;
+    position: relative;
+  }
+  .background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+  }
+  .cover svg{
+    width: 100px;
+    height: 100px;
+    color: rgba(255, 255, 255, 0.29);
+  }
+  .cover p{
+    font-size: 85px;
+    -webkit-text-stroke: 1px #ffffffc7;
+    color: #67646400;
+  }
+  .cover{
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 30px;
+    position: relative;
+  }
+  .cover::before{
+    position: absolute;
+    content: '';
+    width: 105%;
+    height: 105%;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    border-top: 3px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    animation: spin 5s linear infinite;
+    box-shadow: 3px 3px 5px 5px rgba(255, 255, 255, 0.548);
+  
+  }
+  .cover::after{
+    position: absolute;
+    content: '';
+    width: 98%;
+    height: 98%;
+    border-right: 3px solid rgb(0, 8, 255);
+    border-left: 3px solid rgb(0, 8, 255);
+    border-radius: 50%;
+    animation: spin 5s linear 1.25s infinite;
+    box-shadow: inset 3px 3px 5px 5px rgba(0, 4, 255, 0.548);
+  }
+  .row{
+    padding-top: 20px;
+  }
+  .col-2{
+    height: 90vh;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    border-radius: 10px;
+  }
+  .col-2 h3{
+    color: white;
+  }
+  .col-2 .menu-item{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 15px 0;
+    border: 1px solid white;
+    padding: 10px;
+  }
+  .menu-item svg{
+    width: 65px;
+    height: 65px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: white;
+  }
+  .menu-item a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+  }
+  .col-5,.col-4{
+    height: 86.95vh;
+    z-index: 1;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.025);
+  }
+  .col-5{
+    margin-right: 10px;
+    padding-top: 30px;
+    position: relative;
+    background-color: white;
+  }
+  .top-div a{
+    padding: 2px 15px;
+    width: auto;
+    border-radius: 3px;
+  }
+  .popular-burgers h2{
+    color: rgb(0, 0, 0);
+  }
+  .card{
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 5px rgba(255, 255, 255, 0.548);
+    border: none;
+    cursor: pointer;
+  }
+  .card img{
+    border-radius: 5px 5px 0 0;
+  }
+  .card-body{
+    padding: 5px;
+    background-color: black;
+    border-radius: 0 0 5px 5px;
+  }
+  .card-body p{
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+  }
+  .card-bottom{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    font-size: 16px;
+  }
+  .card-bottom p{
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .card-bottom svg{
+    color: white;
+    height: 20px;
+    width: 20px;
+    transform: translateY(5px);
+  }
+  .numeric-output{
+    width: 95%;
+    height: 70px;
+  }
+  .numeric-output input{
+    width: 100%;
+    height: 100px;
+    color: black;
+    text-transform: uppercase;
+    font-size: 60px;
+    text-align: end;
+    padding: 0 15px;
+    border-radius: 5px;
+  }
+  .output-body{
+    background-color: white;
+    margin-top: 35px;
+    width: 95%;
+    height: 500px;
+    border-radius: 5px;
+    padding: 0 15px;
+    position: relative;
+  }
+  .duft-status-bar{
+    position: fixed;
+    bottom: 2%;
+    left: 5%;
+    background-color: #000000;
+    width: 90%;
+    height: 50px;
+    border-radius: 35px 35px 5px 5px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 5px 5px 5px #ffffff;
+  }
+  .section{
+    width: 30%;
+    height: 45px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px solid white;
+  }
+  .section:nth-child(1){
+    border-left: none;
+  }
+  .section p{
+    margin: auto 5px;
+    font-weight: 600;
+    color: white;
+  }
+  .status-bar-icon{
+    position: relative;
+    margin-left: 50px;
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  .status-bar-icon::before{
+    position: absolute;
+    top: 0;
+    left: 45%;
+    content: '';
+    width: 5px;
+    height: 60px;
+    background: linear-gradient(#ffffff 30%,#06e606 70%);
+    transform: translateY(-10%);
+    animation: spin 2s linear infinite;
+  }
+  .status-bar-icon::after{
+    position: absolute;
+    content: '';
+    width: 80%;
+    height: 80%;
+    background-color: rgb(0, 0, 0);
+    inset: 3.75px;
+    border-radius: 50%;
+  }
+  
+  @keyframes spin {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+  }
