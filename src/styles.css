@@ -80,20 +80,59 @@
     flex-direction: column;
     position: relative;
     border-radius: 10px;
+    z-index: 5;
+    background: #000000;
+    overflow: hidden;
+  }
+  .express-menu{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 40px;
+    height: 60%;
+    transform: translateY(140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    opacity: 1;
+    transition: 0.5s ease;
+  }
+  .express-menu.hidden{
+    transform: scale(0.5);
+    pointer-events: none;
+    opacity: 0;
+  }
+  .express-1{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px 2px white;
+  }
+  .express-1:nth-child(2){
+    box-shadow: 2px 2px 2px 2px rgb(255, 0, 0);
   }
   .col-2 h3{
     color: white;
   }
   .col-2 .menu-item{
-    width: 100px;
+    width: 120px;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 15px 0;
-    border: 1px solid white;
     padding: 10px;
+    border-radius: 15px;
+  }
+  .menu-item.active{
+    box-shadow: 3px 2px 3px 2px #060de6;
   }
   .menu-item svg{
     width: 65px;
@@ -109,17 +148,23 @@
     color: rgb(255, 255, 255);
     font-size: 12px;
   }
-  .col-5,.col-4{
+  .middle-div,.output-panel{
     height: 86.95vh;
     z-index: 1;
     border-radius: 3px;
     background-color: rgba(255, 255, 255, 0.025);
+    flex-grow: 1;
+    animation: blend-in 0.5s linear forwards;
   }
-  .col-5{
+  .middle-div{
     margin-right: 10px;
     padding-top: 30px;
     position: relative;
     background-color: white;
+    left: 0;
+  }
+  .middle-div.toggled-off{
+    animation: toggleMenu 0.25s linear forwards;
   }
   .top-div a{
     padding: 2px 15px;
@@ -165,9 +210,14 @@
     width: 20px;
     transform: translateY(5px);
   }
+  .output-panel{
+    transition: all 2s ease;
+  }
   .numeric-output{
-    width: 95%;
+    width: 100%;
     height: 70px;
+    position: relative;
+    right: 13px;
   }
   .numeric-output input{
     width: 100%;
@@ -181,12 +231,66 @@
   }
   .output-body{
     background-color: white;
+    right: 13px;
     margin-top: 35px;
-    width: 95%;
+    width: 100%;
     height: 500px;
     border-radius: 5px;
     padding: 0 15px;
     position: relative;
+  }
+  .toggle-menu-container{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: auto;
+    padding: 15px;
+  }
+  .menu-label{
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 20px;
+    margin-bottom: 15px;
+  }
+  .menu-label input{
+    display: none;
+  }
+  input:checked + .sliding-element{
+    background-color: rgb(17, 0, 255);
+  }
+  input:checked + .sliding-element::after{
+    transform: translateX(30px);
+  }
+  .label-item{
+    position: relative;
+    top: 3px;
+    margin-left: 65px;
+    font-size: 14px;
+    color: #222;
+    font-weight: 700;
+    width: 110px;
+  }
+  .sliding-element{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: gray;
+    border-radius: 5px;
+    transition: 0.3s ease;
+  }
+  .sliding-element::after{
+    position: absolute;
+    content: '';
+    width: 28px;
+    height: 18px;
+    inset: 1px 1px;
+    background-color: white;
+    border-radius: 5px;
+    transition: 0.5s ease;
   }
   .duft-status-bar{
     position: fixed;
@@ -196,7 +300,7 @@
     width: 90%;
     height: 50px;
     border-radius: 35px 35px 5px 5px;
-    z-index: 2;
+    z-index: 6;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -234,7 +338,7 @@
     content: '';
     width: 5px;
     height: 60px;
-    background: linear-gradient(#ffffff 30%,#06e606 70%);
+    background: linear-gradient(#ffffff 30%,#0a06e6 70%);
     transform: translateY(-10%);
     animation: spin 2s linear infinite;
   }
@@ -254,5 +358,29 @@
     }
     100%{
         transform: rotate(360deg);
+    }
+  }
+  @keyframes toggleMenu {
+    0%{
+      left: 0;
+    }
+    50%{
+      left: -50%;
+      display: none;
+    }
+    100%{
+      left: -100%;
+      display: none;
+    }
+  }
+  @keyframes blend-in {
+    0%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
     }
   }

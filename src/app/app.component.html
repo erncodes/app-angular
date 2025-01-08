@@ -7,32 +7,42 @@
   </div>
   <div class="row">
       <div class="col-2">
+        <div [ngClass]="{'express-menu' : true, 'hidden' : !isPanelExpanded}">
+            <div class="express-1">
+                <i class="fa fa-bars" title="menu"></i>
+            </div>
+            <div class="express-1">
+                <i class="fa fa-delete-left" title="void"></i>
+            </div>
+            <div class="express-1">
+                <i class="fa fa-bars" title="total"></i>
+            </div>
+        </div>
           <h3> <i class="fa fa-chess-knight"></i>Dufty POS</h3>
-          <div class="menu-item">
+          <div (click)="ActivateMenuItem('Pizza')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Pizza'}">
               <i class="fa fa-pizza-slice"></i>
               <a href="" class="menu-link">Pizzas</a>
           </div>
-          <div class="menu-item">
+          <div (click)="ActivateMenuItem('Burger')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Burger'}">
               <i class="fa fa-burger"></i>
               <a href="" class="menu-link">Burgers</a>
           </div>
-          <div class="menu-item">
+          <div (click)="ActivateMenuItem('Meal')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Meal'}">
               <i class="fa fa-plate-wheat"></i>
               <a href="" class="menu-link">Meals</a>
           </div>
-          <div class="menu-item">
+          <div (click)="ActivateMenuItem('Drink')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Drink'}">
               <i class="fa fa-martini-glass-citrus"></i>
               <a href="" class="menu-link">Drinks</a>
           </div>
       </div>
-      <div class="col-5 flex-grow-1">
+      <div [ngClass]="{'col-5 middle-div' : true,'toggled-off': isPanelExpanded}">
           <div class="top-div">
-              <a href="" class="btn btn-outline-dark">Menu All</a>
-              <a href="" class="btn btn-outline-dark">Promotions</a>
-              <a href="" class="btn btn-outline-dark">Search</a>
+              <a href="" class="btn btn-outline-dark"><i class="fa fa-bars"></i> All Menu</a>
+              
           </div>
           <div class="popular-burgers row">
-              <h2>Popular Burgers</h2>
+              <h2>Popular {{activeMenu? activeMenu + 's' : 'Burgers'}}</h2>
               <div class="col-3 my-2">
                   <div class="card">
                       <img class="card-img-top" src="../assets/images/1.jpg" alt="">
@@ -132,11 +142,90 @@
          
           </div>
       </div>
-      <div class="col-4">
+      <div class="col-4 output-panel">
           <div class="numeric-output">
               <input type="text" placeholder="0.00">
           </div>
           <div class="output-body">
+            <div class="cart-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-list">
+                                <table cellpadding="0" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="15%">Barcode</th>
+                                            <th width="15%">Product</th>
+                                            <th width="15%">Quantity</th>
+                                            <th width="15%">Unit Price</th>
+                                            <th width="15%">Inc. VAT</th>
+                                            <th width="15%">Discount</th>
+                                            <th width="10%">Total</th>
+                                        </tr>
+                                    </thead>
+                                  <!--
+                                    <tbody>
+                                          <tr *ngFor="let wishItem of wishListProducts,let i = index" [class]="(selectedProduct?.id == wishItem.id)? 'selected-tr':'tr'">
+                                              <td width="45%">
+                                                  <div class="display-flex align-center">
+                                                      <div class="img-product">
+                                                          <img [src]="wishItem.imageUrl" alt="" class="mCS_img_loaded">
+                                                      </div>
+                                                      <div class="name-product">
+                                                          {{wishItem.title}}
+                                                      </div>
+                                                  </div>
+                                              </td>
+                                              <td width="15%" class="price">{{wishItem.price | currency : 'R'}}</td>
+                                              <td width="15%"><span [class]="wishItem.isInStock? 'in-stock-box':'out-of-stock-box'">{{wishItem.isInStock? 'In Stock' : 'Out Of Stock'}}</span></td>
+                                              <td width="15%">
+                                                  <div class="wishAdd">
+                                                      <div class="product-option-div p-2" *ngIf="selectedProduct?.id == wishItem.id">
+                                                          <header class="fw-bold ms-2 mb-2">Please Choose</header>
+                                                          <div class="row w-100" >
+                                                              <dt class="col-3 pt-1">Color:</dt>
+                                                              <dd class="col-8">
+                                                                <div class="d-flex">
+                                                                  <div class="d-flex flex-column pt-1 mx-1" *ngFor="let color of wishItem.colorOptions">
+                                                                    <input type="radio" id="color-radio"  [value]="color" name="color" [(ngModel)]="selectedColor"/>
+                                                                    <label for="color-radio">{{color}}</label>
+                                                                  </div>
+                                                                </div>
+                                                              </dd>
+                                                              <dt class="col-3 pt-1">Size:</dt>
+                                                              <dd class="col-9 ">
+                                                                <select class="form-select border border-secondary" style="height: 35px;" [(ngModel)]="selectedSize">
+                                                                  <option selected>Choose</option>
+                                                                  <option *ngFor="let size of wishItem.sizeOptions" [value]="size">{{size}}</option>
+                                                                </select>
+                                                              </dd>
+                                                              <div class="confirmOrCancel">
+                                                                  <button type="button" class="round-black-btn small-btn" (click)="CancelAddToCart()">Cancel</button>
+                                                                  <button type="button" class="round-black-btn small-btn" (click)="ConfirmAddToCart(wishItem,i)">Confirm</button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <button class="round-black-btn small-btn" (click)="AddToCart(wishItem, i)">{{wishItem.isInStock? 'Add to Cart':'Notify Me'}}</button>
+                                                  </div>
+                                              </td>
+                                              <td width="10%" class="text-center"><a class="trash-icon"><i class="far fa-trash-alt" (click)="RemoveFromWishList(i)"></i></a></td>
+                                          </tr>
+                                      </tbody>
+                                    -->  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="toggle-menu-container">
+                <div class="menu-label">
+                    <input type="checkbox" id="menu-check" (click)="TogglePanel()">
+                    <div class="sliding-element"></div>
+                    <label for="menu-check" class="menu-label"><p class="label-item">Max Screen</p></label>
+                </div>
+            </div>
           </div>
       </div>
   </div>
