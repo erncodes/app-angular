@@ -8,6 +8,10 @@ export class CartService {
 
   constructor() { }
 
+  getProducts() : Product[] | []{
+    return this.products;
+  }
+
   products : Product[] = [
     {
       id : 160015,
