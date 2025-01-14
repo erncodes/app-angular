@@ -10,7 +10,7 @@ export class AppComponent implements OnInit{
 
   isPanelExpanded : boolean = false;
   isSearchMode : boolean = false;
-  isPOSMode : boolean = false;
+  isPOSMode : boolean = true;
   activeMenu : string = '';
   cartService : CartService = inject(CartService);
   products : any[] = [];

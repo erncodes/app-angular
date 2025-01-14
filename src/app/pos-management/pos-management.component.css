@@ -29,7 +29,7 @@
   }
 
  nav{
-    background-color: black;
+    background-color: #524b4e;
     position: fixed;
     top: 0;
     width: 98%;
@@ -37,11 +37,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0 0 35px 35px;
+    box-shadow: 0px 3px 2px 2px #00000045;
+    z-index: 0;
   }
   .logo{
     text-decoration: none;
     color: white;
     font-size: 40px;
+    font-weight: 700;
   }
   .user-details{
     position: absolute;
@@ -55,36 +59,41 @@
     background-color: white;
     border-radius: 15px 0 15px 0;
     height: 30px;
+    box-shadow: 2px 2px 3px 3px #ffffff;
     width: auto;
   }
   .user-details p{
     margin-bottom: 0;
     font-weight: 600;
+    color: #524b4e;
   }
   .sidebar-menu{
     position: absolute;
     height: 84vh;
     width: 200px;
-    background-color: rgb(0, 0, 0);
     top: 15vh;
     left: 11px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    box-shadow: 3px 0px 3px 3px rgba(0, 0, 0, 0.262);
+    border-radius: 15px;
   }
 
   .menu-item{
     width: 80%;
-    height: 100px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid white;
+    background-color: #524b4e;
+    border-radius: 5px;
+    padding: 4px 8px;
   }
   .menu-item svg{
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
   }
   .main-content{
     position: absolute;
