@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/models/product';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-
   constructor() { }
+  filteredProdArray : any[] = [];
+  filteredProdsSub : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+
+  getSelectedPopular(filterText? : string){
+    if(filterText == ''){
+      this.filteredProdArray = this.products.filter(prod => prod.rating > 4.5 && prod.category == 'Burgers');
+      this.filteredProdsSub.next(this.filteredProdArray);
+     return this.filteredProdArray;
+    }
+    else{
+      this.filteredProdArray = this.products.filter(prod => prod.rating > 4.5 && prod.category == filterText);
+      this.filteredProdsSub.next(this.filteredProdArray);
+     return this.filteredProdArray;
+    }
+  }
 
   getProducts() : Product[] | []{
     return this.products;
@@ -24,11 +39,12 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 62.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160016,
-      title : 'Buffalo Chicken Burger',
+      title : 'Buffalo Chicken',
       description : 'Large chicken burger',
       category : 'Burgers',
       size : 'large',
@@ -37,24 +53,26 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 82.99,
-      discount : 0
+      discount : 0,
+      rating : 4.8
     },
     {
       id : 160017,
-      title : 'Swiss Burger',
+      title : 'Swiss Grilled Burger',
       description : 'Grilled mushroom burger',
-      category : 'medium',
-      size : 'Mega',
+      category : 'Burgers',
+      size : 'medium',
       imageUrl : '../assets/images/burger_images/Grilled-Mushroom-Swiss-Burger.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 115.99,
-      discount : 0
+      discount : 0,
+      rating : 4.8
     },
     {
       id : 160018,
-      title : 'Spicy Durbanite Burger',
+      title : 'Spicy Durbanite',
       description : 'Spicy Durban beef burger',
       category : 'Burgers',
       size : 'medium',
@@ -63,7 +81,8 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 82.99,
-      discount : 0
+      discount : 0,
+      rating : 4.9
     },
     {
       id : 160019,
@@ -76,7 +95,8 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 123.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160020,
@@ -88,8 +108,9 @@ export class CartService {
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
-      price : 82.99,
-      discount : 0
+      price : 79.99,
+      discount : 0,
+      rating : 4.6
     },
     {
       id : 160021,
@@ -102,7 +123,8 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 82.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160022,
@@ -115,11 +137,12 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 82.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160023,
-      title : 'Spicy Jalapeno Burger',
+      title : 'Spicy Jalapeno',
       description : 'Spicy burger',
       category : 'Burgers',
       size : 'large',
@@ -127,8 +150,9 @@ export class CartService {
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
-      price : 82.99,
-      discount : 0
+      price : 94.99,
+      discount : 0,
+      rating : 4.8
     },
     {
       id : 160024,
@@ -141,7 +165,8 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 82.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160025,
@@ -154,7 +179,8 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 52.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
 
 
@@ -164,29 +190,31 @@ export class CartService {
     //pizza
     {
       id : 160030,
-      title : 'BBQ-Chicken-Pizza',
+      title : 'BBQ Chicken Pizza',
       description : 'A BBQ pizza',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/BBQ-Chicken-Pizza.jpg',
+      imageUrl : '../assets/images/pizza_images/BBQ-Chicken-Pizza.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 115.99,
-      discount : 0
+      discount : 0,
+      rating : 4.8
     },
     {
       id : 160031,
       title : 'Pepperoni Pizza (black olives)',
       description : 'Black-Olives Pepperoni Pizza',
-      category : 'Pizza',
+      category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Black-Olives-and-Pepperoni.jpg',
+      imageUrl : '../assets/images/pizza_images/Black-Olives-and-Pepperoni.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 122.99,
-      discount : 0
+      discount : 0,
+      rating : 4.7
     },
     {
       id : 160032,
@@ -194,12 +222,13 @@ export class CartService {
       description : 'A chicken sausage pizza with onions and peppers.',
       category : 'Pizzas',
       size : 'small',
-      imageUrl : '../assets/pizza_images/Chicken-Sausage-Pizza-with-Onions-and-Peppers.jpg',
+      imageUrl : '../assets/images/pizza_images/Chicken-Sausage-Pizza-with-Onions-and-Peppers.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 52.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160033,
@@ -207,12 +236,13 @@ export class CartService {
       description : 'Greek pizza.',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Greek-Pizza.jpg',
+      imageUrl : '../assets/images/pizza_images/Greek-Pizza.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 95.99,
-      discount : 0
+      discount : 0,
+      rating : 4.6
     },
     {
       id : 160034,
@@ -220,12 +250,13 @@ export class CartService {
       description : 'Grilled pizza with red onions and feta.',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Grilled-Pizza-With-Red-Onions-and-Feta.jpg',
+      imageUrl : '../assets/images/pizza_images/Grilled-Pizza-With-Grilled-Red-Onions-and-Feta.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 105.99,
-      discount : 0
+      discount : 0,
+      rating : 4.6
     },
     {
       id : 160035,
@@ -233,12 +264,13 @@ export class CartService {
       description : 'Olive pizza with red onions.',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Olive-Pizza-with-Red-Onions.jpg',
+      imageUrl : '../assets/images/pizza_images/Olive-Pizza-with-Red-Onions.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 52.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160036,
@@ -246,12 +278,13 @@ export class CartService {
       description : 'A pepperoni pizza',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Pepperoni-Pizza.jpg',
+      imageUrl : '../assets/images/pizza_images/Pepperoni-Pizza.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 102.99,
-      discount : 0
+      discount : 0,
+      rating : 4.7
     },
     {
       id : 160037,
@@ -259,12 +292,13 @@ export class CartService {
       description : 'An avocado pizza',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Pizzas-avacados.jpg',
+      imageUrl : '../assets/images/pizza_images/Pizzas-avacados.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 92.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160038,
@@ -272,12 +306,13 @@ export class CartService {
       description : 'Sausage Pizza',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Sausage-Pizza-with-BBQ-Sauce.jpg',
+      imageUrl : '../assets/images/pizza_images/Sausage-Pizza-with-BBQ-Sauce.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 89.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
     {
       id : 160039,
@@ -285,12 +320,13 @@ export class CartService {
       description : 'Smoked sausage pizza.',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Smoked-Sausage-Pizza.jpg',
+      imageUrl : '../assets/images/pizza_images/Smoked-Sausage-Pizza.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 95.99,
-      discount : 0
+      discount : 0,
+      rating : 4.9
     },
     {
       id : 160040,
@@ -303,7 +339,8 @@ export class CartService {
       isInPromo : false,
       leftInStock : 30,
       price : 135.99,
-      discount : 0
+      discount : 0,
+      rating : 4
     },
   ];
 }

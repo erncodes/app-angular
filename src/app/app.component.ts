@@ -14,10 +14,16 @@ export class AppComponent implements OnInit{
   activeMenu : string = '';
   cartService : CartService = inject(CartService);
   products : any[] = [];
+  selectedPopularProducts : any[] = [];
 
   ngOnInit(): void {
     this.products = this.cartService.getProducts();
-    console.log(this.products)
+    this.cartService.getSelectedPopular('Burgers');
+    this.cartService.filteredProdsSub.subscribe((products)=>{
+      this.selectedPopularProducts =  products;
+      console.log(this.selectedPopularProducts)
+
+    })
   }
 
   TogglePanel(){
@@ -30,12 +36,14 @@ export class AppComponent implements OnInit{
     this.activeMenu = '';
   }
   ActivateMenuItem(menuItem : string){
+    this.cartService.getSelectedPopular(menuItem+'s');
     if (this.isPanelExpanded)
       this.isPanelExpanded = !this.isPanelExpanded;
     
     switch(menuItem){
       case 'Pizza':
       this.activeMenu = 'Pizza';
+      
       break;
       case 'Burger':
       this.activeMenu = 'Burger';

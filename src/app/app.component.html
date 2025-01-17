@@ -42,103 +42,18 @@
               </div>
               <div class="popular-burgers row">
                   <h2>Popular {{activeMenu? activeMenu + 's' : 'Burgers'}}</h2>
-                  <div class="col-3 my-2">
+                  <div class="col-3 my-2" *ngFor="let prod of selectedPopularProducts">
                       <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
+                          <img class="card-img-top" [src]="prod.imageUrl" alt="">
                           <div class="card-body">
-                              <p class="title">Cheese Burger</p>
+                              <p class="title">{{prod.title}}</p>
                               <div class="card-bottom">
-                                  <p>R 75.99</p>
+                                  <p>{{prod.price}}</p>
                                   <i class="fa fa-basket-shopping"></i>
                               </div>
                           </div>
                       </div>
                   </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-3 my-2">
-                      <div class="card">
-                          <img class="card-img-top" src="../assets/images/1.jpg" alt="">
-                          <div class="card-body">
-                              <p class="title">Cheese Burger</p>
-                              <div class="card-bottom">
-                                  <p>R 75.99</p>
-                                  <i class="fa fa-basket-shopping"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-             
               </div>
           </div>
           <div class="col-4 output-panel">
