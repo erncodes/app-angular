@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/models/product';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,13 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   constructor() { }
   filteredProdArray : any[] = [];
+  cartProducts :Product[]  = [];
+  cartTotal : number = 0;
+
   filteredProdsSub : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  productsInCart : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  cartTotalSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0); 
+  productPriceSubject : Subject<number> = new Subject<number>();
 
   getSelectedPopular(filterText? : string){
     if(filterText == ''){
@@ -25,6 +31,18 @@ export class CartService {
 
   getProducts() : Product[] | []{
     return this.products;
+  }
+
+  addToCart(id : string){
+    var selectedProd = this.products.find(product=>product.id === +id);
+
+    if(selectedProd){
+      this.cartProducts.push(selectedProd);
+      this.productsInCart.next(this.cartProducts);
+      this.cartTotal += selectedProd.price;
+      this.cartTotalSubject.next(this.cartTotal);
+      this.productPriceSubject.next(selectedProd.price);
+    }
   }
 
   products : Product[] = [
@@ -86,7 +104,7 @@ export class CartService {
     },
     {
       id : 160019,
-      title : 'Vegan Avocado Burger',
+      title : 'Vegan Avocado',
       description : 'Avocado burger',
       category : 'Burgers',
       size : 'large',
@@ -96,7 +114,7 @@ export class CartService {
       leftInStock : 30,
       price : 123.99,
       discount : 0,
-      rating : 4
+      rating : 4.6
     },
     {
       id : 160020,
@@ -118,13 +136,13 @@ export class CartService {
       description : 'A beef burger',
       category : 'Burgers',
       size : 'mega',
-      imageUrl : '../assets/images/burger_images/Beef-Burger.jpg',
+      imageUrl : '../assets/images/burger_images/Mexican.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 82.99,
       discount : 0,
-      rating : 4
+      rating : 4.8
     },
     {
       id : 160022,
@@ -174,13 +192,13 @@ export class CartService {
       description : 'A chicken burger',
       category : 'Burgers',
       size : 'small',
-      imageUrl : '../assets/burger_images/Chicken-Burger-McDonalds.jpg',
+      imageUrl : '../assets/images/burger_images/Chicken-Burger-Mcdonalds.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 52.99,
       discount : 0,
-      rating : 4
+      rating : 4.9
     },
 
 
@@ -204,7 +222,7 @@ export class CartService {
     },
     {
       id : 160031,
-      title : 'Pepperoni Pizza (black olives)',
+      title : 'Pepperoni Pizza',
       description : 'Black-Olives Pepperoni Pizza',
       category : 'Pizzas',
       size : 'large',
@@ -218,7 +236,7 @@ export class CartService {
     },
     {
       id : 160032,
-      title : 'Chicken Sausage Pizza',
+      title : 'Chicken Sausage',
       description : 'A chicken sausage pizza with onions and peppers.',
       category : 'Pizzas',
       size : 'small',
@@ -228,11 +246,11 @@ export class CartService {
       leftInStock : 30,
       price : 52.99,
       discount : 0,
-      rating : 4
+      rating : 4.7
     },
     {
       id : 160033,
-      title : 'Greek Pizza',
+      title : ' Spicy Greek Pizza',
       description : 'Greek pizza.',
       category : 'Pizzas',
       size : 'large',
@@ -246,7 +264,7 @@ export class CartService {
     },
     {
       id : 160034,
-      title : 'Grilled Pizza',
+      title : 'Grilled Onion Pizza',
       description : 'Grilled pizza with red onions and feta.',
       category : 'Pizzas',
       size : 'large',
@@ -260,7 +278,7 @@ export class CartService {
     },
     {
       id : 160035,
-      title : 'Olive Pizza',
+      title : 'Epic Olive Pizza',
       description : 'Olive pizza with red onions.',
       category : 'Pizzas',
       size : 'large',
@@ -270,7 +288,7 @@ export class CartService {
       leftInStock : 30,
       price : 52.99,
       discount : 0,
-      rating : 4
+      rating : 4.8
     },
     {
       id : 160036,
@@ -316,7 +334,7 @@ export class CartService {
     },
     {
       id : 160039,
-      title : 'Smoked Sausage Pizza',
+      title : 'Smoked Sausage',
       description : 'Smoked sausage pizza.',
       category : 'Pizzas',
       size : 'large',
@@ -334,11 +352,170 @@ export class CartService {
       description : 'Spare rib pizza',
       category : 'Pizzas',
       size : 'large',
-      imageUrl : '../assets/pizza_images/Spare-Rib-Pizza.jpg',
+      imageUrl : '../assets/images/pizza_images/Spare-Rib-Pizza.jpg',
       isInStock : true,
       isInPromo : false,
       leftInStock : 30,
       price : 135.99,
+      discount : 0,
+      rating : 4
+    },
+
+
+
+
+    //meals
+    {
+      id : 160050,
+      title : 'Meal-1',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (1).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
+      discount : 0,
+      rating : 4.7
+    },
+    {
+      id : 160051,
+      title : 'Meal-2',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (2).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
+      discount : 0,
+      rating : 4.6
+    },
+    {
+      id : 160052,
+      title : 'Meal-3',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (3).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
+      discount : 0,
+      rating : 4.9
+    },
+    {
+      id : 160053,
+      title : 'Meal-4',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (4).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 64.99,
+      discount : 0,
+      rating : 4.8
+    },
+    {
+      id : 160054,
+      title : 'Meal-5',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (5).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 72.99,
+      discount : 0,
+      rating : 4.6
+    },
+    {
+      id : 160055,
+      title : 'Meal-6',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (6).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
+      discount : 0,
+      rating : 4.8
+    },
+    {
+      id : 160056,
+      title : 'Meal-7',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (7).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 95.99,
+      discount : 0,
+      rating : 4.9
+    },
+    {
+      id : 160057,
+      title : 'Meal-8',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (8).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 66.99,
+      discount : 0,
+      rating : 4.8
+    },
+    {
+      id : 160058,
+      title : 'Meal-9',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (9).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
+      discount : 0,
+      rating : 4
+    },
+    {
+      id : 160059,
+      title : 'Meal-10',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (9).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
+      discount : 0,
+      rating : 4
+    },
+    {
+      id : 160060,
+      title : 'Meal-6',
+      description : 'Meals description here.',
+      category : 'Meals',
+      size : '',
+      imageUrl : '../assets/images/meals_images/Meal (6).jpg',
+      isInStock : true,
+      isInPromo : false,
+      leftInStock : 30,
+      price : 56.99,
       discount : 0,
       rating : 4
     },

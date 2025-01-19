@@ -19,14 +19,14 @@
                 </div>
             </div>
               <h3><i class="fa fa-chess-knight"></i>Dufty POS</h3>
-              <div (click)="ActivateMenuItem('Pizza')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Pizza'}">
-                  <i class="fa fa-pizza-slice"></i>
-                  <a class="menu-link">Pizzas</a>
-              </div>
               <div (click)="ActivateMenuItem('Burger')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Burger'}">
                   <i class="fa fa-burger"></i>
                   <a class="menu-link">Burgers</a>
               </div>
+              <div (click)="ActivateMenuItem('Pizza')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Pizza'}">
+                <i class="fa fa-pizza-slice"></i>
+                <a class="menu-link">Pizzas</a>
+            </div>
               <div (click)="ActivateMenuItem('Meal')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Meal'}">
                   <i class="fa fa-plate-wheat"></i>
                   <a class="menu-link">Meals</a>
@@ -43,13 +43,12 @@
               <div class="popular-burgers row">
                   <h2>Popular {{activeMenu? activeMenu + 's' : 'Burgers'}}</h2>
                   <div class="col-3 my-2" *ngFor="let prod of selectedPopularProducts">
-                      <div class="card">
+                      <div class="card" (click)="AddToCart(prod.id)">
                           <img class="card-img-top" [src]="prod.imageUrl" alt="">
                           <div class="card-body">
                               <p class="title">{{prod.title}}</p>
                               <div class="card-bottom">
-                                  <p>{{prod.price}}</p>
-                                  <i class="fa fa-basket-shopping"></i>
+                                  <p>{{prod.price | currency : 'R'}}</p>
                               </div>
                           </div>
                       </div>
@@ -58,8 +57,8 @@
           </div>
           <div class="col-4 output-panel">
               <div class="numeric-output">
-                  <span class="text-output">Change</span>
-                  <input type="text" placeholder="0.00">
+                  <span class="text-output"></span>
+                  <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)">
               </div>
               <div class="output-body">
                 <div class="cart-wrap">
@@ -80,14 +79,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                              <tr *ngFor="let item of products,let i = index">
+                                              <tr *ngFor="let item of productsInCart,let i = index">
                                                   <td width="15%">
                                                               {{item.id}}
                                                   </td>
                                                   <td width="15%">
                                                               {{item.title}}
                                                   </td>
-                                                  <td width="10%" *ngIf="isPanelExpanded">0</td>
+                                                  <td width="10%" *ngIf="isPanelExpanded">1</td>
                                                   <td width="15%">{{item.price | currency : 'R'}}</td>
                                                   <td width="15%" *ngIf="isPanelExpanded">
                                                     {{item.price + 10 | currency : 'R'}}
@@ -111,7 +110,7 @@
                     </div>
                     <div class="subtotal-container">
                         <span class="total-text">Total :</span>
-                        <span class="total-number">0.00</span>
+                        <span class="total-number">{{cartTotal | currency : 'R'}}</span>
                     </div>
                 </div>
               </div>

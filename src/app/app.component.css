@@ -25,5 +25,5 @@
     font-size: 13px;
 }
 .table-list tr:nth-child(even){
-    background-color: rgba(173, 216, 230, 0.692);
+    background-color: #524b4e6e;
 }

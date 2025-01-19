@@ -1,5 +1,7 @@
 import { Component,inject,NgModule, OnInit } from '@angular/core';
+import { Product } from 'src/models/product';
 import { CartService } from 'src/services/cart.service';
+import { PosManagementService } from 'src/services/pos-management.service';
 
 @Component({
   selector: 'app-root',
@@ -10,30 +12,54 @@ export class AppComponent implements OnInit{
 
   isPanelExpanded : boolean = false;
   isSearchMode : boolean = false;
-  isPOSMode : boolean = true;
-  activeMenu : string = '';
-  cartService : CartService = inject(CartService);
-  products : any[] = [];
+  isPOSMode : boolean = false;
+  activeMenu : string = 'Burger';
+  products : Product[] = [];
+  productsInCart : Product[] = [];
   selectedPopularProducts : any[] = [];
+  cartTotal : number = 0;
+  productPrice : number = 0;
+
+  cartService : CartService = inject(CartService);
+  posManagement : PosManagementService = inject(PosManagementService);
 
   ngOnInit(): void {
     this.products = this.cartService.getProducts();
     this.cartService.getSelectedPopular('Burgers');
     this.cartService.filteredProdsSub.subscribe((products)=>{
       this.selectedPopularProducts =  products;
-      console.log(this.selectedPopularProducts)
-
+    })
+    this.cartService.productsInCart.subscribe((products)=>{
+      this.productsInCart = products;
+    })
+    this.cartService.cartTotalSubject.subscribe((total)=>{
+      this.cartTotal = total;
+    })
+    this.cartService.productPriceSubject.subscribe((price)=>{
+      this.productPrice = price;
+    })
+    this.posManagement.modeSubject.subscribe((value)=>{
+      this.isPOSMode = value;
     })
   }
-
+  AddToCart(id : string){
+    this.cartService.addToCart(id);
+  }
   TogglePanel(){
+    if(this.isPanelExpanded){
+      this.activeMenu = 'Burger';
+    }
+    else{
+      this.activeMenu = '';
+    }
     this.isPanelExpanded = !this.isPanelExpanded;
-    this.activeMenu = '';
+    this.cartService.getSelectedPopular('Burgers');
   }
   ToggleMode(){
     this.isSearchMode = !this.isSearchMode;
     this.isPanelExpanded = true;
     this.activeMenu = '';
+    this.cartService.getSelectedPopular('Burgers');
   }
   ActivateMenuItem(menuItem : string){
     this.cartService.getSelectedPopular(menuItem+'s');

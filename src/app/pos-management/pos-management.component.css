@@ -13,23 +13,46 @@
     width: 80px;
     height: 80px;
     color: rgb(0, 0, 0);
+    z-index: 5;
   }
   .cover p{
     font-size: 65px;
-    -webkit-text-stroke: 2px #000000c7;
+    -webkit-text-stroke: 3px #000000c7;
     color: #ffffff00;
+    position: relative;
+  }
+  .cover p::after{
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -25px;
+    width: 20px;
+    height: 120px;
+    background: linear-gradient(to right, transparent,white,transparent);
+    animation: shiny 10s linear alternate infinite;
+  }
+  @keyframes shiny {
+    0%{
+      transform: rotate(45deg) translate(0);
+    }
+    50%{
+      transform: rotate(45deg) translate(350px,-300px);
+    }
+    100%{
+      transform: rotate(45deg) translate(350px,-300px);
+    }
   }
   .cover span{
     color: #00000079;
     font-weight: 600;
-    border-radius: 15px;
+    border-radius: 40px;
     padding: 5px;
     box-shadow: 0px 2px 2px 2px #0000002e,inset 0px 2px 2px 2px #0000002e;
     border: 1px solid white;
   }
 
  nav{
-    background-color: #524b4e;
+    background-color: #000;
     position: fixed;
     top: 0;
     width: 98%;
@@ -65,7 +88,7 @@
   .user-details p{
     margin-bottom: 0;
     font-weight: 600;
-    color: #524b4e;
+    color: #000;
   }
   .sidebar-menu{
     position: absolute;
@@ -87,9 +110,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #524b4e;
+    background-color: #000;
     border-radius: 5px;
     padding: 4px 8px;
+    cursor: pointer;
   }
   .menu-item svg{
     width: 30px;
