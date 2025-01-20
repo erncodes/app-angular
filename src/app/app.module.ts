@@ -10,6 +10,8 @@ import { LoginComponent } from '../login/login.component';
 import { ProductComponent } from '../product/product.component';
 import { UserComponent } from '../user/user.component';
 import { PromoComponent } from '../promo/promo.component';
+import { AnalyticsComponent } from '../analytics/analytics.component';
+import { PosTransactComponent } from './pos-transact/pos-transact.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { PromoComponent } from '../promo/promo.component';
     LoginComponent,
     ProductComponent,
     UserComponent,
-    PromoComponent
+    PromoComponent,
+    AnalyticsComponent,
+    PosTransactComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+.row{
+    width: 1300px;
+    height: 583px;
+    border: 1px solid;
+}
+.col-2{
+    height: 300px;
+    border: 1px solid;
+    background-color: white;
+}

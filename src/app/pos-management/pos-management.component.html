@@ -6,10 +6,9 @@
             <span>management</span>
         </div>
     </div>
-
     <nav class="active">
         <div class="logo-container">
-            <a href="" class="logo"><i class="fa fa-chess-knight"></i>POS Management</a>
+            <a class="logo"><i class="fa fa-chess-knight"></i>POS Management</a>
         </div>
         <div class="user-details">
             <p>Logged In : Admin</p>
@@ -17,48 +16,45 @@
     </nav>
     <div class="sidebar-menu">
         <h3>Quick Menu</h3>
-        <div class="menu-item">
+        <div [ngClass]="{ 'menu-item' : true, 'active' : activePanel === 'PosManagement' || activePanel === 'PromoPanel' || activePanel === 'ProductPanel'}" (click)="SwitchActivePanel('PosManagement')">
             <i class="fa fa-tags"></i>
-            <a href="">Manage POS</a>
+            <a>Manage POS</a>
         </div>
-        <div class="menu-item">
+        <div [ngClass]="{ 'menu-item' : true, 'active' : activePanel === 'PosAnalytics'}" (click)="SwitchActivePanel('PosAnalytics')">
             <i class="fa fa-money-bill-trend-up"></i>
-            <a href="">POS Analytics</a>
+            <a>POS Analytics</a>
         </div>
-        <div class="menu-item">
+        <div [ngClass]="{ 'menu-item' : true, 'active' : activePanel === 'PosUsers'}" (click)="SwitchActivePanel('PosUsers')">
             <i class="fa fa-users"></i>
-            <a href="">Manage Users</a>
+            <a>Manage Users</a>
         </div>
         <div class="menu-item" (click)="SwitchToPOS()">
             <i class="fa fa-money-bill-transfer"></i>
-            <a href="">Switch To POS</a>
+            <a>Switch To POS</a>
         </div>
         <div class="menu-item">
             <i class="fa fa-arrow-left"></i>
-            <a href="">Sign Out</a>
+            <a>Sign Out</a>
         </div>
     </div>
     <div class="main-content">
-        <div class="row gap-2 px-5">
-            <h1><i class="fa fa-gear"></i> Manage POS</h1>
-            <div class="col-2">
+        <div class="row gap-2 px-3" *ngIf="activePanel == 'PosManagement'">
+            
+            <div class="col-2 ms-3" (click)="SwitchActivePanel('ProductPanel')">
                 <h2>Manage Products</h2>
             </div>
-            <div class="col-2">
+            <div class="col-2" (click)="SwitchActivePanel('PromoPanel')">
                 <h2>Manage Promotions</h2>
-            </div>
-            <div class="col-2">
-                <h2>Manage Inventory</h2>
-            </div>
-            <div class="col-2">
-                <h2>Manage Tax</h2>
             </div>
             <div class="col-2">
                 <h2>Manage Categories</h2>
             </div>
             <div class="col-12">
-                
             </div>
         </div>
+        <app-promo *ngIf="activePanel === 'PromoPanel'"></app-promo>
+        <app-product *ngIf="activePanel === 'ProductPanel'"></app-product>
+        <app-user *ngIf="activePanel === 'PosUsers'"></app-user>
+        <app-analytics *ngIf="activePanel === 'PosAnalytics'"></app-analytics>
     </div>
 </div>

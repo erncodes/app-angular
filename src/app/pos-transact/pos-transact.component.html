@@ -1,0 +1,146 @@
+<main *ngIf="isPOSMode">
+    <div class="background">
+        <div class="cover">
+            <i class="fa fa-chess-knight"></i>
+            <p>Dufty POS</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <div [ngClass]="{'express-menu' : true, 'hidden' : !isPanelExpanded}">
+                <div class="express-1" (click)="ToggleMode()">
+                    <i class="fa fa-bars" title="menu"></i>
+                </div>
+                <div class="express-1">
+                    <i class="fa fa-delete-left" title="void"></i>
+                </div>
+                <div class="express-1">
+                    <i class="fa fa-info" title="info"></i>
+                </div>
+            </div>
+            <h3><i class="fa fa-chess-knight"></i>Dufty POS</h3>
+            <div (click)="ActivateMenuItem('Burger')"
+                [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Burger'}">
+                <i class="fa fa-burger"></i>
+                <a class="menu-link">Burgers</a>
+            </div>
+            <div (click)="ActivateMenuItem('Pizza')"
+                [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Pizza'}">
+                <i class="fa fa-pizza-slice"></i>
+                <a class="menu-link">Pizzas</a>
+            </div>
+            <div (click)="ActivateMenuItem('Meal')" [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Meal'}">
+                <i class="fa fa-plate-wheat"></i>
+                <a class="menu-link">Meals</a>
+            </div>
+            <div (click)="ActivateMenuItem('Drink')"
+                [ngClass]="{'menu-item' : true, 'active' : activeMenu === 'Drink'}">
+                <i class="fa fa-martini-glass-citrus"></i>
+                <a class="menu-link">Drinks</a>
+            </div>
+        </div>
+        <div [ngClass]="{'col-5 middle-div' : true,'toggled-off': isPanelExpanded}">
+            <div class="top-div">
+                <a class="btn btn-outline-dark" (click)="ToggleMode()"><i class="fa fa-bars"></i> All Menu</a>
+            </div>
+            <div class="popular-burgers row">
+                <h2>Popular {{activeMenu? activeMenu + 's' : 'Burgers'}}</h2>
+                <div class="col-3 my-2" *ngFor="let prod of selectedPopularProducts">
+                    <div class="card" (click)="AddToCart(prod.id)">
+                        <img class="card-img-top" [src]="prod.imageUrl" alt="">
+                        <div class="card-body">
+                            <p class="title">{{prod.title}}</p>
+                            <div class="card-bottom">
+                                <p>{{prod.price | currency : 'R'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 output-panel">
+            <div class="numeric-output">
+                <span class="text-output"></span>
+                <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)">
+            </div>
+            <div class="output-body">
+                <div class="cart-wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-list">
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="tr-header">
+                                                <th width="15%">Barcode</th>
+                                                <th [ngStyle]="{width : !isPanelExpanded ? '40%' : '15%'}">Product Name
+                                                </th>
+                                                <th width="10%" *ngIf="isPanelExpanded">Quantity</th>
+                                                <th width="15%">Unit Price</th>
+                                                <th width="15%" *ngIf="isPanelExpanded">Inc. VAT</th>
+                                                <th width="15%" *ngIf="isPanelExpanded">Discount</th>
+                                                <th width="10%">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of productsInCart,let i = index">
+                                                <td width="15%">
+                                                    {{item.id}}
+                                                </td>
+                                                <td width="15%">
+                                                    {{item.title}}
+                                                </td>
+                                                <td width="10%" *ngIf="isPanelExpanded">1</td>
+                                                <td width="15%">{{item.price | currency : 'R'}}</td>
+                                                <td width="15%" *ngIf="isPanelExpanded">
+                                                    {{item.price + 10 | currency : 'R'}}
+                                                </td>
+                                                <td width="15%" *ngIf="isPanelExpanded"> 0.00
+                                                </td>
+                                                <td width="10%">{{item.price + 10 | currency : 'R'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-menu-container">
+                    <div class="menu-label">
+                        <input type="checkbox" id="menu-check" (click)="TogglePanel()">
+                        <div class="sliding-element"></div>
+                        <label for="menu-check" class="menu-label">
+                            <p class="label-item">Max Screen</p>
+                        </label>
+                    </div>
+                    <div class="subtotal-container">
+                        <span class="total-text">Total :</span>
+                        <span class="total-number">{{cartTotal | currency : 'R'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="{'search-container' : true, 'active' : isSearchMode}" (click)="ToggleMode()"></div>
+    <div class="duft-status-bar">
+        <div class="section">
+            <p>User :</p>
+            <p>Lira Opus</p>
+        </div>
+        <div class="section">
+            <p>IP Address :</p>
+            <p>196.10.68.001</p>
+        </div>
+        <div class="section">
+            <p>Connected To :</p>
+            <p>Database-DB</p>
+        </div>
+        <div class="section">
+            <p>POS Mode :</p>
+            <p>Ready</p>
+            <div class="status-bar-icon">
+            </div>
+        </div>
+    </div>
+</main>>
