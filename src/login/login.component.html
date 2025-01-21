@@ -23,7 +23,7 @@
                     <input type="checkbox" class="" id="remember-chkbox">
                 </div>
                 <div class="mb-3 text-center">
-                    <a href="" class="btn btn-outline-light mb-3">Login</a>
+                    <a href="" class="btn btn-outline-light mb-3" [routerLink]="isCashier ? 'PosTransact': 'PosManagement'">Login</a>
                     <p>Don't have an account ? <br> <a href="">Click here</a> to register.</p>
                 </div>
             </form>

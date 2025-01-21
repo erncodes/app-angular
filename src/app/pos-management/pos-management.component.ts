@@ -18,7 +18,9 @@ export class PosManagementComponent implements OnInit{
     this.activePanel = value;
   }
   ngOnInit(): void {
-    
+    this.posManagementService.activePanelSubject.subscribe((text)=>{
+      this.activePanel = text;
+    })
   }
 
 }

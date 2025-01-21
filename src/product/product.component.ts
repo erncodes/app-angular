@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PosManagementService } from 'src/services/pos-management.service';
 
 @Component({
   selector: 'app-product',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
+  posManagementService : PosManagementService = inject(PosManagementService);
 
+  SwitchBackToMain(value : string){
+    this.posManagementService.SwitchActivePanel(value);
+  }
 }

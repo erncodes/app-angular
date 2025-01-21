@@ -2,6 +2,10 @@
     width: 1300px;
     height: 583px;
     border: 1px solid;
+    padding: 20px;
+}
+.row .btn{
+    height: 40px;
 }
 .col-2{
     height: 300px;
