@@ -424,7 +424,7 @@ input:checked + .sliding-element::after{
 }
 .table-list table {
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 45px;
 }
 .table-list thead {
     border-bottom: 1px solid #e5e5e5;

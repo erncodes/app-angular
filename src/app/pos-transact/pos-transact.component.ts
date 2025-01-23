@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {  AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/models/product';
 import { CartService } from 'src/services/cart.service';
 import { PosManagementService } from 'src/services/pos-management.service';
@@ -8,7 +8,12 @@ import { PosManagementService } from 'src/services/pos-management.service';
   templateUrl: './pos-transact.component.html',
   styleUrls: ['./pos-transact.component.css']
 })
-export class PosTransactComponent {
+export class PosTransactComponent implements OnInit,AfterViewInit{
+  ngAfterViewInit(): void {
+    if(this.doc)
+    this.doc.autofocus
+  }
+
   isPanelExpanded : boolean = false;
   isSearchMode : boolean = false;
   isPOSMode : boolean = true;
@@ -21,8 +26,11 @@ export class PosTransactComponent {
 
   cartService : CartService = inject(CartService);
   posManagement : PosManagementService = inject(PosManagementService);
+  @ViewChild('outputPanel') outputPanel : ElementRef | undefined;
+  @ViewChild('doc') doc : HTMLInputElement | undefined;
 
   ngOnInit(): void {
+
     this.products = this.cartService.getProducts();
     this.cartService.getSelectedPopular('Burgers');
     this.cartService.filteredProdsSub.subscribe((products)=>{
@@ -41,9 +49,13 @@ export class PosTransactComponent {
       this.isPOSMode = value;
     })
   }
+  
   AddToCart(id : string){
     this.cartService.addToCart(id);
+    this.outputPanel?.nativeElement.scrollBy({top : window.innerHeight, behavior: 'smooth'})
   }
+  
+
   TogglePanel(){
     if(this.isPanelExpanded){
       this.activeMenu = 'Burger';

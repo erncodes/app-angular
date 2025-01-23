@@ -61,9 +61,9 @@
         <div class="col-4 output-panel">
             <div class="numeric-output">
                 <span class="text-output"></span>
-                <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)">
+                <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)" #doc>
             </div>
-            <div class="output-body">
+            <div class="output-body" #outputPanel>
                 <div class="cart-wrap">
                     <div class="container">
                         <div class="row">
