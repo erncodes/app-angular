@@ -5,19 +5,61 @@
             <i class="fa fa-arrow-left"></i> back to main menu
         </a>
     </div>
-    <div class="col-2 flex-grow-1">
-        <h3>All Products</h3>
+    <div class="table-list col-9 flex-grow-1">
+        <div class="col-12 filters">
+            <div class="radio-el">
+                <input type="radio" name="prodfilt" id="all">
+                <label for="all">All</label>
+            </div>
+            <div class="radio-el">
+                <input type="radio" name="prodfilt" id="pizza">
+                <label for="pizza">Pizza</label>
+            </div>
+            <div class="radio-el">
+                <input type="radio" name="prodfilt" id="burger">
+                <label for="burger">Burger</label>
+            </div>
+            <div class="radio-el">
+                <input type="radio" name="prodfilt" id="meal">
+                <label for="meal">Meal</label>
+            </div>
+            <div class="radio-el">
+                <input type="radio" name="prodfilt" id="drink">
+                <label for="drink">Drink</label>
+            </div>
+            <div class="search-el">
+                <input type="text" name="" id="search" placeholder="search">
+                <div class="btn btn-info">Search</div>
+            </div>
+        </div>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+                <tr class="tr-header">
+                    <th width="15%">Barcode</th>
+                    <th [ngStyle]="{width : !isPanelExpanded ? '40%' : '15%'}">Product Name
+                    </th>
+                    <th width="10%" *ngIf="isPanelExpanded">Quantity</th>
+                    <th width="15%">Unit Price</th>
+                    <th width="15%" *ngIf="isPanelExpanded">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of allProducts,let i = index">
+                    <td width="15%">
+                        {{item.id}}
+                    </td>
+                    <td width="15%">
+                        {{item.title}}
+                    </td>
+                    <td width="10%" *ngIf="isPanelExpanded">{{item.leftInStock}}</td>
+                    <td width="15%">{{item.price | currency : 'R'}}</td>
+                    <td width="15%" *ngIf="isPanelExpanded"> 
+                        <i class="fa fa-file-pen"></i>
+                        <i class="fa fa-trash"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="col-2 flex-grow-1">
-        <h3>Add New Product</h3>
-    </div>
-    <div class="col-2 flex-grow-1">
-        <h3>Update Product</h3>
-    </div>
-    <div class="col-2 flex-grow-1">
-        <h3>Search Product</h3>
-    </div>
-    <div class="col-2 flex-grow-1">
-        <h3>Delete Product</h3>
-    </div>
+    <div class="col-2"></div>
 </div>

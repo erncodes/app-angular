@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  isCashier : boolean = true;
+  isCashier : boolean = false;
 }

@@ -8,7 +8,7 @@
     align-items: flex-start;
     width: 100%;
     height: 100%;
-    background-color: #04062e;
+    background-color: #ffffff;
   }
   .upper{
     display: flex;
@@ -16,7 +16,7 @@
   .cover svg{
     width: 40px;
     height: 40px;
-    color: rgba(255, 255, 255, 0.134);
+    color: rgba(50, 49, 49, 0.677);
   }
   .cover p{
     font-size: 45px;

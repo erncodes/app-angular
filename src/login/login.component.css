@@ -4,7 +4,7 @@
     position: absolute;
     left: 22px;
     top: 0;
-    border-top: 40px solid #ffffff;
+    border-top: 40px solid #19191b1f;
     padding-top: 10px;
 }
 .col-3{
@@ -18,35 +18,35 @@
     font-size: 55px;
     font-weight: 500;
     margin-bottom: 40px;
-    color: #ffffff;
+    color: #04062e;
 }
 .col-3 h1{
     font-size: 75px;
     font-weight: 700;
-    color: #ffffff;
+    color: #04062e;
     margin-bottom: 50px;
     letter-spacing: 5px;
-    -webkit-text-stroke: .5px #c5c5c5;
+    -webkit-text-stroke: .5px #000000;
 }
 .col-3 h2 svg{
-    color: #ff0000;
+    color: #000000;
 }
 .col-3 p{
     font-size: 20px;
     margin-bottom: 50px;
     font-family: 500;
-    color: #ffffff;
+    color: #04062e;
 }
 .col-3 a{
     font-size: 25px;
     font-weight: 500;
-    color: #ffffff;
+    color: #04062e;
 }
 .col-3 a svg{
-    color: #ffffff;
+    color: #04062e;
 }
 .col-3 a svg:nth-child(3){
-    color: #ff0000;
+    color: #00d9ff;
 }
 .col-4{
     margin-top: auto;
@@ -63,7 +63,7 @@
 form{
     width: 100%;
     padding: 20px;
-    background-color: #04062e;
+    background-color: #000000;
     color: white;
     border-radius: 10px;
     box-shadow: inset 5px -5px 5px 4px rgba(255, 255, 255, 0.174),inset -5px 5px 5px 4px rgba(255, 255, 255, 0.174);
