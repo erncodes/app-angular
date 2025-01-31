@@ -9,7 +9,7 @@ import { PosManagementService } from 'src/services/pos-management.service';
 export class PosManagementComponent implements OnInit{
 
   posManagementService : PosManagementService = inject(PosManagementService);
-  activePanel : string = 'ProductPanel';
+  activePanel : string = 'PosUsers';
 
   SwitchToPOS(){
     this.posManagementService.SwitchPOsMode();

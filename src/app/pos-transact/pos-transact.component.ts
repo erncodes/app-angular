@@ -72,6 +72,9 @@ export class PosTransactComponent implements OnInit,AfterViewInit{
     this.activeMenu = '';
     this.cartService.getSelectedPopular('Burgers');
   }
+  SignOut(){
+    
+  }
   ActivateMenuItem(menuItem : string){
     this.cartService.getSelectedPopular(menuItem+'s');
     if (this.isPanelExpanded)

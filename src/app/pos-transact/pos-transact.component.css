@@ -370,6 +370,10 @@ input:checked + .sliding-element::after{
   align-items: center;
   box-shadow: 0px 5px 5px 5px #ffffff;
 }
+.section p.sign-out svg{
+  transform: rotate(180deg);
+  cursor: pointer;
+}
 .section{
   width: 30%;
   height: 45px;
