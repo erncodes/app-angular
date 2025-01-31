@@ -1,59 +1,46 @@
-import {  AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/models/product';
 import { CartService } from 'src/services/cart.service';
-import { PosManagementService } from 'src/services/pos-management.service';
 
 @Component({
   selector: 'app-pos-transact',
   templateUrl: './pos-transact.component.html',
   styleUrls: ['./pos-transact.component.css']
 })
-export class PosTransactComponent implements OnInit,AfterViewInit{
-  ngAfterViewInit(): void {
-    if(this.doc)
-    this.doc.autofocus
-  }
-
+export class PosTransactComponent implements OnInit{
   isPanelExpanded : boolean = false;
   isSearchMode : boolean = false;
-  isPOSMode : boolean = true;
   activeMenu : string = 'Burger';
-  products : Product[] = [];
   productsInCart : Product[] = [];
-  selectedPopularProducts : any[] = [];
+ 
   cartTotal : number = 0;
   productPrice : number = 0;
 
   cartService : CartService = inject(CartService);
-  posManagement : PosManagementService = inject(PosManagementService);
   @ViewChild('outputPanel') outputPanel : ElementRef | undefined;
-  @ViewChild('doc') doc : HTMLInputElement | undefined;
 
   ngOnInit(): void {
 
-    this.products = this.cartService.getProducts();
-    this.cartService.getSelectedPopular('Burgers');
-    this.cartService.filteredProdsSub.subscribe((products)=>{
-      this.selectedPopularProducts =  products;
-    })
-    this.cartService.productsInCart.subscribe((products)=>{
-      this.productsInCart = products;
-    })
     this.cartService.cartTotalSubject.subscribe((total)=>{
       this.cartTotal = total;
     })
     this.cartService.productPriceSubject.subscribe((price)=>{
       this.productPrice = price;
     })
-    this.posManagement.modeSubject.subscribe((value)=>{
-      this.isPOSMode = value;
+    this.cartService.productsInCart.subscribe((items)=>{
+      this.productsInCart =items;
     })
-  }
   
-  AddToCart(id : string){
-    this.cartService.addToCart(id);
-    this.outputPanel?.nativeElement.scrollBy({top : window.innerHeight, behavior: 'smooth'})
+    /*let body = document.getElementsByTagName("body");
+    body[0].focus()
+    body[0].addEventListener('keyup',(e)=>{
+      console.log(e.key);
+    })*/
   }
+  ClearCart(){
+    this.cartService.clearCart();
+  }
+
   
 
   TogglePanel(){
@@ -72,6 +59,7 @@ export class PosTransactComponent implements OnInit,AfterViewInit{
     this.activeMenu = '';
     this.cartService.getSelectedPopular('Burgers');
   }
+  
   SignOut(){
     
   }
@@ -99,3 +87,6 @@ export class PosTransactComponent implements OnInit,AfterViewInit{
     }
   }
 }
+/*
+    this.outputPanel?.nativeElement.scrollBy({top : window.innerHeight, behavior: 'smooth'})
+*/

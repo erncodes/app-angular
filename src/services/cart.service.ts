@@ -45,6 +45,14 @@ export class CartService {
     }
   }
 
+  clearCart(){
+    this.cartProducts = [];
+    this.productsInCart.next(this.cartProducts);
+    this.cartTotal = 0;
+    this.cartTotalSubject.next(this.cartTotal);
+    this.productPriceSubject.next(0);
+  }
+
   products : Product[] = [
     {
       id : 160015,

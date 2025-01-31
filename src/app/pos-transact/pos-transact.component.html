@@ -1,4 +1,4 @@
-<main *ngIf="isPOSMode">
+<main>
     <div class="background">
         <div class="cover">
             <i class="fa fa-chess-knight"></i>
@@ -42,26 +42,14 @@
         <div [ngClass]="{'col-5 middle-div' : true,'toggled-off': isPanelExpanded}">
             <div class="top-div">
                 <a class="btn btn-outline-dark" (click)="ToggleMode()"><i class="fa fa-bars"></i> All Menu</a>
+                <a class="btn btn-outline-dark ms-2" (click)="ClearCart()"><i class="fa fa-xmark"></i> Clear Cart</a>
             </div>
-            <div class="popular-burgers row">
-                <h2>Popular {{activeMenu? activeMenu + 's' : 'Burgers'}}</h2>
-                <div class="col-3 my-2" *ngFor="let prod of selectedPopularProducts">
-                    <div class="card" (click)="AddToCart(prod.id)">
-                        <img class="card-img-top" [src]="prod.imageUrl" alt="">
-                        <div class="card-body">
-                            <p class="title">{{prod.title}}</p>
-                            <div class="card-bottom">
-                                <p>{{prod.price | currency : 'R'}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <popular-products></popular-products>
         </div>
         <div class="col-4 output-panel">
             <div class="numeric-output">
                 <span class="text-output"></span>
-                <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)" #doc>
+                <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)">
             </div>
             <div class="output-body" #outputPanel>
                 <div class="cart-wrap">
@@ -122,7 +110,9 @@
             </div>
         </div>
     </div>
-    <div [ngClass]="{'search-container' : true, 'active' : isSearchMode}" (click)="ToggleMode()"></div>
+    <div [ngClass]="{'search-container' : true, 'active' : isSearchMode}" (click)="ToggleMode()">
+        <app-search></app-search>
+    </div>
     <div class="duft-status-bar">
         <div class="section">
             <p class="sign-out"><i class="fa fa-sign-out me-5"></i> User :</p>

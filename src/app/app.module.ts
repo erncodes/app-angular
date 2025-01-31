@@ -12,6 +12,7 @@ import { UserComponent } from '../user/user.component';
 import { PromoComponent } from '../promo/promo.component';
 import { AnalyticsComponent } from '../analytics/analytics.component';
 import { PosTransactComponent } from './pos-transact/pos-transact.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PosTransactComponent } from './pos-transact/pos-transact.component';
     UserComponent,
     PromoComponent,
     AnalyticsComponent,
-    PosTransactComponent
+    PosTransactComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

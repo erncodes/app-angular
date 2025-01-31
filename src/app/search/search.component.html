@@ -1,0 +1,34 @@
+<table cellpadding="0" cellspacing="0" width="100%" class="table table-striped">
+    <thead>
+        <tr class="tr-header">
+            <th width="10%">Barcode</th>
+            <th width="20%">Product Name
+            </th>
+            <th width="20%">Product Category
+            </th>
+            <th width="10%">In Stock</th>
+            <th width="10%">Unit Price</th>
+            <th width="10%">Inc. VAT</th>
+            <th width="20%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of allProducts,let i = index">
+            <td width="10%">
+                {{item.id}}
+            </td>
+            <td width="20%">
+                {{item.title}}
+            </td>
+            <td width="20%">
+                {{item.category}}
+            </td>
+            <td width="10%">{{item.leftInStock}}</td>
+            <td width="10%">{{item.price | currency : 'R'}}</td>
+            <td width="10%">{{item.price + 5 | currency : 'R'}}</td>
+            <td width="20%"> 
+                
+            </td>
+        </tr>
+    </tbody>
+</table>

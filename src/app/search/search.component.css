@@ -1,0 +1,11 @@
+.table thead tr th {
+    padding: 8px 0 14px;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .table tr td {
+    padding: 20px 0 20px 3px;
+    vertical-align: start;
+    font-size: 15px;
+  }
