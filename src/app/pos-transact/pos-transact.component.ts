@@ -1,4 +1,5 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/models/product';
 import { CartService } from 'src/services/cart.service';
 
@@ -9,7 +10,7 @@ import { CartService } from 'src/services/cart.service';
 })
 export class PosTransactComponent implements OnInit{
   isPanelExpanded : boolean = false;
-  isSearchMode : boolean = false;
+  isSearchMode : boolean = true;
   activeMenu : string = 'Burger';
   productsInCart : Product[] = [];
  
@@ -17,6 +18,7 @@ export class PosTransactComponent implements OnInit{
   productPrice : number = 0;
 
   cartService : CartService = inject(CartService);
+  router : Router = inject(Router);
   @ViewChild('outputPanel') outputPanel : ElementRef | undefined;
 
   ngOnInit(): void {
@@ -41,8 +43,6 @@ export class PosTransactComponent implements OnInit{
     this.cartService.clearCart();
   }
 
-  
-
   TogglePanel(){
     if(this.isPanelExpanded){
       this.activeMenu = 'Burger';
@@ -61,7 +61,7 @@ export class PosTransactComponent implements OnInit{
   }
   
   SignOut(){
-    
+    this.router.navigate(['/']);
   }
   ActivateMenuItem(menuItem : string){
     this.cartService.getSelectedPopular(menuItem+'s');

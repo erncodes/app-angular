@@ -1,11 +1,40 @@
-.table thead tr th {
-    padding: 8px 0 14px;
-    color: #000000;
-    font-size: 18px;
-    font-weight: 700;
-  }
-  .table tr td {
-    padding: 20px 0 20px 3px;
-    vertical-align: start;
-    font-size: 15px;
-  }
+.table-list table {
+  width: 100%;
+  margin-bottom: 45px;
+}
+.table-list thead {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 5px;
+}
+.table-list thead tr th {
+  padding: 8px 0 14px;
+  color: #484848;
+  font-size: 14px;
+  font-weight: 600;
+}
+.table-list tr td {
+  padding: 5px 0;
+  vertical-align: middle;
+  font-size: 14px;
+}
+.table-list tr{
+  border-bottom: 1px solid;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.table-list tr:hover{
+  background-color: #5c595a6e;
+  color: white;
+}
+.search-el{
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+.search-el input{
+  padding: 5px;
+  border-radius: 4px;
+  width: 40%;
+  margin-left: auto;
+}

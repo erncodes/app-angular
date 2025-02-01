@@ -41,8 +41,8 @@
         </div>
         <div [ngClass]="{'col-5 middle-div' : true,'toggled-off': isPanelExpanded}">
             <div class="top-div">
-                <a class="btn btn-outline-dark" (click)="ToggleMode()"><i class="fa fa-bars"></i> All Menu</a>
-                <a class="btn btn-outline-dark ms-2" (click)="ClearCart()"><i class="fa fa-xmark"></i> Clear Cart</a>
+                <a class="button-15 me-3" (click)="ToggleMode()"><i class="fa fa-bars"></i>Menu</a>
+                <a *ngIf="productsInCart.length > 0" class="button-15 ms-2 me-3" (click)="ClearCart()"><i class="fa fa-trash"></i> ClearCart</a>
             </div>
             <popular-products></popular-products>
         </div>
@@ -56,7 +56,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="table-list">
+                                <div class="table-list" *ngIf="productsInCart.length > 0">
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="tr-header">
@@ -102,7 +102,7 @@
                             <p class="label-item">Max Screen</p>
                         </label>
                     </div>
-                    <div class="subtotal-container">
+                    <div class="subtotal-container" *ngIf="productsInCart.length > 0">
                         <span class="total-text">Total :</span>
                         <span class="total-number">{{cartTotal | currency : 'R'}}</span>
                     </div>
@@ -110,12 +110,12 @@
             </div>
         </div>
     </div>
-    <div [ngClass]="{'search-container' : true, 'active' : isSearchMode}" (click)="ToggleMode()">
-        <app-search></app-search>
+    <div [ngClass]="{'search-container' : true, 'active' : isSearchMode}">
+        <app-search (closeSearch)="ToggleMode()"></app-search>
     </div>
     <div class="duft-status-bar">
         <div class="section">
-            <p class="sign-out"><i class="fa fa-sign-out me-5"></i> User :</p>
+            <p class="sign-out" (click)="SignOut()"><i class="fa fa-sign-out me-5"></i> User :</p>
             <p>Lira Opus </p>
         </div>
         <div class="section">

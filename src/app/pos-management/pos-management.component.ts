@@ -11,9 +11,6 @@ export class PosManagementComponent implements OnInit{
   posManagementService : PosManagementService = inject(PosManagementService);
   activePanel : string = 'PosUsers';
 
-  SwitchToPOS(){
-    this.posManagementService.SwitchPOsMode();
-  }
   SwitchActivePanel(value : string){
     this.activePanel = value;
   }
