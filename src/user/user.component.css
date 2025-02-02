@@ -33,13 +33,9 @@
     background-color: white;
     padding-left: 15px;
 }
-.col-2 .mi-button{
+.col-2 .button-15{
     width: auto;
     margin-bottom: 15px;
-}
-.mi-button.new::after{
-    background-color: green;
-    width: 25%;
 }
 .table-list{
     background-color: white;

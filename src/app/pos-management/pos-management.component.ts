@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PosManagementService } from 'src/services/pos-management.service';
 
 @Component({
@@ -9,10 +10,14 @@ import { PosManagementService } from 'src/services/pos-management.service';
 export class PosManagementComponent implements OnInit{
 
   posManagementService : PosManagementService = inject(PosManagementService);
+  router : Router = inject(Router);
   activePanel : string = 'PosUsers';
 
   SwitchActivePanel(value : string){
     this.activePanel = value;
+  }
+  SignOut(){
+    this.router.navigate(['/']);
   }
   ngOnInit(): void {
     this.posManagementService.activePanelSubject.subscribe((text)=>{

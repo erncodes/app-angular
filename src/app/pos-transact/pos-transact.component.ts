@@ -10,7 +10,7 @@ import { CartService } from 'src/services/cart.service';
 })
 export class PosTransactComponent implements OnInit{
   isPanelExpanded : boolean = false;
-  isSearchMode : boolean = true;
+  isSearchMode : boolean = false;
   activeMenu : string = 'Burger';
   productsInCart : Product[] = [];
  
