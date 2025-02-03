@@ -1,9 +1,65 @@
-<div class="row">
+<div class="row gap-2 px-2">
     <div class="col-12 d-flex justify-content-between">
-        <h2>Promotions Management</h2>
+        <h2>Manage Promotions</h2>
         <a class="btn btn-outline-dark" (click)="SwitchBackToMain('PosManagement')">
             <i class="fa fa-arrow-left"></i> back to main menu
         </a>
+    </div>
+    <div class="table-list col-9 flex-grow-1">
+        <div class="col-12 filters">
+            <div class="radio-el">
+                <input type="radio" name="promofilter" id="all">
+                <label for="all">all</label>
+            </div>
+            <div class="radio-el">
+                <input type="radio" name="promofilter" id="active">
+                <label for="active">active</label>
+            </div>
+            <div class="radio-el">
+                <input type="radio" name="promofilter" id="inactive">
+                <label for="inactive">inactive</label>
+            </div>
+            <div class="search-el">
+                <input type="text" name="" id="search" placeholder="search promo name">
+                <button class="button-15 ms-2">Search <i class="fa fa-magnifying-glass ms-2"></i></button>
+            </div>
+        </div>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+                <tr class="tr-header">
+                    <th width="15%">promo ID</th>
+                    <th width="15%">Promo Name</th>
+                    <th width="10%">Status</th>
+                    <th width="10%">Start Date</th>
+                    <th width="10%">End Date</th>
+                    <th width="10%">Created By</th>
+                    <th width="20%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let promo of allPromos,let i = index">
+                    <td width="10%">
+                        {{promo.id}}
+                    </td>
+                    <td width="15%">
+                        {{promo.promoName}}
+                    </td>
+                    <td width="10%">{{promo.isRunning ? 'Active' : 'Not Active'}}</td>
+                    <td width="10%">{{promo.startDate}}</td>
+                    <td width="10%">{{promo.endDate}}</td>
+                    <td width="10%">{{promo.createdBy}}</td>
+                    <td width="20%"> 
+                        <p class="buttons">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons">Delete <i class="fa fa-trash"></i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-2">
+        <h4 class="mb-3">Quick Actions</h4>
+        <button class="button-15 new">New Promo <i class="fa fa-file-circle-plus ms-2"></i></button>
+        <button class="button-15">Search <i class="fa fa-magnifying-glass ms-2"></i></button>
     </div>
 </div>
 

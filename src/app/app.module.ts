@@ -13,6 +13,7 @@ import { PromoComponent } from '../promo/promo.component';
 import { AnalyticsComponent } from '../analytics/analytics.component';
 import { PosTransactComponent } from './pos-transact/pos-transact.component';
 import { SearchComponent } from './search/search.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SearchComponent } from './search/search.component';
     PromoComponent,
     AnalyticsComponent,
     PosTransactComponent,
-    SearchComponent
+    SearchComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

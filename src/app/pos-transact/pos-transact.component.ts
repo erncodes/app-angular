@@ -25,6 +25,7 @@ export class PosTransactComponent implements OnInit{
 
     this.cartService.cartTotalSubject.subscribe((total)=>{
       this.cartTotal = total;
+      this.outputPanel?.nativeElement.scrollBy({top : window.innerHeight, behavior: 'smooth'})
     })
     this.cartService.productPriceSubject.subscribe((price)=>{
       this.productPrice = price;
@@ -87,6 +88,3 @@ export class PosTransactComponent implements OnInit{
     }
   }
 }
-/*
-    this.outputPanel?.nativeElement.scrollBy({top : window.innerHeight, behavior: 'smooth'})
-*/

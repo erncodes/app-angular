@@ -1,9 +1,77 @@
 .row{
     width: 1300px;
     height: 583px;
-    border: 1px solid;
     padding: 20px;
+    overflow: hidden;
 }
 .row .btn{
     height: 40px;
+}
+.filters{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 4px;
+}
+.radio-el{
+    width: 80px;
+}
+.radio-el label{
+    font-size: 14px;
+}
+.search-el{
+    margin-left: auto;
+}
+.search-el input{
+    padding: 5px;
+    border-radius: 4px;
+    margin: auto 0;
+    
+}
+.col-2{
+    height: 300px;
+    background-color: white;
+    padding-left: 15px;
+}
+.col-2 .button-15{
+    width: auto;
+    margin-bottom: 15px;
+}
+.table-list{
+    background-color: white;
+    height: 500px;
+    overflow-y: scroll;
+}
+.table-list thead tr th {
+    padding: 8px 0 14px;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 700;
+}
+.table-list tr td {
+    padding: 10px 0 10px 3px;
+    vertical-align: middle;
+    font-size: 13px;
+    border: 1px solid;
+}
+p.buttons{
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+.fa-file-pen{
+    color: rgb(11, 13, 104);
+    font-size: 18px;
+}
+.fa-trash{
+    color: rgb(224, 26, 26);
+    font-size: 18px;
+}
+.fa-magnifying-glass{
+    color: rgb(224, 26, 26);
+}
+.fa-file-circle-plus{
+    color: rgb(0, 197, 36);
 }

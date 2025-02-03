@@ -46,7 +46,7 @@
             <div class="col-2" (click)="SwitchActivePanel('PromoPanel')">
                 <h2>Manage Promotions</h2>
             </div>
-            <div class="col-2">
+            <div class="col-2" (click)="SwitchActivePanel('CategoryPanel')">
                 <h2>Manage Categories</h2>
             </div>
             <div class="col-12">
@@ -54,6 +54,7 @@
         </div>
         <app-promo *ngIf="activePanel === 'PromoPanel'"></app-promo>
         <app-product *ngIf="activePanel === 'ProductPanel'"></app-product>
+        <app-category *ngIf="activePanel === 'CategoryPanel'"></app-category>
         <app-user *ngIf="activePanel === 'PosUsers'"></app-user>
         <app-analytics *ngIf="activePanel === 'PosAnalytics'"></app-analytics>
     </div>

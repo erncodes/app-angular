@@ -1,6 +1,6 @@
 import { Product } from "./product";
 
-export class Sale
+export class Promotion
 {
 constructor(
       public id : string , public promoName : string,public startDate : Date, public endDate : Date, 

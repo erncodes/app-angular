@@ -1,24 +1,22 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Promotion } from 'src/models/promotion';
+import { Category } from 'src/models/category';
 import { PosManagementService } from 'src/services/pos-management.service';
-import { ProductService } from 'src/services/product.service';
 
 @Component({
-  selector: 'app-promo',
-  templateUrl: './promo.component.html',
-  styleUrls: ['./promo.component.css']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class PromoComponent implements OnInit{
+export class CategoryComponent implements OnInit{
 
-  allPromos : Promotion[] = [];
-
+  allCategories : Category[] = [];
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
   posManagementService : PosManagementService = inject(PosManagementService);
-  productService : ProductService = inject(ProductService);
-
+  
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
+
 }

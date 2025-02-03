@@ -1,0 +1,43 @@
+<div class="row gap-2 px-2">
+    <div class="col-12 d-flex justify-content-between">
+        <h2>Manage Categories</h2>
+        <a class="btn btn-outline-dark" (click)="SwitchBackToMain('PosManagement')">
+            <i class="fa fa-arrow-left"></i> back to main menu
+        </a>
+    </div>
+    <div class="table-list col-9 flex-grow-1">
+        <table cellpadding="0" cellspacing="0" width="90%">
+            <thead>
+                <tr class="tr-header">
+                    <th width="20%">Category ID</th>
+                    <th width="20%">Category Name
+                    </th>
+                    <th width="20%">Description</th>
+                    <th width="20%">Total Products</th>
+                    <th width="20%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of allCategories,let i = index">
+                    <td width="10%">
+                        {{category.id}}
+                    </td>
+                    <td width="15%">
+                        {{category.categoryName}}
+                    </td>
+                    <td width="10%">{{category.description}}</td>
+                    <td width="10%">{{category.totalProducts}}</td>
+                    <td width="20%"> 
+                        <p class="buttons">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons">Delete <i class="fa fa-trash"></i></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-2">
+        <h4 class="mb-3">Quick Actions</h4>
+        <button class="button-15 new">New Category <i class="fa fa-file-circle-plus ms-2"></i></button>
+        <button class="button-15">Search <i class="fa fa-magnifying-glass ms-2"></i></button>
+    </div>
+</div>
