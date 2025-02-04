@@ -51,16 +51,35 @@
             </button>
             <div class="col-12">
                 <div class="total-products">
-                    <h4>Total Products</h4>
+                    <h4>Products</h4>
+                    <p><span>148</span> total products</p>
+                    <p><span>18</span> damaged</p>
+                    <div class="icon" (click)="SwitchActivePanel('ProductPanel')">
+                        <span>See More</span><i class="fa fa-arrow-right"></i>
+                    </div>
                 </div>
-                <div class="new-products">
+                <div class="new-products" (click)="SwitchActivePanel('ProductPanel')">
                     <h4>New Products</h4>
+                    <p><span>14</span> products added this month.</p>
+                    <div class="icon">
+                        <span>See More</span><i class="fa fa-arrow-right"></i>
+                    </div>
                 </div>
-                <div class="promotions">
+                <div class="promotions" (click)="SwitchActivePanel('PromoPanel')">
                     <h4>Promotions</h4>
+                    <p>No active promotions at the moment</p>
+                    <p><span>2</span> promotions coming soon</p>
+                    <div class="icon">
+                        <span>See More</span><i class="fa fa-arrow-right"></i>
+                    </div>
                 </div>
-                <div class="product-stock">
+                <div class="product-stock" (click)="SwitchActivePanel('PosAnalytics')">
                     <h4>Quick Inventory Insights</h4>
+                    <p><span>68%</span> Remaining stock levels</p>
+                    <p><span>4</span> products out of stock</p>
+                    <div class="icon">
+                        <span>See More</span><i class="fa fa-arrow-right"></i>
+                    </div>
                 </div>
             </div>
         </div>

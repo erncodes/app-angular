@@ -11,7 +11,7 @@ export class PosManagementComponent implements OnInit{
 
   posManagementService : PosManagementService = inject(PosManagementService);
   router : Router = inject(Router);
-  activePanel : string = 'ProductPanel';
+  activePanel : string = 'PosAnalytics';
 
   SwitchActivePanel(value : string){
     this.activePanel = value;

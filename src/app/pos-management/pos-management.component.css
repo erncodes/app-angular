@@ -182,6 +182,9 @@ main{
   .menu-item.active::after{
     display: block;
   }
+  .menu-item.active svg{
+    color: #0011ff;
+  }
   .menu-item a{
     text-decoration: none;
     text-transform: uppercase;
@@ -215,11 +218,13 @@ main{
     margin-left: 15px;
     padding: 10px;
     display: flex;
-    background: rgb(0, 0, 0);
+    flex-wrap: wrap;
+    background: rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #505055 0 -3px 0 inset;
   }
   .total-products{
+    position: relative;
     height: 180px;
     width: 300px;
     margin: 10px;
@@ -227,8 +232,17 @@ main{
     background : white;
     padding: 10px;
     box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+  .total-products p span{
+    font-size: 24px;
+    font-weight: 700;
+    color: red;
+  }
+  .total-products p:nth-child(2) span{
+    color: #11023c;
   }
   .new-products{
+    position: relative;
     height: 180px;
     width: 300px;
     margin: 10px;
@@ -237,7 +251,13 @@ main{
     padding: 10px;
     box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
   }
+  .new-products p span{
+    font-size: 24px;
+    font-weight: 700;
+    color: rgb(9, 229, 31);
+  }
   .product-stock{
+    position: relative;
     height: 180px;
     width: 400px;
     margin: 10px;
@@ -246,7 +266,16 @@ main{
     padding: 10px;
     box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
   }
+  .product-stock p span{
+    font-size: 24px;
+    font-weight: 700;
+    color: red;
+  }
+  .product-stock p:nth-child(2) span{
+    color: #edb10d;
+  }
   .promotions{
+    position: relative;
     height: 180px;
     width: 300px;
     margin: 10px;
@@ -254,6 +283,24 @@ main{
     background : white;
     padding: 10px;
     box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+  .promotions p span{
+    font-size: 24px;
+    font-weight: 700;
+    color: rgb(255, 208, 0);
+  }
+  .icon{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: red;
+    cursor: pointer;
+  }
+  .icon span{
+    color: black;
+    font: 13px;
+    font-weight: bold;
+    margin-right: 5px;
   }
   @keyframes spin {
     0%{

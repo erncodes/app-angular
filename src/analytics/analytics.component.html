@@ -1,6 +1,37 @@
-<div class="col-12 d-flex justify-content-between">
-    <h2>Manage Categories</h2>
-    <a class="btn btn-outline-dark" (click)="SwitchBackToMain('PosManagement')">
-        <i class="fa fa-arrow-left"></i> back to main menu
-    </a>
+<div class="row gap-1">
+    <div class="col-12 d-flex justify-content-between">
+        <h2>Analytics Dashboard</h2>
+        <a class="btn btn-outline-dark" (click)="SwitchBackToMain('PosManagement')">
+            <i class="fa fa-arrow-left"></i> back to main menu
+        </a>
+    </div>
+    <div class="col-1 month-wheel">
+        <span>Jan</span>
+        <span>Feb</span>
+        <span class="active">Mar</span>
+        <span>Apr</span>
+        <span>May</span>
+        <span>Jun</span>
+        <span>Jul</span>
+        <span>Aug</span>
+        <span>Sep</span>
+        <span>Oct</span>
+        <span>Nov</span>
+        <span>Dec</span>
+
+        <span class="year">2025</span>
+    </div>
+    <div class="col-6 graphs">
+        <h4 class="my-3">January Activity - 2025 </h4>
+        <div class="graph-box"></div>
+    </div>
+    <div class="col-2 flex-grow-1 products-info">
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="col-2 flex-grow-1 promos">
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
 </div>
+
