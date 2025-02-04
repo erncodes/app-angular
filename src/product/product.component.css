@@ -2,6 +2,7 @@
     width: 1300px;
     height: 583px;
     padding: 20px;
+    padding-bottom: 0;
     overflow: hidden;
 }
 .row .btn{
@@ -67,4 +68,14 @@ p.buttons{
 .fa-trash{
     color: rgb(224, 26, 26);
     font-size: 18px;
+}
+.sort{
+    height: 50px;
+    margin-left: 10px;
+    position: relative;
+    top: -5px;
+}
+.fa-sort-down{
+    color: rgb(78, 75, 75);
+    cursor: pointer;
 }

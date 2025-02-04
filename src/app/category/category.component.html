@@ -6,27 +6,26 @@
         </a>
     </div>
     <div class="table-list col-9 flex-grow-1">
-        <table cellpadding="0" cellspacing="0" width="90%">
+        <table cellpadding="0" cellspacing="0" width="100%">
             <thead>
                 <tr class="tr-header">
                     <th width="20%">Category ID</th>
-                    <th width="20%">Category Name
-                    </th>
+                    <th width="20%">Category Name <span class="sort"><i class="fa fa-sort-down"></i></span> </th>
                     <th width="20%">Description</th>
-                    <th width="20%">Total Products</th>
+                    <th width="20%">Total Products <span class="sort"><i class="fa fa-sort-down"></i></span></th>
                     <th width="20%">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let category of allCategories,let i = index">
-                    <td width="10%">
+                    <td width="20%">
                         {{category.id}}
                     </td>
-                    <td width="15%">
+                    <td width="20%">
                         {{category.categoryName}}
                     </td>
-                    <td width="10%">{{category.description}}</td>
-                    <td width="10%">{{category.totalProducts}}</td>
+                    <td width="20%">{{category.description}}</td>
+                    <td width="20%">{{category.totalProducts}}</td>
                     <td width="20%"> 
                         <p class="buttons">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>

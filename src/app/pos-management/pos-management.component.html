@@ -39,17 +39,29 @@
     </div>
     <div class="main-content">
         <div class="row gap-2 px-3" *ngIf="activePanel == 'PosManagement'">
-            
-            <div class="col-2 ms-3" (click)="SwitchActivePanel('ProductPanel')">
-                <h2>Manage Products</h2>
-            </div>
-            <div class="col-2" (click)="SwitchActivePanel('PromoPanel')">
-                <h2>Manage Promotions</h2>
-            </div>
-            <div class="col-2" (click)="SwitchActivePanel('CategoryPanel')">
-                <h2>Manage Categories</h2>
-            </div>
+            <h2 class="fw-bold">Welcome To Your Dashboard</h2>
+            <button class="button-15 col-2 ms-3" (click)="SwitchActivePanel('ProductPanel')">
+                Manage Products
+            </button>
+            <button class="button-15 col-2" (click)="SwitchActivePanel('PromoPanel')">
+                Manage Promotions
+            </button>
+            <button class="button-15 col-2" (click)="SwitchActivePanel('CategoryPanel')">
+                Manage Categories
+            </button>
             <div class="col-12">
+                <div class="total-products">
+                    <h4>Total Products</h4>
+                </div>
+                <div class="new-products">
+                    <h4>New Products</h4>
+                </div>
+                <div class="promotions">
+                    <h4>Promotions</h4>
+                </div>
+                <div class="product-stock">
+                    <h4>Quick Inventory Insights</h4>
+                </div>
             </div>
         </div>
         <app-promo *ngIf="activePanel === 'PromoPanel'"></app-promo>

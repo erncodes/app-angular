@@ -153,6 +153,7 @@ main{
     flex-direction: column;
     box-shadow: 3px 0px 3px 3px rgba(0, 0, 0, 0.262);
     border-radius: 15px;
+    padding-top: 5px;
   }
 
   .menu-item{
@@ -200,9 +201,6 @@ main{
     right: 18.5px;
     width: 1300px;
     height: 583px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: transparent;
   }
   .main-content .row{
@@ -210,22 +208,52 @@ main{
     height: 100%;
     background-color: transparent;
     padding: 20px;
-  }
-  .main-content .row .col-2{
-    height: 100px;
-    background-color: white;
-    box-shadow: 0px 2px 2px 2px #0000002e,inset 0px 2px 2px 2px #0000002e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  .main-content .row .col-2 h2{
-    font-size: 25px;
-    cursor: pointer;
+    padding-bottom: 0;
   }
   .main-content .row .col-12{
-    height: 250px;
+    min-height: 400px;
+    margin-left: 15px;
+    padding: 10px;
+    display: flex;
+    background: rgb(0, 0, 0);
+    border-radius: 5px;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #505055 0 -3px 0 inset;
+  }
+  .total-products{
+    height: 180px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    background : white;
+    padding: 10px;
+    box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+  .new-products{
+    height: 180px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    background : white;
+    padding: 10px;
+    box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+  .product-stock{
+    height: 180px;
+    width: 400px;
+    margin: 10px;
+    border-radius: 10px;
+    background : white;
+    padding: 10px;
+    box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+  .promotions{
+    height: 180px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    background : white;
+    padding: 10px;
+    box-shadow: rgba(250, 248, 255, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
   }
   @keyframes spin {
     0%{

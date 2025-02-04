@@ -66,3 +66,17 @@ body{
   background: rgb(15, 1, 60);
   border-radius: 2px;
 }
+.fa-file-circle-plus{
+  color: #00c524;
+}
+.fa-file-pen{
+  color: #0b0d68;
+  font-size: 18px;
+}
+.fa-trash{
+  color: #e01a1a;
+  font-size: 18px;
+}
+.fa-magnifying-glass{
+  color: #000000;
+}

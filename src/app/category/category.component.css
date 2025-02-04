@@ -2,6 +2,7 @@
     width: 1300px;
     height: 583px;
     padding: 20px;
+    bottom: 0;
     overflow: hidden;
 }
 .row .btn{
@@ -138,17 +139,13 @@ p.buttons{
     font-weight: 600;
     cursor: pointer;
 }
-.fa-file-pen{
-    color: rgb(11, 13, 104);
-    font-size: 18px;
+.sort{
+    height: 50px;
+    margin-left: 10px;
+    position: relative;
+    top: -5px;
 }
-.fa-trash{
-    color: rgb(224, 26, 26);
-    font-size: 18px;
-}
-.fa-magnifying-glass{
-    color: rgb(224, 26, 26);
-}
-.fa-file-circle-plus{
-    color: rgb(0, 197, 36);
+.fa-sort-down{
+    color: rgb(78, 75, 75);
+    cursor: pointer;
 }

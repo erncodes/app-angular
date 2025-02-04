@@ -36,11 +36,10 @@
             <thead>
                 <tr class="tr-header">
                     <th width="10%">Barcode</th>
-                    <th width="40%">Product Name
-                    </th>
-                    <th width="10%">In Stock</th>
-                    <th width="10%">Unit Price</th>
-                    <th width="10%">Inc. VAT</th>
+                    <th width="30%">Product Name <span class="sort"><i class="fa fa-sort-down"></i></span></th>
+                    <th width="10%">In Stock <span class="sort"><i class="fa fa-sort-down"></i></span></th>
+                    <th width="15%">Unit Price <span class="sort"><i class="fa fa-sort-down"></i></span></th>
+                    <th width="15%">Inc. VAT <span class="sort"><i class="fa fa-sort-down"></i></span></th>
                     <th width="20%">Actions</th>
                 </tr>
             </thead>
@@ -49,12 +48,12 @@
                     <td width="10%">
                         {{item.id}}
                     </td>
-                    <td width="15%">
+                    <td width="30%">
                         {{item.title}}
                     </td>
                     <td width="10%">{{item.leftInStock}}</td>
-                    <td width="10%">{{item.price | currency : 'R'}}</td>
-                    <td width="10%">{{item.price + 5 | currency : 'R'}}</td>
+                    <td width="15%">{{item.price | currency : 'R'}}</td>
+                    <td width="15%">{{item.price + 5 | currency : 'R'}}</td>
                     <td width="20%"> 
                         <p class="buttons">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
