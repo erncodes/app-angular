@@ -72,17 +72,20 @@ export class PosTransactComponent implements OnInit{
     switch(menuItem){
       case 'Pizza':
       this.activeMenu = 'Pizza';
-      
       break;
+
       case 'Burger':
       this.activeMenu = 'Burger';
       break;
+
       case 'Meal':
       this.activeMenu = 'Meal';
       break;
+
       case 'Drink':
       this.activeMenu = 'Drink';
       break;
+      
       default:
         this.activeMenu = '';
     }

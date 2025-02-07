@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Category } from 'src/models/category';
+import { CategoryService } from 'src/services/category.service';
 import { PosManagementService } from 'src/services/pos-management.service';
 
 @Component({
@@ -11,9 +12,10 @@ export class CategoryComponent implements OnInit{
 
   allCategories : Category[] = [];
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.allCategories = this.categoryService.GetAllCategories();
   }
   posManagementService : PosManagementService = inject(PosManagementService);
+  categoryService : CategoryService = inject(CategoryService);
   
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);

@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
 
 @Component({
@@ -7,10 +8,11 @@ import { AuthService } from 'src/services/auth-.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit{
-  allUsers : any[]=[];
+  allUsers : User[]=[];
   authService : AuthService = inject(AuthService);
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.allUsers =  this.authService.GetAllUsers();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Promotion } from 'src/models/promotion';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
+import { PromoService } from 'src/services/promo.service';
 
 @Component({
   selector: 'app-promo',
@@ -13,10 +14,11 @@ export class PromoComponent implements OnInit{
   allPromos : Promotion[] = [];
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.allPromos = this.promoService.GetAllPromotions();
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   productService : ProductService = inject(ProductService);
+  promoService : PromoService = inject(PromoService);
 
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);

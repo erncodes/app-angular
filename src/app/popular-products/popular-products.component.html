@@ -2,7 +2,7 @@
     <h2>Popular {{activeMenu? activeMenu + 's' : 'Burgers'}}</h2>
     <div class="col-3 my-2" *ngFor="let prod of selectedPopularProducts">
         <div class="card" (click)="AddToCart(prod.id)">
-            <img class="card-img-top" [src]="prod.imageUrl" alt="">
+            <img class="card-img-top" [src]="prod.imageUrl" loading="eager" alt="">
             <div class="card-body">
                 <p class="title">{{prod.title}}</p>
                 <div class="card-bottom">
