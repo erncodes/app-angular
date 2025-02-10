@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
 
@@ -16,7 +16,14 @@ export class ProductComponent implements OnInit{
   isPanelExpanded : boolean = true;
   allProducts : any[] = [];
 
+  @Output() 
+  toggler : EventEmitter<string> = new EventEmitter<string>()
+
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
+  }
+
+  Toggle(){
+    this.toggler.emit('Product');
   }
 }

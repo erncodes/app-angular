@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Category } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { PosManagementService } from 'src/services/pos-management.service';
@@ -11,6 +11,9 @@ import { PosManagementService } from 'src/services/pos-management.service';
 export class CategoryComponent implements OnInit{
 
   allCategories : Category[] = [];
+    @Output() 
+    toggler : EventEmitter<string> = new EventEmitter<string>()
+    
   ngOnInit(): void {
     this.allCategories = this.categoryService.GetAllCategories();
   }
@@ -20,5 +23,7 @@ export class CategoryComponent implements OnInit{
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
-
+  Toggle(){
+    this.toggler.emit('Category');
+  }
 }

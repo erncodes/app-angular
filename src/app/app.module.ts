@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { PopularProductsComponent } from './popular-products/popular-products.component';
 import { PosManagementComponent } from './pos-management/pos-management.component';
 import { LoginComponent } from '../login/login.component';
-import { ProductComponent } from '../product/product.component';
+import { ProductComponent } from './product/product.component';
 import { UserComponent } from '../user/user.component';
 import { PromoComponent } from '../promo/promo.component';
 import { AnalyticsComponent } from '../analytics/analytics.component';

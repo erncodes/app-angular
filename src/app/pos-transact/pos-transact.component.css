@@ -205,6 +205,7 @@ main{
 
 .output-panel{
   transition: all 2s ease;
+  position: relative;
 }
 .numeric-output{
   width: 100%;
@@ -242,6 +243,37 @@ main{
   padding: 0 15px;
   position: relative;
   overflow-y: scroll;
+}
+.modalx{
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  width: 600px;
+  height: 345px;
+  transform: translate(50%,50%);
+  border-radius: 5px;
+  padding: 15px 20px;
+  border: 1px solid;
+  transition: 0.5s ease;
+  display: none;
+}
+.modalx.lg{
+  width: 650px;
+  height: 350px;
+  transform: translate(95%,50%);
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 15px 20px;
+  transition: 0.5s ease;
+  display: none;
+}
+.modalx.active{
+  display: block;
+}
+.modalx.lg.active{
+  display: block;
 }
 .toggle-menu-container{
   position: sticky;

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Promotion } from 'src/models/promotion';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
@@ -12,6 +12,8 @@ import { PromoService } from 'src/services/promo.service';
 export class PromoComponent implements OnInit{
 
   allPromos : Promotion[] = [];
+    @Output() 
+    toggler : EventEmitter<string> = new EventEmitter<string>()
 
   ngOnInit(): void {
     this.allPromos = this.promoService.GetAllPromotions();
@@ -22,5 +24,8 @@ export class PromoComponent implements OnInit{
 
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
+  }
+  Toggle(){
+    this.toggler.emit('Promotion');
   }
 }

@@ -5,6 +5,12 @@
             <p>Dufty POS</p>
         </div>
     </div>
+    <div class="modalx" [ngClass]="{'modalx' : true, 'lg' : isPanelExpanded, 'active' : showModal}">
+        <hr>
+        <p>Halo</p>
+        <p>Halo</p>
+        <hr>
+    </div>
     <div class="row">
         <div class="col-2">
             <div [ngClass]="{'express-menu' : true, 'hidden' : !isPanelExpanded}">
@@ -48,14 +54,13 @@
         </div>
         <div class="col-4 output-panel">
             <div class="numeric-output">
-                <span class="text-output"></span>
-                <input type="text" placeholder="0.00" [value]="productPrice.toFixed(2)">
+                <span class="text-output">{{text}}</span>
+                <input type="text" placeholder="0.00" #inp>
             </div>
             <div class="output-body" #outputPanel>
-                <div class="cart-wrap">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-12">
                                 <div class="table-list" *ngIf="productsInCart.length > 0">
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <thead>
@@ -93,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+              
                 <div class="toggle-menu-container">
                     <div class="menu-label">
                         <input type="checkbox" id="menu-check" (click)="TogglePanel()">
@@ -110,6 +115,7 @@
             </div>
         </div>
     </div>
+    
     <div [ngClass]="{'search-container' : true, 'active' : isSearchMode}">
         <app-search (closeSearch)="ToggleMode()"></app-search>
     </div>

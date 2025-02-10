@@ -12,12 +12,18 @@ export class PosManagementComponent implements OnInit{
   posManagementService : PosManagementService = inject(PosManagementService);
   router : Router = inject(Router);
   activePanel : string = 'PosManagement';
+  isCreateMode : boolean = false;
+  emittedValue = '';
 
   SwitchActivePanel(value : string){
     this.activePanel = value;
   }
   SignOut(){
     this.router.navigate(['/']);
+  }
+  ToggleCreateMode(value : string){
+    this.emittedValue = value;
+    this.isCreateMode = ! this.isCreateMode;
   }
   ngOnInit(): void {
     this.posManagementService.activePanelSubject.subscribe((text)=>{
