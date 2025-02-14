@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PosManagementService } from 'src/services/pos-management.service';
 
@@ -14,6 +15,13 @@ export class PosManagementComponent implements OnInit{
   activePanel : string = 'PosManagement';
   isCreateMode : boolean = false;
   emittedValue = '';
+
+  @ViewChild('formi')
+  form: NgForm | undefined;
+
+  FormSubmit(){
+    console.log(this.form?.value);
+  }
 
   SwitchActivePanel(value : string){
     this.activePanel = value;
