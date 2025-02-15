@@ -26,4 +26,7 @@ export class CategoryComponent implements OnInit{
   Toggle(){
     this.toggler.emit('Category');
   }
+  EditCategory(category : Category){
+    this.toggler.emit('EditCategory');
+  }
 }

@@ -10,7 +10,7 @@ export class ProductService {
 
   GetProduct(){}
   EditProduct(){}
-  CreateProduct(){}
+  CreateProduct(product : Product){}
   DeleteProduct(){}
   GetAllProducts() : Product[] | []{
     return this.products;

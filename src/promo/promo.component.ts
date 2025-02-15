@@ -28,4 +28,7 @@ export class PromoComponent implements OnInit{
   Toggle(){
     this.toggler.emit('Promotion');
   }
+  EditPromo(promo : Promotion){
+    this.toggler.emit('EditPromotion');
+  }
 }

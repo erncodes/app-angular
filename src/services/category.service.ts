@@ -10,7 +10,7 @@ export class CategoryService {
 
      GetCategory(){}
       EditCategory(){}
-      CreateCategory(){}
+      CreateCategory(category : Category){}
       DeleteCategory(){}
       GetAllCategories() : Category[] | []{
         return this.categories;

@@ -19,4 +19,7 @@ export class UserComponent implements OnInit{
   Toggle(){
     this.toggler.emit('User');
   }
+  EditUser(user : User){
+    this.toggler.emit('EditUser');
+  }
 }

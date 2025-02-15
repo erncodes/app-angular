@@ -48,7 +48,7 @@
                     <td width="15%">{{promo.endDate.toDateString()}}</td>
                     <td width="15%">{{promo.createdBy}}</td>
                     <td width="20%"> 
-                        <p class="buttons">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons" (click)="EditPromo(promo)">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
                     </td>
                 </tr>

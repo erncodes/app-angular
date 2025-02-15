@@ -10,7 +10,7 @@ export class PromoService {
 
    GetPromotion(){}
     EditPromotion(){}
-    CreatePromotion(){}
+    CreatePromotion(promo : Promotion){}
     DeletePromotion(){}
     GetAllPromotions() : Promotion[] | []{
       return this.promotions;

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Helper } from 'src/models/helper';
+import { Product } from 'src/models/product';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
 
@@ -17,13 +19,18 @@ export class ProductComponent implements OnInit{
   allProducts : any[] = [];
 
   @Output() 
-  toggler : EventEmitter<string> = new EventEmitter<string>()
+  productEmi : EventEmitter<Helper> = new EventEmitter<Helper>();
 
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
 
   Toggle(){
-    this.toggler.emit('Product');
+    var obj = new Helper('Product');
+    this.productEmi.emit(obj);
+  }
+  EditProduct(product : Product){
+    var obj = new Helper('EditProduct',product);
+    this.productEmi.emit(obj);
   }
 }
