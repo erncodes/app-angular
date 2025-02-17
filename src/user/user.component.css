@@ -3,11 +3,14 @@
     height: 583px;
     padding: 20px;
     padding-bottom: 0;
+    position: relative;
 }
 .row .btn{
     height: 40px;
 }
-
+form .col-2{
+    height: auto;
+  }
 .filters{
     display: flex;
     justify-content: flex-start;

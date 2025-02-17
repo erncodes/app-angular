@@ -1,4 +1,5 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
 
@@ -10,16 +11,19 @@ import { AuthService } from 'src/services/auth-.service';
 export class UserComponent implements OnInit{
   allUsers : User[]=[];
   authService : AuthService = inject(AuthService);
-  @Output() 
-  toggler : EventEmitter<string> = new EventEmitter<string>()
+
+  isModalOpen : boolean = false;
+  
+  @ViewChild('form')
+      form: NgForm | undefined;
   
   ngOnInit(): void {
     this.allUsers =  this.authService.GetAllUsers();
   }
-  Toggle(){
-    this.toggler.emit('User');
+  ToggleModal(){
+    this.isModalOpen = !this.isModalOpen;
   }
   EditUser(user : User){
-    this.toggler.emit('EditUser');
   }
+  FormSubmit(){}
 }

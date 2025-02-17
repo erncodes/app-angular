@@ -1,5 +1,5 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { Helper } from 'src/models/helper';
+import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Product } from 'src/models/product';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
@@ -17,20 +17,18 @@ export class ProductComponent implements OnInit{
   productService : ProductService = inject(ProductService);
   isPanelExpanded : boolean = true;
   allProducts : any[] = [];
-
-  @Output() 
-  productEmi : EventEmitter<Helper> = new EventEmitter<Helper>();
+  isModalOpen : boolean = false;
+  
+  @ViewChild('form')
+      form: NgForm | undefined;
 
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
-
-  Toggle(){
-    var obj = new Helper('Product');
-    this.productEmi.emit(obj);
+  ToggleModal(){
+    this.isModalOpen = !this.isModalOpen;
   }
   EditProduct(product : Product){
-    var obj = new Helper('EditProduct',product);
-    this.productEmi.emit(obj);
   }
+  FormSubmit(){}
 }

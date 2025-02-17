@@ -4,7 +4,11 @@
     padding: 20px;
     padding-bottom: 0;
     overflow: hidden;
+    position: relative;
 }
+form .col-2{
+    height: auto;
+  }
 .row .btn{
     height: 40px;
 }

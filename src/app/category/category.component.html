@@ -1,4 +1,26 @@
 <div class="row gap-2 px-2">
+    <div class="mod-cover" [ngClass]="{'mod-cover' : true, 'active' : isModalOpen}">
+        <div class="col-7 m-auto">
+            <form (ngSubmit)="FormSubmit()" #form="ngForm">
+                <div class="close-box" (click)="ToggleModal()">
+                    <i class="fa fa-xmark" title="close-modal"></i>
+                </div>
+                <h2 class="mb-3">Create New Promotion</h2>
+                <div class="mb-3">
+                    <label for="name" class="form-label col-2">Name</label>
+                    <input type="text" class="col-8" id="name" placeholder="Promo Name" name="name_El" ngModel>
+                </div>
+                <div class="mb-3 d-flex align-items-start">
+                    <label for="description" class="form-label col-2">Description</label>
+                    <textarea name="description" id="description" class="col-8" ngModel></textarea>
+                </div>
+                <div class="text-end ms-auto">
+                    <button class="button-15 text-danger me-3" (click)="ToggleModal()">Close<i class="fa fa-xmark ms-2"></i></button>
+                    <button class="button-15 text-success mb-3">Create Promotion<i class="fa fa-file-circle-plus ms-2"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="col-12 d-flex justify-content-between">
         <h2>Manage Categories</h2>
         <a class="btn btn-outline-dark" (click)="SwitchBackToMain('PosManagement')">
@@ -36,7 +58,7 @@
     </div>
     <div class="col-2">
         <h4 class="mb-3">Quick Actions</h4>
-        <button class="button-15" (click)="Toggle()">New Category <i class="fa fa-file-circle-plus ms-2"></i></button>
+        <button class="button-15" (click)="ToggleModal()">New Category <i class="fa fa-file-circle-plus ms-2"></i></button>
         <button class="button-15">Search <i class="fa fa-magnifying-glass ms-2"></i></button>
     </div>
 </div>

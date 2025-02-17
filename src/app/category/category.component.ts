@@ -1,4 +1,5 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Category } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { PosManagementService } from 'src/services/pos-management.service';
@@ -19,14 +20,19 @@ export class CategoryComponent implements OnInit{
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   categoryService : CategoryService = inject(CategoryService);
+  isModalOpen : boolean = false;
+    
+  @ViewChild('form')
+        form: NgForm | undefined;
   
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
-  Toggle(){
-    this.toggler.emit('Category');
+  ToggleModal(){
+    this.isModalOpen = !this.isModalOpen;
   }
   EditCategory(category : Category){
     this.toggler.emit('EditCategory');
   }
+  FormSubmit(){}
 }
