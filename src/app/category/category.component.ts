@@ -12,8 +12,7 @@ import { PosManagementService } from 'src/services/pos-management.service';
 export class CategoryComponent implements OnInit{
 
   allCategories : Category[] = [];
-    @Output() 
-    toggler : EventEmitter<string> = new EventEmitter<string>()
+  formMode : string = 'Add';
     
   ngOnInit(): void {
     this.allCategories = this.categoryService.GetAllCategories();
@@ -28,11 +27,24 @@ export class CategoryComponent implements OnInit{
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
-  ToggleModal(){
+  ToggleModal(id? : string){
     this.isModalOpen = !this.isModalOpen;
-  }
-  EditCategory(category : Category){
-    this.toggler.emit('EditCategory');
+    if(id){
+      let category = this.categoryService.GetCategory(id);
+      this.formMode = 'Edit';
+      if(category && this.form){
+        this.form.setValue({
+          name_El : category.categoryName,
+          description : category.description,
+        })
+      }
+      
+
+    }
+    else{
+      this.formMode = 'Add';
+      this.form?.resetForm()
+    }
   }
   FormSubmit(){}
 }

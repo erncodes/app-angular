@@ -5,10 +5,10 @@
                 <div class="close-box" (click)="ToggleModal()">
                     <i class="fa fa-xmark" title="close-modal"></i>
                 </div>
-                <h2 class="mb-3">Create New Promotion</h2>
+                <h2 class="mb-3 text-center">{{formMode}} Category</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label col-2">Name</label>
-                    <input type="text" class="col-8" id="name" placeholder="Promo Name" name="name_El" ngModel>
+                    <input type="text" class="col-8" id="name" placeholder="Category Name" name="name_El" ngModel>
                 </div>
                 <div class="mb-3 d-flex align-items-start">
                     <label for="description" class="form-label col-2">Description</label>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="text-end ms-auto">
                     <button class="button-15 text-danger me-3" (click)="ToggleModal()">Close<i class="fa fa-xmark ms-2"></i></button>
-                    <button class="button-15 text-success mb-3">Create Promotion<i class="fa fa-file-circle-plus ms-2"></i></button>
+                    <button class="button-15 text-success mb-3">{{formMode}} Category<i class="fa fa-file-circle-plus ms-2"></i></button>
                 </div>
             </form>
         </div>
@@ -49,7 +49,7 @@
                     <td width="20%">{{category.description}}</td>
                     <td width="20%">{{category.totalProducts}}</td>
                     <td width="20%"> 
-                        <p class="buttons">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons" (click)="ToggleModal(category.id.toString())">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
                     </td>
                 </tr>

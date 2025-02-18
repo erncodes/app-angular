@@ -6,10 +6,39 @@
     overflow: hidden;
     position: relative;
 }
+.col-7 form{
+    height: auto;
+    margin: 5px 0;
+}
 form .col-2{
     height: auto;
-  }
-
+}
+.date{
+    position: relative;
+}
+.sdate,.edate{
+    position: absolute;
+    top: 2px;
+    left: 60%;
+}
+.sdate input{
+    width: 20px;
+    border-radius: 4px;
+    border: none;
+    color: black;
+    filter: invert(2);
+}
+.edate input{
+    width: 20px;
+    border-radius: 4px;
+    border: none;
+    color: black;
+    filter: invert(2);
+}
+.form-select{
+    height: 35px;
+    width: 50%;
+}
 .row .btn{
     height: 40px;
 }

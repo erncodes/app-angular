@@ -5,17 +5,35 @@
                 <div class="close-box" (click)="ToggleModal()">
                     <i class="fa fa-xmark" title="close-modal"></i>
                 </div>
-                <h2 class="mb-3">Create New Promotion</h2>
+                <h2 class="mb-3 text-center">Add New Product</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label col-2">Name</label>
-                    <input type="text" class="col-8" id="name" placeholder="Promo Name" name="name_El" ngModel>
+                    <input type="text" class="col-8" id="name" placeholder="Product Name" name="name_El" ngModel>
                 </div>
                 <div class="mb-3 d-flex align-items-start">
                     <label for="description" class="form-label col-2">Description</label>
                     <textarea name="description" id="description" class="col-8" ngModel></textarea>
                 </div>
+                <div class="mb-3">
+                    <label for="qty" class="form-label col-2">Quantity</label>
+                    <input type="text" class="" id="qty" name="quantity" ngModel>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label col-2">Unit Price</label>
+                    <input type="text" class="" id="price" name="price" ngModel>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label col-2">Category:</label>
+                    <select class="form-select" style="height: 35px;" name="category" ngModel>
+                        <option>Choose</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="imgFile" class="form-label col-2">Image</label>
+                    <input type="file" class="" id="imgFile" name="imageUrl" ngModel>
+                </div>
                 <div class="text-end ms-auto">
-                    <button class="button-15 text-danger me-3" (click)="ToggleModal()">Close<i class="fa fa-xmark ms-2"></i></button>
+                    <a class="button-15 text-danger me-3" (click)="ToggleModal()">Close<i class="fa fa-xmark ms-2"></i></a>
                     <button class="button-15 text-success mb-3">Create Promotion<i class="fa fa-file-circle-plus ms-2"></i></button>
                 </div>
             </form>

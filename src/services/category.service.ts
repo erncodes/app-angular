@@ -8,7 +8,12 @@ export class CategoryService {
 
   constructor() { }
 
-     GetCategory(){}
+     GetCategory(id : string) : Category | null{
+      let category = this.categories.find(x => x.id == id);
+      if(category)
+        return category;
+      return null;
+     }
       EditCategory(){}
       CreateCategory(category : Category){}
       DeleteCategory(){}

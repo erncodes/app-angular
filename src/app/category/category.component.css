@@ -8,7 +8,11 @@
 }
 form .col-2{
     height: auto;
-  }
+}
+.form-select{
+    height: 35px;
+    width: 50%;
+}
 .row .btn{
     height: 40px;
 }

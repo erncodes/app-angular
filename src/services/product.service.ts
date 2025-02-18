@@ -8,7 +8,12 @@ export class ProductService {
 
   constructor() { }
 
-  GetProduct(){}
+  GetProduct(id : string) : Product | null{
+    let product = this.products.find(c => c.id == +id);
+    if(product)
+      return product;
+    return null;
+  }
   EditProduct(){}
   CreateProduct(product : Product){}
   DeleteProduct(){}

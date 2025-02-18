@@ -8,9 +8,14 @@
 .row .btn{
     height: 40px;
 }
+.col-7 form{
+    height: auto;
+    margin: 5px 0;
+    overflow-y: scroll;
+}
 form .col-2{
     height: auto;
-  }
+}
 .filters{
     display: flex;
     justify-content: flex-start;

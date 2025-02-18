@@ -6,9 +6,18 @@
     overflow: hidden;
     position: relative;
 }
+.col-7 form{
+    height: auto;
+    margin: 5px 0;
+    overflow-y: scroll;
+}
 form .col-2{
     height: auto;
-  }
+}
+form textarea{
+    min-height: 100px;
+    max-height: 150px;
+}
 .row .btn{
     height: 40px;
 }

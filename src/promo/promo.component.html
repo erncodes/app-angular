@@ -5,18 +5,39 @@
                 <div class="close-box" (click)="ToggleModal()">
                     <i class="fa fa-xmark" title="close-modal"></i>
                 </div>
-                <h2 class="mb-3">Create New Promotion</h2>
+                <h2 class="mb-3 text-center">{{formMode}} Promotion</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label col-2">Name</label>
-                    <input type="text" class="col-8" id="name" placeholder="Promo Name" name="name_El" ngModel>
+                    <input type="text" class="col-5" id="name" placeholder="Promo Name" name="name_El" ngModel>
                 </div>
-                <div class="mb-3 d-flex align-items-start">
-                    <label for="description" class="form-label col-2">Description</label>
-                    <textarea name="description" id="description" class="col-8" ngModel></textarea>
+                <div class="mb-3 date">
+                    <label for="sdate_lbl" class="form-label col-2">Start Date</label>
+                    <input type="text" class="col-5" id="sdate_lbl" name="sdate_El_lbl" ngModel>
+                    <div class="sdate">
+                        <input type="date" class="col-3" id="sdate" #startDateEl (change)="SDateChanged(startDateEl)">
+                    </div>
+                </div>
+                <div class="mb-3 date">
+                    <label for="edate_lbl" class="form-label col-2">End Date</label>
+                    <input type="text" class="col-5" id="edate_lbl" name="edate_El_lbl" ngModel>
+                    <div class="edate">
+                        <input type="date" class="col-3" id="edate" #endDateEl (change)="EDateChanged(endDateEl)">
+                    </div>
+                </div>
+                <div class="mb-3 d-flex">
+                    <label for="promo_items" class="form-label col-2">Promo Items</label>
+                    <select class="form-select" name="promo_items" ngModel>
+                        <option value="">{{promoItems.length ? promoItems.length + ' items in this promotion' : 'No items yet. . .'}}</option>
+                        <option *ngFor="let prod of promoItems">{{prod.title + ' : ' + prod.price}}</option>
+                    </select>
+                </div>
+                <div class="mb-3 text-end">
+                    <label for="status" class="form-label col-2 me-1">Active</label>
+                    <input type="checkbox"  id="status" class="me-2" name="status" ngModel [checked]="promoStatus">
                 </div>
                 <div class="text-end ms-auto">
                     <button class="button-15 text-danger me-3" (click)="ToggleModal()">Close<i class="fa fa-xmark ms-2"></i></button>
-                    <button class="button-15 text-success mb-3">Create Promotion<i class="fa fa-file-circle-plus ms-2"></i></button>
+                    <button class="button-15 text-success mb-3">{{formMode}} Promotion<i class="fa fa-file-circle-plus ms-2"></i></button>
                 </div>
             </form>
         </div>
@@ -70,7 +91,7 @@
                     <td width="15%">{{promo.endDate.toDateString()}}</td>
                     <td width="15%">{{promo.createdBy}}</td>
                     <td width="20%"> 
-                        <p class="buttons" (click)="EditPromo(promo)">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons" (click)="ToggleModal(promo.id)">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
                     </td>
                 </tr>
