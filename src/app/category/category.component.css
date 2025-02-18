@@ -9,9 +9,6 @@
 form .col-2{
     height: auto;
 }
-.row .btn{
-    height: 40px;
-}
 .filters{
     display: flex;
     justify-content: flex-start;

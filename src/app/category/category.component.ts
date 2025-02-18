@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Category } from 'src/models/category';
+import { ProductCategory } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { PosManagementService } from 'src/services/pos-management.service';
 
@@ -11,7 +11,7 @@ import { PosManagementService } from 'src/services/pos-management.service';
 })
 export class CategoryComponent implements OnInit{
 
-  allCategories : Category[] = [];
+  allCategories : ProductCategory[] = [];
   formMode : string = 'Add';
     
   ngOnInit(): void {

@@ -132,3 +132,10 @@ transition: 0.5s ease;
 .close-box svg:hover{
 transform: scale(1.2);
 }
+.button-15.btn{
+  height: 45px;
+}
+.fa-arrow-left{
+  color: red;
+  margin-right: 5px;
+}

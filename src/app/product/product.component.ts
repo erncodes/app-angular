@@ -55,5 +55,9 @@ export class ProductComponent implements OnInit{
       this.form?.resetForm()
     }
   }
-  FormSubmit(){}
+  SortProducts(){
+  }
+  FormSubmit(){
+
+  }
 }
