@@ -16,21 +16,21 @@
                 </div>
                 <div class="mb-3">
                     <label for="qty" class="form-label col-2">Quantity</label>
-                    <input type="text" class="" id="qty" name="quantity" ngModel>
+                    <input type="text" class="col-8" id="qty" name="quantity" ngModel>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label col-2">Unit Price</label>
-                    <input type="text" class="" id="price" name="price" ngModel>
+                    <input type="text" class="col-8" id="price" name="price" ngModel>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 d-flex">
                     <label class="form-label col-2">Category:</label>
-                    <select class="form-select" style="height: 35px;" name="category" ngModel>
-                        <option>Choose</option>
+                    <select class="form-select" name="category" ngModel>
+                        <option value="">Choose</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="imgFile" class="form-label col-2">Image</label>
-                    <input type="file" class="" id="imgFile" name="imageUrl" ngModel>
+                    <input type="file" class="col-8" id="imgFile" name="imageUrl" ngModel>
                 </div>
                 <div class="text-end ms-auto">
                     <a class="button-15 text-danger me-3" (click)="ToggleModal()">Close<i class="fa fa-xmark ms-2"></i></a>
@@ -94,7 +94,7 @@
                     <td width="15%">{{item.price | currency : 'R'}}</td>
                     <td width="15%">{{item.price + 5 | currency : 'R'}}</td>
                     <td width="20%"> 
-                        <p class="buttons" (click)="EditProduct(item)">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons" (click)="ToggleModal(item.id)">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
                     </td>
                 </tr>

@@ -1,4 +1,4 @@
-export class Category
+export class ProductCategory
 {
 constructor(
       public id : string | number, public categoryName : string, 
