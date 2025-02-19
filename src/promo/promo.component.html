@@ -51,15 +51,15 @@
     <div class="table-list col-9 flex-grow-1">
         <div class="col-12 filters">
             <div class="radio-el">
-                <input type="radio" name="promofilter" id="all">
+                <input type="radio" name="promofilter" checked id="all" (change)="FilterPromo()">
                 <label for="all">all</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="promofilter" id="active">
+                <input type="radio" name="promofilter" id="active" (change)="FilterPromo('active')">
                 <label for="active">active</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="promofilter" id="inactive">
+                <input type="radio" name="promofilter" id="inactive" (change)="FilterPromo('inactive')">
                 <label for="inactive">inactive</label>
             </div>
             <div class="search-el">

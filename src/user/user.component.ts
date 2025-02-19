@@ -25,5 +25,11 @@ export class UserComponent implements OnInit{
   }
   EditUser(user : User){
   }
+  FilterUsers(value? : string){
+    if(value)
+     this.allUsers = this.authService.GetAllUsers(value);
+    else
+    this.allUsers = this.authService.GetAllUsers();
+  }
   FormSubmit(){}
 }

@@ -14,15 +14,18 @@
                     <label for="email" class="form-label col-2">Email</label>
                     <input type="text" class="col-8" id="email" placeholder="e.g user@duftypos.com" name="email" ngModel>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 d-flex">
                     <label class="form-label col-2" >Role:</label>
-                      <select class="form-select" style="height: 35px;" name="role" ngModel>
-                        <option>Choose</option>
+                      <select class="form-select" name="role" ngModel>
+                        <option value="">Choose</option>
+                        <option>Admin</option>
+                        <option>Cashier</option>
                       </select>
                   </div>
-                  <div class="mb-3">
+                  <div class="mb-3 d-flex">
                     <label class="form-label col-2" >Gender:</label>
-                      <select class="form-select" style="height: 35px;" name="gender" ngModel>
+                      <select class="form-select" name="gender" ngModel>
+                        <option value="">Choose</option>
                         <option>Male</option>
                         <option>Female</option>
                       </select>
@@ -40,27 +43,27 @@
     <div class="table-list col-9 flex-grow-1">
         <div class="col-12 filters">
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="all">
+                <input type="radio" checked name="userfilter" id="all" (change)="FilterUsers()">
                 <label for="all">All</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="admin">
+                <input type="radio" name="userfilter" id="admin" (change)="FilterUsers('admin')">
                 <label for="admin">Admins</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="cashier">
+                <input type="radio" name="userfilter" id="cashier" (change)="FilterUsers('cashier')">
                 <label for="cashier">Cashiers</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="male">
+                <input type="radio" name="userfilter" id="male" (change)="FilterUsers('male')">
                 <label for="male">Male</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="female">
+                <input type="radio" name="userfilter" id="female" (change)="FilterUsers('female')">
                 <label for="female">Female</label>
             </div>
             <div class="search-el">
-                <input type="text" name="" id="search" placeholder="search">
+                <input type="text" id="search" placeholder="search">
             </div>
         </div>
         <table cellpadding="0" cellspacing="0" width="100%">

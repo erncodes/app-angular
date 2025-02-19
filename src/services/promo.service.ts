@@ -17,7 +17,20 @@ export class PromoService {
     EditPromotion(){}
     CreatePromotion(promo : Promotion){}
     DeletePromotion(){}
-    GetAllPromotions() : Promotion[] | []{
+    GetAllPromotions(filter? : string) : Promotion[] | []{
+      let filtered_promos = this.promotions;
+      if(filter){
+        if(filter === 'active'){
+          filtered_promos = this.promotions.filter(x => x.isRunning);
+          return filtered_promos;
+        }
+        else if(filter === 'inactive'){
+          filtered_promos = this.promotions.filter(x => x.isRunning === false);
+          return filtered_promos;
+        }
+        else
+        return this.promotions;
+      }
       return this.promotions;
     }
     promotions : Promotion[] = [

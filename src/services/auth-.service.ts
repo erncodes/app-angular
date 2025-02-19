@@ -8,7 +8,28 @@ export class AuthService {
 
   constructor() { }
 
-  GetAllUsers() : User[] | []{
+  GetAllUsers(filter? : string) : User[] | []{
+    let filtered_users = this.users;
+    if(filter){
+      switch(filter){
+        case 'male':
+          filtered_users = filtered_users.filter(x => x.gender.toLocaleLowerCase() === 'male');
+          break;
+        case 'female':
+          filtered_users = filtered_users.filter(x => x.gender.toLocaleLowerCase() === 'female');
+          break;
+        case 'admin':
+          filtered_users = filtered_users.filter(x => x.roles.includes('admin'));
+          break;
+        case 'cashier':
+          filtered_users = filtered_users.filter(x => x.roles.includes('cashier'));
+          break;
+        default:
+          filtered_users = this.users;
+          break;
+      }
+      return filtered_users;
+    }
     return this.users;
   }
   GetSingleUser(id : number | string){}

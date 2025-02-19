@@ -58,6 +58,12 @@ export class PromoComponent implements OnInit{
       this.form?.resetForm()
     }
   }
+  FilterPromo(value? : string){
+    if(value)
+      this.allPromos = this.promoService.GetAllPromotions(value);
+     else
+     this.allPromos = this.promoService.GetAllPromotions();
+  }
   SDateChanged(date_el : any){
     let new_start_date = new Date(date_el.value);
       this.form?.setValue({

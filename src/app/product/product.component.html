@@ -48,23 +48,23 @@
     <div class="table-list col-9 flex-grow-1">
         <div class="col-12 filters">
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="all">
+                <input type="radio" name="prodfilt" id="all" checked (change)="FilterProducts()">
                 <label for="all">All</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="pizza">
+                <input type="radio" name="prodfilt" id="pizza" (change)="FilterProducts('pizzas')">
                 <label for="pizza">Pizza</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="burger">
+                <input type="radio" name="prodfilt" id="burger" (change)="FilterProducts('burgers')">
                 <label for="burger">Burger</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="meal">
+                <input type="radio" name="prodfilt" id="meal" (change)="FilterProducts('meals')">
                 <label for="meal">Meal</label>
             </div>
             <div class="radio-el">
-                <input type="radio" name="prodfilt" id="drink">
+                <input type="radio" name="prodfilt" id="drink" (change)="FilterProducts('drinks')">
                 <label for="drink">Drink</label>
             </div>
             <div class="search-el">

@@ -17,7 +17,28 @@ export class ProductService {
   EditProduct(){}
   CreateProduct(product : Product){}
   DeleteProduct(){}
-  GetAllProducts() : Product[] | []{
+  GetAllProducts(filter? : string) : Product[] | []{
+    let filtered_products = this.products;
+    if(filter){
+      switch(filter){
+        case 'burgers':
+          filtered_products = this.products.filter(x => x.category.toLocaleLowerCase() === 'burgers');
+          break;
+        case 'meals':
+          filtered_products = this.products.filter(x => x.category.toLocaleLowerCase() === 'meals');
+          break;
+        case 'pizzas':
+          filtered_products = this.products.filter(x => x.category.toLocaleLowerCase() === 'pizzas');
+          break;
+        case 'drinks':
+          filtered_products = this.products.filter(x => x.category.toLocaleLowerCase() === 'drinks');
+          break;
+        default:
+          filtered_products = this.products;
+          break;
+      }
+      return filtered_products;
+    }
     return this.products;
   }
 

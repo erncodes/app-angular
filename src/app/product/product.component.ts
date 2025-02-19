@@ -55,7 +55,11 @@ export class ProductComponent implements OnInit{
       this.form?.resetForm()
     }
   }
-  SortProducts(){
+  FilterProducts(value? : string){
+    if(value)
+     this.allProducts = this.productService.GetAllProducts(value);
+    else
+    this.allProducts = this.productService.GetAllProducts();
   }
   FormSubmit(){
 
