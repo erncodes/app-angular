@@ -27,7 +27,8 @@
                 <div class="mb-3 d-flex">
                     <label for="promo_items" class="form-label col-2">Promo Items</label>
                     <select class="form-select" name="promo_items" ngModel>
-                        <option value="">{{promoItems.length ? promoItems.length + ' items in this promotion' : 'No items yet. . .'}}</option>
+                        <option *ngIf="promoItems.length == 0" value="">No items yet. . .</option>
+                        <option *ngIf="promoItems.length">{{ promoItems.length + ' items in this promotion'}}</option>
                         <option *ngFor="let prod of promoItems">{{prod.title + ' : ' + prod.price}}</option>
                     </select>
                 </div>
@@ -69,7 +70,7 @@
         <table cellpadding="0" cellspacing="0" width="100%">
             <thead>
                 <tr class="tr-header">
-                    <th width="10%">promo ID</th>
+                    <th width="10%">Promo ID</th>
                     <th width="15%" (click)="OrderByName()">Promo Name <span class="sort"><i class="fa fa-sort"></i></span></th>
                     <th width="10%" (click)="OrderByStatus()">Status <span class="sort"><i class="fa fa-sort"></i></span></th>
                     <th width="15%">Start Date</th>

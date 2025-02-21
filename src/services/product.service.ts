@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { Product } from 'src/models/product';
 
 @Injectable({
@@ -7,6 +9,7 @@ import { Product } from 'src/models/product';
 export class ProductService {
 
   constructor() { }
+  httpClient : HttpClient = inject(HttpClient);
 
   GetProduct(short_barcode : string) : Product | null{
     let product = this.products.find(c => c.short_barcode == +short_barcode);
@@ -14,15 +17,13 @@ export class ProductService {
       return product;
     return null;
 
-    /**this.httpClient.get<{[key : string] : Product}>('https://urbanstrides-640e5-default-rtdb.europe-west1.firebasedatabase.app/products/'+short_barcode+'.json')
+   /* this.httpClient.get<{[key : string] : Product}>('https://urbanstrides-640e5-default-rtdb.europe-west1.firebasedatabase.app/products/'+short_barcode+'.json')
     .pipe(map((response)=>{
       let prod = {};
       prod = {...response, short_barcode : short_barcode};
       return prod;
     })).subscribe((product)=>{
-      this.productClicked.next(product);
-    }
-    ) */
+    }) */
   }
   EditProduct(){}
   CreateProduct(product : Product){}
@@ -225,10 +226,6 @@ export class ProductService {
       discount : 0,
       rating : 4.9
     },
-
-
-
-
 
     //pizza
     {

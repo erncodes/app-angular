@@ -58,8 +58,8 @@ export class PromoComponent implements OnInit{
     else{
       this.formMode = 'Add';
       this.promoStatus = false;
-      this.promoItems = [];
       this.form?.resetForm()
+      this.promoItems = [];
     }
   }
   FilterPromo(value? : string){
@@ -132,5 +132,7 @@ export class PromoComponent implements OnInit{
       this.isStatusAscend = !this.isStatusAscend
     }
   }
-  FormSubmit(){}
+  FormSubmit(id? : string){
+
+  }
 }

@@ -14,6 +14,7 @@ import { AnalyticsComponent } from '../analytics/analytics.component';
 import { PosTransactComponent } from './pos-transact/pos-transact.component';
 import { SearchComponent } from './search/search.component';
 import { CategoryComponent } from './category/category.component';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CategoryComponent } from './category/category.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
