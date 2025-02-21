@@ -8,11 +8,21 @@ export class ProductService {
 
   constructor() { }
 
-  GetProduct(id : string) : Product | null{
-    let product = this.products.find(c => c.id == +id);
+  GetProduct(short_barcode : string) : Product | null{
+    let product = this.products.find(c => c.short_barcode == +short_barcode);
     if(product)
       return product;
     return null;
+
+    /**this.httpClient.get<{[key : string] : Product}>('https://urbanstrides-640e5-default-rtdb.europe-west1.firebasedatabase.app/products/'+short_barcode+'.json')
+    .pipe(map((response)=>{
+      let prod = {};
+      prod = {...response, short_barcode : short_barcode};
+      return prod;
+    })).subscribe((product)=>{
+      this.productClicked.next(product);
+    }
+    ) */
   }
   EditProduct(){}
   CreateProduct(product : Product){}
@@ -40,11 +50,29 @@ export class ProductService {
       return filtered_products;
     }
     return this.products;
+
+    /**   let headers = new HttpHeaders();
+     headers = headers.set('Access-Control-Allow-Origin','*');
+    this.httpClient.get<{ [key : string] : Product}>('https://urbanstrides-640e5-default-rtdb.europe-west1.firebasedatabase.app/products.json',{headers : headers})
+      .pipe(map((data)=>{
+      let items = [];
+      for(let key in data){
+        if(data.hasOwnProperty(key))
+        {
+          items.push({...data[key],short_barcode : key})
+        }
+      }
+      return items;
+    })).subscribe((products)=>{
+      this.products = products;
+      this.filteredProdsSub.next(this.GetProductsFiltered());
+      this.productSearchSub.next(this.GetProductsFiltered());
+    }); */
   }
 
   products : Product[] = [
     {
-      id : 160015,
+      short_barcode : 160015,
       title : 'Chipolte Burger',
       description : 'Medium cheese burger',
       category : 'Burgers',
@@ -58,7 +86,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160016,
+      short_barcode : 160016,
       title : 'Buffalo Chicken',
       description : 'Large chicken burger',
       category : 'Burgers',
@@ -72,7 +100,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160017,
+      short_barcode : 160017,
       title : 'Swiss Grilled Burger',
       description : 'Grilled mushroom burger',
       category : 'Burgers',
@@ -86,7 +114,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160018,
+      short_barcode : 160018,
       title : 'Spicy Durbanite',
       description : 'Spicy Durban beef burger',
       category : 'Burgers',
@@ -100,7 +128,7 @@ export class ProductService {
       rating : 4.9
     },
     {
-      id : 160019,
+      short_barcode : 160019,
       title : 'Vegan Avocado',
       description : 'Avocado burger',
       category : 'Burgers',
@@ -114,7 +142,7 @@ export class ProductService {
       rating : 4.6
     },
     {
-      id : 160020,
+      short_barcode : 160020,
       title : 'Spicy Chicken Burger',
       description : 'A spicy chicken burger',
       category : 'Burgers',
@@ -128,7 +156,7 @@ export class ProductService {
       rating : 4.6
     },
     {
-      id : 160021,
+      short_barcode : 160021,
       title : 'Mexican Beef Burger',
       description : 'A beef burger',
       category : 'Burgers',
@@ -142,7 +170,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160022,
+      short_barcode : 160022,
       title : 'Avocado Burger',
       description : 'Avocado burger',
       category : 'Burgers',
@@ -156,7 +184,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160023,
+      short_barcode : 160023,
       title : 'Spicy Jalapeno',
       description : 'Spicy burger',
       category : 'Burgers',
@@ -170,7 +198,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160024,
+      short_barcode : 160024,
       title : 'Epic Burger',
       description : 'A cheese burger',
       category : 'Burgers',
@@ -184,7 +212,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160025,
+      short_barcode : 160025,
       title : 'Mc Chicken Burger',
       description : 'A chicken burger',
       category : 'Burgers',
@@ -204,7 +232,7 @@ export class ProductService {
 
     //pizza
     {
-      id : 160030,
+      short_barcode : 160030,
       title : 'BBQ Chicken Pizza',
       description : 'A BBQ pizza',
       category : 'Pizzas',
@@ -218,7 +246,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160031,
+      short_barcode : 160031,
       title : 'Pepperoni Pizza',
       description : 'Black-Olives Pepperoni Pizza',
       category : 'Pizzas',
@@ -232,7 +260,7 @@ export class ProductService {
       rating : 4.7
     },
     {
-      id : 160032,
+      short_barcode : 160032,
       title : 'Chicken Sausage',
       description : 'A chicken sausage pizza with onions and peppers.',
       category : 'Pizzas',
@@ -246,9 +274,9 @@ export class ProductService {
       rating : 4.7
     },
     {
-      id : 160033,
-      title : ' Spicy Greek Pizza',
-      description : 'Greek pizza.',
+      short_barcode : 160033,
+      title : 'Greek Spicy Pizza',
+      description : 'Spicy Greek pizza.',
       category : 'Pizzas',
       size : 'large',
       imageUrl : '../assets/images/pizza_images/Greek-Pizza.jpg',
@@ -260,7 +288,7 @@ export class ProductService {
       rating : 4.6
     },
     {
-      id : 160034,
+      short_barcode : 160034,
       title : 'Grilled Onion Pizza',
       description : 'Grilled pizza with red onions and feta.',
       category : 'Pizzas',
@@ -274,7 +302,7 @@ export class ProductService {
       rating : 4.6
     },
     {
-      id : 160035,
+      short_barcode : 160035,
       title : 'Epic Olive Pizza',
       description : 'Olive pizza with red onions.',
       category : 'Pizzas',
@@ -288,7 +316,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160036,
+      short_barcode : 160036,
       title : 'Pepperoni Classic',
       description : 'A pepperoni pizza',
       category : 'Pizzas',
@@ -302,7 +330,7 @@ export class ProductService {
       rating : 4.7
     },
     {
-      id : 160037,
+      short_barcode : 160037,
       title : 'Avocado Pizza',
       description : 'An avocado pizza',
       category : 'Pizzas',
@@ -316,7 +344,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160038,
+      short_barcode : 160038,
       title : 'Sausage Pizza',
       description : 'Sausage Pizza',
       category : 'Pizzas',
@@ -330,7 +358,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160039,
+      short_barcode : 160039,
       title : 'Smoked Sausage',
       description : 'Smoked sausage pizza.',
       category : 'Pizzas',
@@ -344,7 +372,7 @@ export class ProductService {
       rating : 4.9
     },
     {
-      id : 160040,
+      short_barcode : 160040,
       title : 'Spare Rib Pizza',
       description : 'Spare rib pizza',
       category : 'Pizzas',
@@ -363,7 +391,7 @@ export class ProductService {
 
     //meals
     {
-      id : 160050,
+      short_barcode : 160050,
       title : 'Meal-1',
       description : 'Meals description here.',
       category : 'Meals',
@@ -377,7 +405,7 @@ export class ProductService {
       rating : 4.7
     },
     {
-      id : 160051,
+      short_barcode : 160051,
       title : 'Meal-2',
       description : 'Meals description here.',
       category : 'Meals',
@@ -391,7 +419,7 @@ export class ProductService {
       rating : 4.6
     },
     {
-      id : 160052,
+      short_barcode : 160052,
       title : 'Meal-3',
       description : 'Meals description here.',
       category : 'Meals',
@@ -405,7 +433,7 @@ export class ProductService {
       rating : 4.9
     },
     {
-      id : 160053,
+      short_barcode : 160053,
       title : 'Meal-4',
       description : 'Meals description here.',
       category : 'Meals',
@@ -419,7 +447,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160054,
+      short_barcode : 160054,
       title : 'Meal-5',
       description : 'Meals description here.',
       category : 'Meals',
@@ -433,7 +461,7 @@ export class ProductService {
       rating : 4.6
     },
     {
-      id : 160055,
+      short_barcode : 160055,
       title : 'Meal-6',
       description : 'Meals description here.',
       category : 'Meals',
@@ -447,7 +475,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160056,
+      short_barcode : 160056,
       title : 'Meal-7',
       description : 'Meals description here.',
       category : 'Meals',
@@ -461,7 +489,7 @@ export class ProductService {
       rating : 4.9
     },
     {
-      id : 160057,
+      short_barcode : 160057,
       title : 'Meal-8',
       description : 'Meals description here.',
       category : 'Meals',
@@ -475,7 +503,7 @@ export class ProductService {
       rating : 4.8
     },
     {
-      id : 160058,
+      short_barcode : 160058,
       title : 'Meal-9',
       description : 'Meals description here.',
       category : 'Meals',
@@ -489,7 +517,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160059,
+      short_barcode : 160059,
       title : 'Meal-10',
       description : 'Meals description here.',
       category : 'Meals',
@@ -503,7 +531,7 @@ export class ProductService {
       rating : 4
     },
     {
-      id : 160060,
+      short_barcode : 160060,
       title : 'Meal-6',
       description : 'Meals description here.',
       category : 'Meals',

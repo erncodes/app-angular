@@ -39,8 +39,8 @@ export class CartService {
     return this.products;
   }
 
-  addToCart(id : string){
-    var selectedProd = this.products.find(product=>product.id === +id);
+  addToCart(short_barcode : string){
+    var selectedProd = this.products.find(product=>product.short_barcode === +short_barcode);
 
     if(selectedProd){
       this.cartProducts.push(selectedProd);

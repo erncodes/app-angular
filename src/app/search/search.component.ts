@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit{
     this.allProducts = this.productService.GetAllProducts();
   }
   AddToCartFromSearch(item : Product){
-    this.cartService.addToCart(item.id.toString());
+    this.cartService.addToCart(item.short_barcode.toString());
     this.closeSearch.emit();
   }
 }

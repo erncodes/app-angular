@@ -39,23 +39,6 @@ form .col-2{
     width: auto;
     margin-bottom: 15px;
 }
-.table-list{
-    background-color: white;
-    height: 500px;
-    overflow-y: scroll;
-}
-.table-list thead tr th {
-    padding: 8px 0 14px;
-    color: #000000;
-    font-size: 16px;
-    font-weight: 700;
-}
-.table-list tr td {
-    padding: 10px 0 10px 3px;
-    vertical-align: middle;
-    font-size: 13px;
-    border: 1px solid;
-}
 p.buttons{
     display: inline-block;
     margin-right: 20px;
@@ -117,7 +100,7 @@ p.buttons{
     margin-bottom: 15px;
 }
 .table-list{
-    background-color: white;
+    background: linear-gradient(to right,#ff000000 0%,white 10%);
     height: 500px;
     overflow-y: scroll;
 }
@@ -144,9 +127,4 @@ p.buttons{
     height: 50px;
     margin-left: 10px;
     position: relative;
-    top: -5px;
-}
-.fa-sort-down{
-    color: rgb(78, 75, 75);
-    cursor: pointer;
 }

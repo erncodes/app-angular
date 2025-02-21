@@ -47,7 +47,7 @@ form .col-2{
     padding-left: 15px;
 }
 .table-list{
-    background-color: white;
+    background: linear-gradient(to right,#ff000000 0%,white 10%);
     height: 500px;
     overflow-y: scroll;
 }
@@ -74,10 +74,6 @@ p.buttons{
     height: 50px;
     margin-left: 10px;
     position: relative;
-    top: -5px;
 }
-.fa-sort-down{
-    color: rgb(78, 75, 75);
-    cursor: pointer;
-}
+
 

@@ -25,6 +25,10 @@ export class PromoComponent implements OnInit{
   isModalOpen : boolean = false;
   formMode : string = 'Add';
   promoStatus : boolean = false;
+  isNameAscend : boolean = false;
+  isStatusAscend : boolean = false;
+  isCreatorAscend : boolean = false;
+
 
   @ViewChild('form')
     form: NgForm | undefined;
@@ -97,6 +101,36 @@ export class PromoComponent implements OnInit{
       return this.promoItems;
     }
     return null;
+  }
+  OrderByName(){
+    if(this.isNameAscend){
+      this.allPromos.sort((a,b) => a.promoName.localeCompare(b.promoName));
+      this.isNameAscend = !this.isNameAscend
+    }
+    else{
+      this.allPromos.sort((a,b) => b.promoName.localeCompare(a.promoName));
+      this.isNameAscend = !this.isNameAscend
+    }
+  }
+  OrderByCreator(){
+    if(this.isCreatorAscend){
+      this.allPromos.sort((a,b) => a.createdBy.localeCompare(b.createdBy));
+      this.isCreatorAscend = !this.isCreatorAscend
+    }
+    else{
+      this.allPromos.sort((a,b) => b.createdBy.localeCompare(a.createdBy));
+      this.isCreatorAscend = !this.isCreatorAscend
+    }
+  }
+  OrderByStatus(){
+    if(this.isStatusAscend){
+      this.allPromos.sort((a,b) => a.isRunning.toString().localeCompare(b.isRunning.toString()));
+      this.isStatusAscend = !this.isStatusAscend
+    }
+    else{
+      this.allPromos.sort((a,b) => b.isRunning.toString().localeCompare(a.isRunning.toString()));
+      this.isStatusAscend = !this.isStatusAscend
+    }
   }
   FormSubmit(){}
 }

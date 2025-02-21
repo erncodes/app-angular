@@ -70,11 +70,11 @@
             <thead>
                 <tr class="tr-header">
                     <th width="10%">promo ID</th>
-                    <th width="15%">Promo Name <span class="sort"><i class="fa fa-sort-down"></i></span></th>
-                    <th width="10%">Status <span class="sort"><i class="fa fa-sort-down"></i></span></th>
+                    <th width="15%" (click)="OrderByName()">Promo Name <span class="sort"><i class="fa fa-sort"></i></span></th>
+                    <th width="10%" (click)="OrderByStatus()">Status <span class="sort"><i class="fa fa-sort"></i></span></th>
                     <th width="15%">Start Date</th>
                     <th width="15%">End Date</th>
-                    <th width="15%">Created By <span class="sort"><i class="fa fa-sort-down"></i></span></th>
+                    <th width="15%">Created By <span class="sort" (click)="OrderByCreator()"><i class="fa fa-sort"></i></span></th>
                     <th width="20%">Actions</th>
                 </tr>
             </thead>

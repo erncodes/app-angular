@@ -25,6 +25,10 @@ export class ProductComponent implements OnInit{
   allCategories : ProductCategory[] = [];
   isModalOpen : boolean = false;
   formMode : string = 'Add';
+  isPriceAscend : boolean = false;
+  isQuantityAscend : boolean = false;
+  isBarcodeAscend : boolean = false;
+  isNameAscend : boolean = false;
   
   @ViewChild('form')
       form: NgForm | undefined;
@@ -32,10 +36,10 @@ export class ProductComponent implements OnInit{
   SwitchBackToMain(value : string){
     this.posManagementService.SwitchActivePanel(value);
   }
-  ToggleModal(id?: string){
+  ToggleModal(short_barcode?: string){
     this.isModalOpen = !this.isModalOpen;
-    if(id){
-      let product = this.productService.GetProduct(id);
+    if(short_barcode){
+      let product = this.productService.GetProduct(short_barcode);
       this.formMode = 'Edit';
       if(product && this.form){
         this.form.setValue({
@@ -60,6 +64,46 @@ export class ProductComponent implements OnInit{
      this.allProducts = this.productService.GetAllProducts(value);
     else
     this.allProducts = this.productService.GetAllProducts();
+  }
+  OrderByName(){
+    if(this.isNameAscend){
+      this.allProducts.sort((a,b) => a.title.localeCompare(b.title));
+      this.isNameAscend = !this.isNameAscend
+    }
+    else{
+      this.allProducts.sort((a,b) => b.title.localeCompare(a.title));
+      this.isNameAscend = !this.isNameAscend
+    }
+  }
+  OrderByBarcode(){
+    if(this.isBarcodeAscend){
+      this.allProducts.sort((a,b) => a.short_barcode - b.short_barcode);
+      this.isBarcodeAscend = !this.isBarcodeAscend
+    }
+    else{
+      this.allProducts.sort((a,b) => b.short_barcode - a.short_barcode);
+      this.isBarcodeAscend = !this.isBarcodeAscend
+    }
+  }
+  OrderByQuantity(){
+    if(this.isQuantityAscend){
+      this.allProducts.sort((a,b) => a.quantity - b.quantity);
+      this.isQuantityAscend = !this.isQuantityAscend
+    }
+    else{
+      this.allProducts.sort((a,b) => b.quantity - a.quantity);
+      this.isQuantityAscend = !this.isQuantityAscend
+    }
+  }
+  OrderByPrice(){
+    if(this.isPriceAscend){
+      this.allProducts.sort((a,b) => a.price - b.price);
+      this.isPriceAscend = !this.isPriceAscend
+    }
+    else{
+      this.allProducts.sort((a,b) => b.price - a.price);
+      this.isPriceAscend = !this.isPriceAscend
+    }
   }
   FormSubmit(){
 

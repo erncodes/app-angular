@@ -22,14 +22,14 @@ form .col-2{
     left: 60%;
 }
 .sdate input{
-    width: 20px;
+    width: 30px;
     border-radius: 4px;
     border: none;
     color: black;
     filter: invert(2);
 }
 .edate input{
-    width: 20px;
+    width: 30px;
     border-radius: 4px;
     border: none;
     color: black;
@@ -66,7 +66,7 @@ form .col-2{
     padding-left: 15px;
 }
 .table-list{
-    background-color: white;
+    background: linear-gradient(to right,#ff000000 0%,white 10%);
     height: 500px;
     overflow-y: scroll;
 }
@@ -75,12 +75,16 @@ form .col-2{
     color: #000000;
     font-size: 16px;
     font-weight: 700;
+    cursor: pointer;
 }
 .table-list tr td {
     padding: 10px 0 10px 3px;
     vertical-align: middle;
     font-size: 13px;
     border: 1px solid;
+}
+.table-list thead tr th:active {
+    background-color: rgba(0, 0, 255, 0.512);
 }
 p.buttons{
     display: inline-block;
@@ -93,9 +97,4 @@ p.buttons{
     height: 50px;
     margin-left: 10px;
     position: relative;
-    top: -5px;
-}
-.fa-sort-down{
-    color: rgb(78, 75, 75);
-    cursor: pointer;
 }

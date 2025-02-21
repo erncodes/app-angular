@@ -74,18 +74,18 @@
         <table cellpadding="0" cellspacing="0" width="100%">
             <thead>
                 <tr class="tr-header">
-                    <th width="10%">Barcode</th>
-                    <th width="30%">Product Name <span class="sort"><i class="fa fa-sort-down"></i></span></th>
-                    <th width="10%">In Stock <span class="sort"><i class="fa fa-sort-down"></i></span></th>
-                    <th width="15%">Unit Price <span class="sort"><i class="fa fa-sort-down"></i></span></th>
-                    <th width="15%">Inc. VAT <span class="sort"><i class="fa fa-sort-down"></i></span></th>
+                    <th width="10%" (click)="OrderByBarcode()">Barcode <span class="sort"><i class="fa fa-sort"></i></span></th>
+                    <th width="30%" (click)="OrderByName()">Product Name <span class="sort"><i class="fa fa-sort"></i></span></th>
+                    <th width="10%" (click)="OrderByQuantity()">Quantity <span class="sort"><i class="fa fa-sort"></i></span></th>
+                    <th width="15%">Unit Price</th>
+                    <th width="15%" (click)="OrderByPrice()">Inc. VAT <span class="sort"><i class="fa fa-sort"></i></span></th>
                     <th width="20%">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of allProducts,let i = index">
                     <td width="10%">
-                        {{item.id}}
+                        {{item.short_barcode}}
                     </td>
                     <td width="30%">
                         {{item.title}}
@@ -94,7 +94,7 @@
                     <td width="15%">{{item.price | currency : 'R'}}</td>
                     <td width="15%">{{item.price + 5 | currency : 'R'}}</td>
                     <td width="20%"> 
-                        <p class="buttons" (click)="ToggleModal(item.id)">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons" (click)="ToggleModal(item.short_barcode)">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
                     </td>
                 </tr>
