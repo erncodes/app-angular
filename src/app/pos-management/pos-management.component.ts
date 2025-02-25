@@ -18,7 +18,7 @@ export class PosManagementComponent implements OnInit{
   productService : ProductService = inject(ProductService);
   promoService : PromoService = inject(PromoService);
   router : Router = inject(Router);
-  activePanel : string = 'PromoPanel';
+  activePanel : string = 'PosAnalytics';
   isCreateMode : boolean = false;
   emittedValue = '';
 

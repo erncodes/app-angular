@@ -1,10 +1,4 @@
 <div class="row gap-1">
-    <div class="col-12 d-flex justify-content-between">
-        <h2>Analytics Dashboard</h2>
-        <a class="btn button-15" (click)="SwitchBackToMain('PosManagement')">
-            <i class="fa fa-arrow-left"></i> back to main menu
-        </a>
-    </div>
     <div class="col-1 month-wheel">
         <span>Jan</span>
         <span>Feb</span>
@@ -22,12 +16,38 @@
         <span class="year">2025</span>
     </div>
     <div class="col-6 graphs">
-        <h4 class="my-3">January Activity - 2025 </h4>
-        <div class="graph-box"></div>
+        <div class="graph-box">
+            <ejs-chart [primaryXAxis]="xAxis" [primaryYAxis]="yAxis" [title]="chartTitle" [legendSettings]="legend" [tooltip]="toolTipSettings">
+                <e-series-collection>
+                    <e-series type="Line" [dataSource]="mockData" xName="month" yName="sales" [name]='"Sales"' [marker]="markerSettings"></e-series>
+                </e-series-collection>
+            </ejs-chart>
+            <ejs-chart [primaryXAxis]="xAxis" [primaryYAxis]="yAxis" [title]="chartTitle" [legendSettings]="legend" [tooltip]="toolTipSettings">
+                <e-series-collection>
+                    <e-series type="Column" fill="#000" [dataSource]="mockData" xName="month" yName="sales" [name]='"Sales"' [marker]="markerSettings"></e-series>
+                </e-series-collection>
+            </ejs-chart>
+        </div>
     </div>
     <div class="col-2 flex-grow-1 products-info">
-        <div class="box"></div>
-        <div class="box"></div>
+        <div class="box">
+            <ejs-accumulationchart [title]="chartPieTitle" [tooltip]="toolTipSettings">
+                <e-accumulation-series-collection>
+                    <e-accumulation-series type="Pie" [dataSource]="mockPieData" xName="name" yName="total" [dataLabel]="pieLabelSettings" innerRadius="40%">
+
+                    </e-accumulation-series>
+                </e-accumulation-series-collection>
+            </ejs-accumulationchart>
+        </div>
+        <div class="box">
+            <ejs-accumulationchart>
+                <e-accumulation-series-collection>
+                    <e-accumulation-series type="Pie" [dataSource]="mockPieData" xName="name" yName="total" >
+
+                    </e-accumulation-series>
+                </e-accumulation-series-collection>
+            </ejs-accumulationchart>
+        </div>
     </div>
     <div class="col-2 flex-grow-1 promos">
         <div class="box"></div>

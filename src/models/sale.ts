@@ -4,6 +4,6 @@ export class Sale
 {
 constructor(
       public id : string | undefined, public cashierName : string, 
-      public dateTime : Date, public items : Product[], public total : number, public isFinalised : boolean = false
+      public dateTime : Date, public productIds : string[] | number[], public total : number
       ){}
 }

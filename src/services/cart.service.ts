@@ -58,5 +58,4 @@ export class CartService {
     this.cartTotalSubject.next(this.cartTotal);
     this.productPriceSubject.next(0);
   }
-
 }
