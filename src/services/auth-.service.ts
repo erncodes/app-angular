@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { User } from 'src/models/user';
 
 @Injectable({
@@ -7,6 +8,7 @@ import { User } from 'src/models/user';
 export class AuthService {
 
   constructor() { }
+  httpClient : HttpClient = inject(HttpClient);
 
   GetAllUsers(filter? : string) : User[] | []{
     let filtered_users = this.users;
