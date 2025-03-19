@@ -14,7 +14,10 @@ import { ProductService } from 'src/services/product.service';
 })
 export class ProductComponent implements OnInit{
   ngOnInit(): void {
-    this.allProducts = this.productService.GetAllProducts();
+    this.productService.sortedProductsSubject.subscribe((prods)=>{
+      this.allProducts = prods;
+    });
+
     this.allCategories = this.categoryService.GetAllCategories();
   }
   posManagementService : PosManagementService = inject(PosManagementService);
@@ -61,9 +64,9 @@ export class ProductComponent implements OnInit{
   }
   FilterProducts(value? : string){
     if(value)
-     this.allProducts = this.productService.GetAllProducts(value);
+     this.allProducts = this.productService.GetProductsFiltered(value);
     else
-    this.allProducts = this.productService.GetAllProducts();
+    this.allProducts = this.productService.GetProductsFiltered();
   }
   OrderByName(){
     if(this.isNameAscend){

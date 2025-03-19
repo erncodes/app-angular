@@ -8,7 +8,9 @@ import { ProductService } from './product.service';
 })
 export class CartService {
   constructor() { 
-    this.products = this.productService.GetAllProducts();
+    this.productService.sortedProductsSubject.subscribe((prods)=>{
+      this.products = prods;
+    })
   }
   filteredProdArray : any[] = [];
   cartProducts :Product[]  = [];

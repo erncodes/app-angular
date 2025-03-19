@@ -17,7 +17,9 @@ export class SearchComponent implements OnInit{
     closeSearch : EventEmitter<string> = new EventEmitter<string>()
   
   ngOnInit(): void {
-    this.allProducts = this.productService.GetAllProducts();
+    this.productService.sortedProductsSubject.subscribe((prods)=>{
+      this.allProducts = prods;
+    });
   }
   AddToCartFromSearch(item : Product){
     this.cartService.addToCart(item.short_barcode.toString());
