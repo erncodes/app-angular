@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Promotion } from 'src/models/promotion';
 
 @Injectable({
@@ -7,6 +8,7 @@ import { Promotion } from 'src/models/promotion';
 export class PromoService {
 
   constructor() { }
+  httpClient : HttpClient = inject(HttpClient);
 
     GetPromotion(id : string) : Promotion | null{
       var promo = this.promotions.find(x => x.id == id);
@@ -34,16 +36,16 @@ export class PromoService {
       return this.promotions;
     }
     promotions : Promotion[] = [
-      {id : '140000', promoName : 'Festive Bonanza', startDate : new Date(2024,12,15),
+      { promoName : 'Festive Bonanza', startDate : new Date(2024,12,15),
         promoItems : [160015,160016,160040,160041,160060,160061],endDate : new Date(2024,12,22), 
         isRunning : false, createdBy : 'Siya'},
-      {id : '140001', promoName : 'Purple Week', startDate : new Date(2024,11,5),
+      { promoName : 'Purple Week', startDate : new Date(2024,11,5),
         promoItems : [160015,160016,160040,160041,160060,160061],endDate : new Date(2024,11,12), 
         isRunning : false, createdBy : 'Emily'},
-      {id : '140002', promoName : 'New Year Promo', startDate : new Date(2025,1,5),
+      { promoName : 'New Year Promo', startDate : new Date(2025,1,5),
         promoItems : [160015,160016,160040,160041,160060,160061],endDate : new Date(2025,1,12), 
         isRunning : false, createdBy : 'Emily'},
-      {id : '140003', promoName : "Valentine's Special", startDate : new Date(2025,2,9),
+      { promoName : "Valentine's Special", startDate : new Date(2025,2,9),
         promoItems : [160015,160016,160040,160041,160060,160061],endDate : new Date(2025,2,16), 
         isRunning : true, createdBy : 'Siya'},
     ]

@@ -39,10 +39,10 @@ export class AuthService {
   DeleteUser(id : number | string){}
 
   users : User[] = [
-    { id : 11100, fullName : 'Josh Claude', roles : ['cashier'], email : 'joshclaude@dufty.com', gender : 'male'},
-    { id : 11101, fullName : 'Emily Miles', roles : ['admin'], email : 'emilymiles@dufty.com', gender : 'female'},
-    { id : 11102, fullName : 'Siya Banks', roles : ['admin'], email : 'siyabanks@dufty.com', gender : 'male'},
-    { id : 11103, fullName : 'Amanda Sauls', roles : ['cashier'], email : 'amandasauls@dufty.com', gender : 'female'},
-    { id : 11104, fullName : 'Katy Green', roles : ['cashier'], email : 'katygreen@dufty.com', gender : 'female'},
+    {  fullName : 'Josh Claude', roles : ['cashier'], email : 'joshclaude@dufty.com', gender : 'male'},
+    {  fullName : 'Emily Miles', roles : ['admin'], email : 'emilymiles@dufty.com', gender : 'female'},
+    {  fullName : 'Siya Banks', roles : ['admin'], email : 'siyabanks@dufty.com', gender : 'male'},
+    {  fullName : 'Amanda Sauls', roles : ['cashier'], email : 'amandasauls@dufty.com', gender : 'female'},
+    {  fullName : 'Katy Green', roles : ['cashier'], email : 'katygreen@dufty.com', gender : 'female'},
   ]
 }

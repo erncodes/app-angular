@@ -49,7 +49,7 @@
                     <td width="20%">{{category.description}}</td>
                     <td width="20%">{{category.totalProducts}}</td>
                     <td width="20%"> 
-                        <p class="buttons" (click)="ToggleModal(category.id.toString())">Edit <i class="fa fa-file-pen"></i></p>
+                        <p class="buttons" (click)="ToggleModal(category.id?.toString())">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>
                     </td>
                 </tr>

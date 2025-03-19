@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { ProductCategory } from 'src/models/category';
 
 @Injectable({
@@ -8,6 +9,7 @@ export class CategoryService {
 
   constructor() { }
 
+    httpClient : HttpClient = inject(HttpClient)
      GetCategory(id : string) : ProductCategory | null{
       let category = this.categories.find(x => x.id == id);
       if(category)
@@ -22,9 +24,9 @@ export class CategoryService {
       }
 
       categories : ProductCategory [] = [
-        {id : 120100, categoryName : 'Pizza', description : 'Category for pizzas',totalProducts : 0},
-        {id : 120101, categoryName : 'Burger', description : 'Category for burgers',totalProducts : 0},
-        {id : 120102, categoryName : 'Meal', description : 'Category for meals',totalProducts : 0},
-        {id : 120103, categoryName : 'Drink', description : 'Category for drinks',totalProducts : 0},
+        { categoryName : 'Pizza', description : 'Category for pizzas',totalProducts : 0},
+        { categoryName : 'Burger', description : 'Category for burgers',totalProducts : 0},
+        { categoryName : 'Meal', description : 'Category for meals',totalProducts : 0},
+        { categoryName : 'Drink', description : 'Category for drinks',totalProducts : 0},
       ]
 }
