@@ -59,8 +59,6 @@ export class AnalyticsComponent implements OnInit{
     this.chartTitle = 'Sales';
   }
   ngOnInit(): void {
-    console.log(this.date.getMonth() > 1)
-    console.log();
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   

@@ -17,7 +17,9 @@ export class PromoComponent implements OnInit{
   promoItems : Product[] = [];
 
   ngOnInit(): void {
-    this.allPromos = this.promoService.GetAllPromotions();
+    this.promoService.promoSubject.subscribe((promos)=>{
+      this.allPromos = promos;
+    })
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   productService : ProductService = inject(ProductService);
@@ -64,9 +66,9 @@ export class PromoComponent implements OnInit{
   }
   FilterPromo(value? : string){
     if(value)
-      this.allPromos = this.promoService.GetAllPromotions(value);
+      this.allPromos = this.promoService.GetFilteredPromotions(value);
      else
-     this.allPromos = this.promoService.GetAllPromotions();
+     this.allPromos = this.promoService.GetFilteredPromotions();
   }
   SDateChanged(date_el : any){
     let new_start_date = new Date(date_el.value);
@@ -133,6 +135,5 @@ export class PromoComponent implements OnInit{
     }
   }
   FormSubmit(id? : string){
-
   }
 }

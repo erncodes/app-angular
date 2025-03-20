@@ -53,7 +53,6 @@ export class ProductService {
      this.products = prods;
      this.sortedProductsSubject.next(this.products);
    });
-  
   }
   GetProductsFiltered(filter? : string): Product[] | [] {
     let filtered_products : Product[] = [];

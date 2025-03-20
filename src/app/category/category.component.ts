@@ -15,7 +15,9 @@ export class CategoryComponent implements OnInit{
   formMode : string = 'Add';
     
   ngOnInit(): void {
-    this.allCategories = this.categoryService.GetAllCategories();
+    this.categoryService.categorySubject.subscribe((categories) =>{
+      this.allCategories = categories;
+    })
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   categoryService : CategoryService = inject(CategoryService);

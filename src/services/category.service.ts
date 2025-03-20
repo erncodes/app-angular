@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
 import { ProductCategory } from 'src/models/category';
 
 @Injectable({
@@ -8,6 +9,9 @@ import { ProductCategory } from 'src/models/category';
 export class CategoryService {
 
   constructor() { }
+
+  categories : ProductCategory[] = [];
+  categorySubject : BehaviorSubject<ProductCategory[]> = new BehaviorSubject<ProductCategory[]>(this.categories);
 
     httpClient : HttpClient = inject(HttpClient)
      GetCategory(id : string) : ProductCategory | null{
@@ -19,14 +23,22 @@ export class CategoryService {
       EditCategory(){}
       CreateCategory(category : ProductCategory){}
       DeleteCategory(){}
-      GetAllCategories() : ProductCategory[] | []{
-        return this.categories;
+      GetAllCategories(){
+            let headers = new HttpHeaders();
+            headers = headers.set('Access-Control-Allow-Origin','*');
+           this.httpClient.get<{ [key : string] : ProductCategory}>('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/categories.json',{headers : headers})
+             .pipe(map((data)=>{
+             let catArray = [];
+             for(let key in data){
+               if(data.hasOwnProperty(key))
+               {
+                catArray.push({...data[key],id : key})
+               }
+             }
+             return catArray;
+           })).subscribe((categories)=>{
+             this.categories = categories;
+             this.categorySubject.next(this.categories);
+           });
       }
-
-      categories : ProductCategory [] = [
-        { categoryName : 'Pizza', description : 'Category for pizzas',totalProducts : 0},
-        { categoryName : 'Burger', description : 'Category for burgers',totalProducts : 0},
-        { categoryName : 'Meal', description : 'Category for meals',totalProducts : 0},
-        { categoryName : 'Drink', description : 'Category for drinks',totalProducts : 0},
-      ]
 }

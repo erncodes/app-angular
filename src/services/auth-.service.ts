@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
 import { User } from 'src/models/user';
 
 @Injectable({
@@ -8,9 +9,27 @@ import { User } from 'src/models/user';
 export class AuthService {
 
   constructor() { }
+  users : User[] = [];
+  userSubject : BehaviorSubject<User[]> = new BehaviorSubject<User[]>(this.users);
   httpClient : HttpClient = inject(HttpClient);
 
   GetAllUsers(filter? : string) : User[] | []{
+     let headers = new HttpHeaders();
+                headers = headers.set('Access-Control-Allow-Origin','*');
+               this.httpClient.get<{ [key : string] : User}>('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/users.json',{headers : headers})
+                 .pipe(map((data)=>{
+                 let userArray = [];
+                 for(let key in data){
+                   if(data.hasOwnProperty(key))
+                   {
+                    userArray.push({...data[key],id : key})
+                   }
+                 }
+                 return userArray;
+               })).subscribe((users)=>{
+                 this.users = users;
+                 this.userSubject.next(this.users);
+               });
     let filtered_users = this.users;
     if(filter){
       switch(filter){
@@ -37,12 +56,4 @@ export class AuthService {
   GetSingleUser(id : number | string){}
   EditUser(id : number | string){}
   DeleteUser(id : number | string){}
-
-  users : User[] = [
-    {  fullName : 'Josh Claude', roles : ['cashier'], email : 'joshclaude@dufty.com', gender : 'male'},
-    {  fullName : 'Emily Miles', roles : ['admin'], email : 'emilymiles@dufty.com', gender : 'female'},
-    {  fullName : 'Siya Banks', roles : ['admin'], email : 'siyabanks@dufty.com', gender : 'male'},
-    {  fullName : 'Amanda Sauls', roles : ['cashier'], email : 'amandasauls@dufty.com', gender : 'female'},
-    {  fullName : 'Katy Green', roles : ['cashier'], email : 'katygreen@dufty.com', gender : 'female'},
-  ]
 }

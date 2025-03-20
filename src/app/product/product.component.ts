@@ -17,8 +17,9 @@ export class ProductComponent implements OnInit{
     this.productService.sortedProductsSubject.subscribe((prods)=>{
       this.allProducts = prods;
     });
-
-    this.allCategories = this.categoryService.GetAllCategories();
+    this.categoryService.categorySubject.subscribe((categories) =>{
+      this.allCategories = categories;
+    })
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   categoryService : CategoryService = inject(CategoryService);
