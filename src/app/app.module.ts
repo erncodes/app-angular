@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { CategoryComponent } from './category/category.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartModule,LineSeriesService,ColumnSeriesService,CategoryService,LegendService,DataLabelService,TooltipService,
   AccumulationChartModule,AccumulationLegendService,AccumulationDataLabelService,AccumulationTooltipService,PieSeriesService } from '@syncfusion/ej2-angular-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ChartModule,LineSeriesService,ColumnSeriesService,CategoryService,Legen
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ChartModule,AccumulationChartModule
+    ChartModule,AccumulationChartModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
   providers: [LineSeriesService,ColumnSeriesService,CategoryService,LegendService,DataLabelService,TooltipService,
     AccumulationLegendService,AccumulationDataLabelService,AccumulationTooltipService,PieSeriesService],

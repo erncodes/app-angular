@@ -18,7 +18,7 @@ export class PosManagementComponent implements OnInit{
   productService : ProductService = inject(ProductService);
   promoService : PromoService = inject(PromoService);
   router : Router = inject(Router);
-  activePanel : string = 'PosAnalytics';
+  activePanel : string = 'PosManagement';
   isCreateMode : boolean = false;
   emittedValue = '';
 
@@ -36,5 +36,4 @@ export class PosManagementComponent implements OnInit{
       this.activePanel = text;
     })
   }
-
 }

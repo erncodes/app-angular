@@ -20,7 +20,6 @@ export class AnalyticsComponent implements OnInit{
   chartPieTitle : string = "";
   date : Date = new Date(2025,1,15);
 
-
   constructor() {
     this.mockData = [
       {month:'Jan',sales:35},{month:'Feb',sales:45},{month:'Mar',sales:15},{month:'Apr',sales:75},

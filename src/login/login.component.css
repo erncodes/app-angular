@@ -1,3 +1,8 @@
+a.message{
+    color: aqua;
+    cursor: pointer;
+    text-decoration: none;
+}
 .row{
     width: 98.5%;
     height: 100%;

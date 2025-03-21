@@ -19,6 +19,7 @@ export class PromoComponent implements OnInit{
   ngOnInit(): void {
     this.promoService.promoSubject.subscribe((promos)=>{
       this.allPromos = promos;
+      console.log(promos)
     })
   }
   posManagementService : PosManagementService = inject(PosManagementService);

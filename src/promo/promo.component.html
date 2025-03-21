@@ -88,8 +88,8 @@
                         {{promo.promoName}}
                     </td>
                     <td width="10%">{{promo.isRunning ? 'Active' : 'Not Active'}}</td>
-                    <td width="15%">{{promo.startDate.toDateString()}}</td>
-                    <td width="15%">{{promo.endDate.toDateString()}}</td>
+                    <td width="15%">{{promo.startDate}}</td>
+                    <td width="15%">{{promo.endDate}}</td>
                     <td width="15%">{{promo.createdBy}}</td>
                     <td width="20%"> 
                         <p class="buttons" (click)="ToggleModal(promo.id)">Edit <i class="fa fa-file-pen"></i></p>
