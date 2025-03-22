@@ -1,6 +1,8 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/models/product';
+import { User } from 'src/models/user';
+import { AuthService } from 'src/services/auth-.service';
 import { CartService } from 'src/services/cart.service';
 
 @Component({
@@ -18,14 +20,19 @@ export class PosTransactComponent implements OnInit{
  
   cartTotal : number = 0;
   productPrice : number | string = '';
+  loggedUser : User | undefined = undefined;
 
+  authService : AuthService = inject(AuthService);
   cartService : CartService = inject(CartService);
   router : Router = inject(Router);
   @ViewChild('outputPanel') outputPanel : ElementRef | undefined;
   @ViewChild('inp') inp : ElementRef | undefined;
   text : string = "";
   ngOnInit(): void {
-
+    this.authService.loggedUserSubject.subscribe({
+      next : (user) =>{ this.loggedUser = user},
+      error: (err) =>{ console.log(err)}
+    })
     this.cartService.cartTotalSubject.subscribe((total)=>{
       this.cartTotal = total;
       this.outputPanel?.nativeElement.scrollBy({top : window.innerHeight, behavior: 'smooth'})

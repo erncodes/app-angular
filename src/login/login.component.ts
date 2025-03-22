@@ -1,5 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthResponse } from 'src/models/authResponse';
+import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
 import { NotificationService } from 'src/services/notification.service';
 
@@ -8,10 +12,19 @@ import { NotificationService } from 'src/services/notification.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  ngOnInit(): void {
+    this.authService.loggedUserSubject.subscribe({
+      next : (user) =>{ this.loggedUser = user},
+      error: (err) =>{ console.log(err)}
+    })
+  }
   isLoginMode : boolean = true;
-  isCashier : boolean = false;
+  loggedUser : User | undefined = undefined;
+
+  router : Router = inject(Router);
   authService : AuthService = inject(AuthService);
+  authObs : Observable<AuthResponse> = new Observable<AuthResponse>;
   notificationService : NotificationService = inject(NotificationService);
 
   SwitchMode(){
@@ -22,14 +35,23 @@ export class LoginComponent {
     const email = form.value.email;
     const password = form.value.password;
     if(this.isLoginMode){
-      return
+      this.authObs = this.authService.Login(email,password);
     }
     else{
-      this.authService.SignUp(email,password).subscribe({
-        next : (res) =>{console.log(res)},
-        error : (error) => { console.log(error)}
-      });
+      this.authObs = this.authService.SignUp(email,password)
     }
-
+    this.authObs.subscribe({
+      next : (res) =>{
+        console.log(res);
+        if(this.loggedUser?.roles.includes('admin')){
+          this.router.navigate(['/PosTransact'])
+        }
+        else{
+          this.router.navigate(['/PosTransact'])
+        }
+      },
+      error : (error) => { console.log(error)}
+    });
+    form.reset();
   }
 }
