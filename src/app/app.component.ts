@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
     this.categoryService.GetAllCategories();
     this.promoService.GetAllPromotions();
     this.authService.GetAllUsers();
+    this.authService.AutoLogin();
   }
   productService : ProductService = inject(ProductService);
   categoryService : CategoryService = inject(CategoryService);

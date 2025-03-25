@@ -1,5 +1,6 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoggedInUser } from 'src/models/loggedInUser';
 import { Product } from 'src/models/product';
 import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
@@ -20,7 +21,7 @@ export class PosTransactComponent implements OnInit{
  
   cartTotal : number = 0;
   productPrice : number | string = '';
-  loggedUser : User | undefined = undefined;
+  loggedUser : LoggedInUser | undefined = undefined;
 
   authService : AuthService = inject(AuthService);
   cartService : CartService = inject(CartService);

@@ -10,11 +10,11 @@
         <div class="col-4">
             <form #authForm="ngForm" (ngSubmit)="OnFormSubmitted(authForm)">
                 <h2>{{isLoginMode? 'Login' : 'Sign-Up'}}</h2>
-                <div class="">
+                <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input email name="email" ngModel>
                 </div>
-                <div class="">
+                <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" name="password" ngModel>
                 </div>

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthResponse } from 'src/models/authResponse';
+import { LoggedInUser } from 'src/models/loggedInUser';
 import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
 import { NotificationService } from 'src/services/notification.service';
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit{
     })
   }
   isLoginMode : boolean = true;
-  loggedUser : User | undefined = undefined;
+  loggedUser : LoggedInUser | undefined = undefined;
 
   router : Router = inject(Router);
   authService : AuthService = inject(AuthService);
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit{
     this.authObs.subscribe({
       next : (res) =>{
         console.log(res);
-        if(this.loggedUser?.roles.includes('admin')){
+        if(this.loggedUser?.user.roles.includes('admin')){
           this.router.navigate(['/PosTransact'])
         }
         else{
