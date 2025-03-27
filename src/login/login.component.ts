@@ -45,13 +45,13 @@ export class LoginComponent implements OnInit{
       next : (res) =>{
         console.log(res);
         if(this.loggedUser?.user.roles.includes('admin')){
-          this.router.navigate(['/PosTransact'])
+          this.router.navigate(['/PosManagement'])
         }
         else{
           this.router.navigate(['/PosTransact'])
         }
       },
-      error : (error) => { console.log(error)}
+      error : (error) => { this.notificationService.ShowErrorNotification(error.message)}
     });
     form.reset();
   }

@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth-.service';
 import { CategoryService } from 'src/services/category.service';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
@@ -17,6 +18,7 @@ export class PosManagementComponent implements OnInit{
   categoryService : CategoryService = inject(CategoryService);
   productService : ProductService = inject(ProductService);
   promoService : PromoService = inject(PromoService);
+  authService : AuthService = inject(AuthService);
   router : Router = inject(Router);
   activePanel : string = 'PosManagement';
   isCreateMode : boolean = false;
@@ -29,7 +31,7 @@ export class PosManagementComponent implements OnInit{
     this.activePanel = value;
   }
   SignOut(){
-    this.router.navigate(['/']);
+    this.authService.LogOut();
   }
   ngOnInit(): void {
     this.posManagementService.activePanelSubject.subscribe((text)=>{

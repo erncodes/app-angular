@@ -5,6 +5,7 @@ import { Product } from 'src/models/product';
 import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
 import { CartService } from 'src/services/cart.service';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-pos-transact',
@@ -22,6 +23,8 @@ export class PosTransactComponent implements OnInit{
   cartTotal : number = 0;
   productPrice : number | string = '';
   loggedUser : LoggedInUser | undefined = undefined;
+  notificationService : NotificationService = inject(NotificationService);
+  
 
   authService : AuthService = inject(AuthService);
   cartService : CartService = inject(CartService);
@@ -48,7 +51,13 @@ export class PosTransactComponent implements OnInit{
   }
   ClearCart(){
     this.cartService.clearCart();
+    this.notificationService.ShowInfoNotification("Cart Cleared!")
   }
+  VoidItem(){}
+  CheckItemPrice(){}
+  FinaliseSale(){}
+  AddToCart(){}
+
   WaitForInput(){
     let body = document.getElementsByTagName("body");
     body[0].focus()
@@ -60,10 +69,19 @@ export class PosTransactComponent implements OnInit{
         case 'r' :
         case 'R' :
           this.text = "Read";
+          this.posMode = 'Read';
           this.showModal = true;
           break;
           case '+':
+            this.posMode = "SubTotal";
             this.text = "Total";
+          break;
+          case '-':
+            this.posMode = "Finalising";
+            this.text = "Change";
+          break;
+          case 'insert':
+            this.showModal = true;
           break;
           case 'Escape':
             this.text = "";
@@ -95,7 +113,7 @@ export class PosTransactComponent implements OnInit{
   }
   
   SignOut(){
-    this.router.navigate(['/']);
+    this.authService.LogOut();
   }
   ActivateMenuItem(menuItem : string){
     this.cartService.getSelectedPopular(menuItem+'s');

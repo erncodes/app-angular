@@ -4,6 +4,7 @@ import { Category } from '@syncfusion/ej2-angular-charts';
 import { ProductCategory } from 'src/models/category';
 import { Product } from 'src/models/product';
 import { CategoryService } from 'src/services/category.service';
+import { NotificationService } from 'src/services/notification.service';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
 
@@ -22,6 +23,7 @@ export class ProductComponent implements OnInit{
     })
   }
   posManagementService : PosManagementService = inject(PosManagementService);
+  notificationService : NotificationService = inject(NotificationService);
   categoryService : CategoryService = inject(CategoryService);
   productService : ProductService = inject(ProductService);
   isPanelExpanded : boolean = true;
@@ -110,6 +112,6 @@ export class ProductComponent implements OnInit{
     }
   }
   FormSubmit(){
-
+    this.notificationService.ShowInfoNotification("Form Submitted.")
   }
 }

@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@ang
 import { NgForm } from '@angular/forms';
 import { ProductCategory } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
+import { NotificationService } from 'src/services/notification.service';
 import { PosManagementService } from 'src/services/pos-management.service';
 
 @Component({
@@ -21,6 +22,8 @@ export class CategoryComponent implements OnInit{
   }
   posManagementService : PosManagementService = inject(PosManagementService);
   categoryService : CategoryService = inject(CategoryService);
+  notificationService : NotificationService = inject(NotificationService);
+  
   isModalOpen : boolean = false;
     
   @ViewChild('form')
@@ -48,5 +51,7 @@ export class CategoryComponent implements OnInit{
       this.form?.resetForm()
     }
   }
-  FormSubmit(){}
+  FormSubmit(){
+    this.notificationService.ShowInfoNotification('Form Submitted');
+  }
 }
