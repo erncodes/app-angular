@@ -8,11 +8,11 @@
                 <h2 class="mb-3 text-center">{{formMode}} Category</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label col-2">Name</label>
-                    <input type="text" class="col-8" placeholder="Category Name" name="name_El" ngModel>
+                    <input type="text" class="col-8" placeholder="Category Name" name="name_El" ngModel required>
                 </div>
                 <div class="mb-3 d-flex align-items-start">
                     <label for="description" class="form-label col-2">Description</label>
-                    <textarea name="description" class="col-8" ngModel></textarea>
+                    <textarea name="description" class="col-8" ngModel required></textarea>
                 </div>
                 <div class="text-end ms-auto">
                     <button class="button-15 text-danger me-3" (click)="ToggleModal()" type="button">Close<i class="fa fa-xmark ms-2"></i></button>
@@ -47,7 +47,7 @@
                         {{category.categoryName}}
                     </td>
                     <td width="20%">{{category.description}}</td>
-                    <td width="20%">{{category.totalProducts}}</td>
+                    <td width="20%">{{'total'}}</td>
                     <td width="20%"> 
                         <p class="buttons" (click)="ToggleModal(category.id?.toString())">Edit <i class="fa fa-file-pen"></i></p>
                         <p class="buttons">Delete <i class="fa fa-trash"></i></p>

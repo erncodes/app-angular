@@ -1,5 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Category } from '@syncfusion/ej2-angular-charts';
 import { ProductCategory } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { NotificationService } from 'src/services/notification.service';
@@ -52,7 +53,12 @@ export class CategoryComponent implements OnInit{
     }
   }
   FormSubmit(form : NgForm){
-    console.log(form.value)
-    this.notificationService.ShowInfoNotification('Form Submitted');
+    if(form.valid){
+      const newCategory = new ProductCategory(form.value.name_El,form.value.description);
+      this.categoryService.CreateCategory(newCategory);
+    }
+    else{
+      this.notificationService.ShowErrorNotification('Please fill all fields.')
+    }
   }
 }

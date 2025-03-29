@@ -24,7 +24,7 @@ export class CategoryService {
       EditCategory(){}
       CreateCategory(category : ProductCategory){
         this.httpClient.post('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/categories',category).subscribe({
-          next: (res)=>{this.notificationService.ShowInfoNotification('Category Added' + res)},
+          next: (res)=>{this.notificationService.ShowSuccessNotification('Category Added')},
           error:(err)=>{this.notificationService.ShowErrorNotification(err.message)}
         })
       }
