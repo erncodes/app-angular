@@ -35,6 +35,7 @@ export class ProductComponent implements OnInit{
   isQuantityAscend : boolean = false;
   isBarcodeAscend : boolean = false;
   isNameAscend : boolean = false;
+  selectedCategory : string = '';
   
   @ViewChild('form')
       form: NgForm | undefined;
@@ -111,7 +112,18 @@ export class ProductComponent implements OnInit{
       this.isPriceAscend = !this.isPriceAscend
     }
   }
-  FormSubmit(){
-    this.notificationService.ShowInfoNotification("Form Submitted.")
+  FormSubmit(form : NgForm){
+    /*public short_barcode : number, public title : string, public description : string, public category : string, public size : string,
+      public imageUrl : string, public isInStock : boolean,public isInPromo : boolean, public leftInStock : number, 
+      public price : number, public discount : number | 0, public rating : number = 0*/
+    //const newProd = new Product();
+    if(form.valid){
+      console.log(form.value)
+      const prod = new Product(form.value.barcode,form.value.name_el,form.value.description,form.value.category,form.value.image_url,+form.value.quantity,form.value.price);
+      this.productService.CreateProduct(prod);      
+    }
+    else{
+      this.notificationService.ShowErrorNotification("Fill In All The Fields.")
+    }
   }
 }

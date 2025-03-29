@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { Product } from 'src/models/product';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class ProductService {
 
   constructor() { }
   httpClient : HttpClient = inject(HttpClient);
+  notificationService : NotificationService = inject(NotificationService);
 
   products : Product[] = [];
   filteredProdArray : any[] = [];
@@ -33,7 +35,12 @@ export class ProductService {
 
   }
   EditProduct(){}
-  CreateProduct(product : Product){}
+  CreateProduct(product : Product){
+    this.httpClient.post('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/products',product).subscribe({
+      next: (res)=>{this.notificationService.ShowSuccessNotification('Product Added!')},
+      error:(err)=>{this.notificationService.ShowErrorNotification(err.message)}
+    })
+  }
   DeleteProduct(){}
 
   GetAllProducts(){
