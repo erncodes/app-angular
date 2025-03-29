@@ -1,26 +1,30 @@
 <div class="row gap-2 px-2">
     <div class="mod-cover" [ngClass]="{'mod-cover' : true, 'active' : isModalOpen}">
         <div class="col-7 m-auto">
-            <form (ngSubmit)="FormSubmit()" #form="ngForm">
+            <form (ngSubmit)="FormSubmit(form)" #form="ngForm">
                 <div class="close-box" (click)="ToggleModal()">
                     <i class="fa fa-xmark" title="close-modal"></i>
                 </div>
                 <h2 class="mb-3 text-center">Add New Product</h2>
                 <div class="mb-3">
                     <label for="name" class="form-label col-2">Name</label>
-                    <input type="text" class="col-8" id="name" placeholder="Product Name" name="name_El" ngModel>
+                    <input type="text" class="col-8" placeholder="Product Name" name="name_El" ngModel>
+                </div>
+                <div class="mb-3">
+                    <label for="barcode" class="form-label col-2">Barcode</label>
+                    <input type="text" class="col-8" placeholder="short barcode" name="barcode" ngModel>
                 </div>
                 <div class="mb-3 d-flex align-items-start">
                     <label for="description" class="form-label col-2">Description</label>
-                    <textarea name="description" id="description" class="col-8" ngModel></textarea>
+                    <textarea name="description" class="col-8" ngModel></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="qty" class="form-label col-2">Quantity</label>
-                    <input type="text" class="col-8" id="qty" name="quantity" ngModel>
+                    <input type="text" class="col-8" name="quantity" ngModel>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label col-2">Unit Price</label>
-                    <input type="text" class="col-8" id="price" name="price" ngModel>
+                    <input type="text" class="col-8" name="price" ngModel>
                 </div>
                 <div class="mb-3 d-flex">
                     <label class="form-label col-2">Category:</label>

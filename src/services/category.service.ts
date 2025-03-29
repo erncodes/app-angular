@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { ProductCategory } from 'src/models/category';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { ProductCategory } from 'src/models/category';
 export class CategoryService {
 
   constructor() { }
-
+  notificationService : NotificationService = inject(NotificationService);
   categories : ProductCategory[] = [];
   categorySubject : BehaviorSubject<ProductCategory[]> = new BehaviorSubject<ProductCategory[]>(this.categories);
 
@@ -21,7 +22,12 @@ export class CategoryService {
       return null;
      }
       EditCategory(){}
-      CreateCategory(category : ProductCategory){}
+      CreateCategory(category : ProductCategory){
+        this.httpClient.post('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/categories',category).subscribe({
+          next: (res)=>{this.notificationService.ShowInfoNotification('Category Added' + res)},
+          error:(err)=>{this.notificationService.ShowErrorNotification(err.message)}
+        })
+      }
       DeleteCategory(){}
       GetAllCategories(){
             let headers = new HttpHeaders();

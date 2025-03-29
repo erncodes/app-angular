@@ -51,7 +51,8 @@ export class CategoryComponent implements OnInit{
       this.form?.resetForm()
     }
   }
-  FormSubmit(){
+  FormSubmit(form : NgForm){
+    console.log(form.value)
     this.notificationService.ShowInfoNotification('Form Submitted');
   }
 }

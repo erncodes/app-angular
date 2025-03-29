@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { Promotion } from 'src/models/promotion';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class PromoService {
   constructor() { }
   promotions : Promotion[] = [];
   promoSubject : BehaviorSubject<Promotion[]> = new BehaviorSubject<Promotion[]>(this.promotions);
+  notificationService : NotificationService = inject(NotificationService);
+  
   httpClient : HttpClient = inject(HttpClient);
 
     GetPromotion(id : string) : Promotion | null{
@@ -38,7 +41,12 @@ export class PromoService {
           });
     }
     EditPromotion(){}
-    CreatePromotion(promo : Promotion){}
+    CreatePromotion(promo : Promotion){
+      this.httpClient.post('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/promotions',promo).subscribe({
+        next: (res)=>{this.notificationService.ShowInfoNotification('Promotion Added' + res)},
+        error:(err)=>{this.notificationService.ShowErrorNotification(err.message)}
+      })
+    }
     DeletePromotion(){}
     GetFilteredPromotions(filter? : string) : Promotion[] | []{
       let filtered_promos = this.promotions;
