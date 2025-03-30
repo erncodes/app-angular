@@ -1,7 +1,8 @@
-import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-user',
@@ -11,6 +12,11 @@ import { AuthService } from 'src/services/auth-.service';
 export class UserComponent implements OnInit{
   allUsers : User[]=[];
   authService : AuthService = inject(AuthService);
+  notificationService : NotificationService = inject(NotificationService);
+  rolesArr : string[] = ['cashier'];
+  gender : string = '';
+
+  @ViewChild('isAdmin') isAdmin : ElementRef;
 
   isModalOpen : boolean = false;
   
@@ -31,5 +37,14 @@ export class UserComponent implements OnInit{
     else
     this.allUsers = this.authService.GetAllUsers();
   }
-  FormSubmit(){}
+  FormSubmit(form : NgForm){
+    console.log(this.isAdmin.nativeElement);
+    if(form.valid){
+      const appUser = new User(form.value.fullname,this.rolesArr,form.value.email,this.gender);
+      this.authService.CreateAppUser(appUser);
+    }
+    else{
+      this.notificationService.ShowInfoNotification('Please fill all fields!')
+    }
+  }
 }
