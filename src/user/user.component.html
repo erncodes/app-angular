@@ -1,7 +1,7 @@
 <div class="row gap-2 px-2">
     <div class="mod-cover" [ngClass]="{'mod-cover' : true, 'active' : isModalOpen}">
         <div class="col-7 m-auto">
-            <form (ngSubmit)="FormSubmit(form)" #form="ngForm">
+            <form (ngSubmit)="FormSubmit(form,isAdmin)" #form="ngForm">
                 <div class="close-box" (click)="ToggleModal()">
                     <i class="fa fa-xmark" title="close-modal"></i>
                 </div>
@@ -16,12 +16,12 @@
                 </div>
                 <div class="mb-3 d-flex">
                     <label class="form-label col-2" >Is Admin:</label>
-                    <input type="checkbox" class="col-8" #isAdmin>
+                    <input type="checkbox" class="col-4" #isAdmin>
                   </div>
                   <div class="mb-3 d-flex">
                     <label class="form-label col-2" >Gender:</label>
-                      <select class="form-select" [(ngModel)]="gender">
-                        <option value="Unspecified">Choose</option>
+                      <select class="form-select" [(ngModel)]="gender" name="option">
+                        <option value="Unspecified" disabled>Choose</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>

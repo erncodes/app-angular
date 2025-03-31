@@ -16,8 +16,6 @@ export class UserComponent implements OnInit{
   rolesArr : string[] = ['cashier'];
   gender : string = '';
 
-  @ViewChild('isAdmin') isAdmin : ElementRef;
-
   isModalOpen : boolean = false;
   
   @ViewChild('form')
@@ -37,8 +35,9 @@ export class UserComponent implements OnInit{
     else
     this.allUsers = this.authService.GetAllUsers();
   }
-  FormSubmit(form : NgForm){
-    console.log(this.isAdmin.nativeElement);
+  FormSubmit(form : NgForm,isAdmin:HTMLInputElement){
+    if(isAdmin.checked)
+      this.rolesArr.push('admin')
     if(form.valid){
       const appUser = new User(form.value.fullname,this.rolesArr,form.value.email,this.gender);
       this.authService.CreateAppUser(appUser);
