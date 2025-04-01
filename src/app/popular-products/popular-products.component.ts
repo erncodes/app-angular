@@ -20,8 +20,8 @@ export class PopularProductsComponent implements OnInit{
       this.selectedPopularProducts =  products;
     })
   }
-  AddToCart(id : string){
-    this.cartService.addToCart(id);
+  AddToCart(barcode : string){
+    this.cartService.addToCart(barcode);
   }
 
 }

@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit{
     this.isLoginMode = !this.isLoginMode;
   }
   OnFormSubmitted(form : NgForm){
-    this.notificationService.ShowInfoNotification("Form Submitted");
     const email = form.value.email;
     const password = form.value.password;
     if(this.isLoginMode){

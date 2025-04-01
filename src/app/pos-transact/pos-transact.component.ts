@@ -13,7 +13,7 @@ import { NotificationService } from 'src/services/notification.service';
   styleUrls: ['./pos-transact.component.css']
 })
 export class PosTransactComponent implements OnInit{
-  isPanelExpanded : boolean = false;
+  isPanelExpanded : boolean = true;
   isSearchMode : boolean = false;
   activeMenu : string = 'Burger';
   showModal : boolean = false;
@@ -33,6 +33,8 @@ export class PosTransactComponent implements OnInit{
   @ViewChild('inp') inp : ElementRef | undefined;
   text : string = "";
   ngOnInit(): void {
+    if(!this.isPanelExpanded)
+      this.isPanelExpanded = true
     this.authService.loggedUserSubject.subscribe({
       next : (user) =>{ this.loggedUser = user},
       error: (err) =>{ console.log(err)}
