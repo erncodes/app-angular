@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit{
   OnFormSubmitted(form : NgForm){
     const email = form.value.email;
     const password = form.value.password;
+    if(!email || !password){
+      this.notificationService.ShowErrorNotification('Please Fill All Required Fields')
+      return;
+    }
     if(this.isLoginMode){
       this.authObs = this.authService.Login(email,password);
     }
@@ -41,8 +45,7 @@ export class LoginComponent implements OnInit{
       this.authObs = this.authService.SignUp(email,password)
     }
     this.authObs.subscribe({
-      next : (res) =>{
-        console.log(res);
+      next : () =>{
         if(this.loggedUser?.user.roles.includes('admin')){
           this.router.navigate(['/PosManagement'])
         }

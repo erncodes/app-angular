@@ -9,6 +9,7 @@ import { NotificationService } from './notification.service';
 })
 export class ProductService {
   productSearchSub: any;
+  checkedProductSub : BehaviorSubject<Product> = new BehaviorSubject<Product>(null);
 
   constructor() { }
   httpClient : HttpClient = inject(HttpClient);
@@ -21,8 +22,10 @@ export class ProductService {
 
   GetProduct(short_barcode : string) : Product | null{
     let product = this.products.find(c => c.short_barcode == +short_barcode);
-    if(product)
+    if(product){
+      this.checkedProductSub.next(product);
       return product;
+    }
     return null;
 
    /* this.httpClient.get<{[key : string] : Product}>('https://urbanstrides-640e5-default-rtdb.europe-west1.firebasedatabase.app/products/'+short_barcode+'.json')

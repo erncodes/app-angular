@@ -2,10 +2,12 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
 import { LoggedInUser } from 'src/models/loggedInUser';
 import { Product } from 'src/models/product';
+import { Sale } from 'src/models/sale';
 import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
 import { CartService } from 'src/services/cart.service';
 import { NotificationService } from 'src/services/notification.service';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-pos-transact',
@@ -17,12 +19,15 @@ export class PosTransactComponent implements OnInit{
   isSearchMode : boolean = false;
   activeMenu : string = 'Burger';
   showModal : boolean = false;
-  posMode : string = '';
+  showPriceModal : boolean = false;
+  posMode : string = 'Ready';
   productsInCart : Product[] = [];
+  checkedProduct : Product;
  
   cartTotal : number = 0;
   productPrice : number | string = '';
   loggedUser : LoggedInUser | undefined = undefined;
+  productService : ProductService = inject(ProductService);
   notificationService : NotificationService = inject(NotificationService);
   
 
@@ -37,7 +42,7 @@ export class PosTransactComponent implements OnInit{
       this.isPanelExpanded = true
     this.authService.loggedUserSubject.subscribe({
       next : (user) =>{ this.loggedUser = user},
-      error: (err) =>{ console.log(err)}
+      error: (err) =>{ this.notificationService.ShowErrorNotification(err.message)}
     })
     this.cartService.cartTotalSubject.subscribe((total)=>{
       this.cartTotal = total;
@@ -49,6 +54,9 @@ export class PosTransactComponent implements OnInit{
     this.cartService.productsInCart.subscribe((items)=>{
       this.productsInCart =items;
     })
+    this.productService.checkedProductSub.subscribe((prod)=>{
+      this.checkedProduct = prod;
+    })
     this.WaitForInput()
   }
   ClearCart(){
@@ -56,10 +64,18 @@ export class PosTransactComponent implements OnInit{
     this.notificationService.ShowInfoNotification("Cart Cleared!")
   }
   VoidItem(){}
-  CheckItemPrice(){}
-  FinaliseSale(){}
-  AddToCart(){}
-
+  CheckItemPrice(barcode : string){
+    this.productService.GetProduct(barcode);
+    this.TogglePriceModal();
+  }
+  FinaliseSale(cartItems : Product[]){
+    const sale = new Sale(this.loggedUser.user.fullName,new Date(),cartItems,cartItems.length);
+    //this.cartService.Finalize(cartItems)
+  }
+  AddToCart(barcode : string){
+    this.cartService.addToCart(barcode);
+  }
+  OverridePrice(barcode : string){}
   WaitForInput(){
     let body = document.getElementsByTagName("body");
     body[0].focus()
@@ -70,9 +86,14 @@ export class PosTransactComponent implements OnInit{
       switch(e.key){
         case 'r' :
         case 'R' :
-          this.text = "Read";
+          this.text = "Read"; 
           this.posMode = 'Read';
-          this.showModal = true;
+          if(!this.inp.nativeElement.value){
+            this.showModal = true;
+          }
+          else{
+            this.CheckItemPrice(this.inp.nativeElement.value.trim())
+          }
           break;
           case '+':
             this.posMode = "SubTotal";
@@ -90,7 +111,8 @@ export class PosTransactComponent implements OnInit{
             this.showModal = false;
           break;
           case 'Enter':
-            this.text = "";
+            this.CheckItemPrice(this.inp.nativeElement.value)
+            
           break;
           default:
             console.log(e.key)
@@ -142,6 +164,9 @@ export class PosTransactComponent implements OnInit{
       default:
         this.activeMenu = '';
     }
+  }
+  TogglePriceModal(){
+    this.showPriceModal = !this.showPriceModal;
   }
   OnEnter(){
     switch(this.posMode){
