@@ -62,8 +62,15 @@ export class PosTransactComponent implements OnInit{
   ClearCart(){
     this.cartService.clearCart();
     this.notificationService.ShowInfoNotification("Cart Cleared!")
+    this.inp.nativeElement.value = 0;
   }
-  VoidItem(){}
+  VoidItem(barcode : string){
+    const itemVoid = this.cartService.RemoveItem(barcode);
+    if(itemVoid){
+      this.notificationService.ShowInfoNotification(itemVoid.title + ' Removed!');
+      this.EndOperation()
+    }
+  }
   CheckItemPrice(barcode : string){
     this.productService.GetProduct(barcode);
     this.TogglePriceModal();
@@ -75,7 +82,27 @@ export class PosTransactComponent implements OnInit{
   AddToCart(barcode : string){
     this.cartService.addToCart(barcode);
   }
-  OverridePrice(barcode : string){}
+  SwitchToRead(){
+    this.text = "Read"; 
+    this.posMode = 'Read';
+    this.inp.nativeElement.value = '';
+  }
+  SwitchToVoid(){
+    this.text = "Void"; 
+    this.posMode = 'Void';
+    this.inp.nativeElement.value = '';
+  }
+  EndOperation(){
+    this.text = "";
+    this.posMode = 'Ready';
+    this.inp.nativeElement.value = '';
+    this.showPriceModal = false;
+  }
+  SubTotalMode(){
+    this.posMode = "SubTotal";
+    this.text = "Total";
+    this.inp.nativeElement.value = this.cartTotal;
+  }
   WaitForInput(){
     let body = document.getElementsByTagName("body");
     body[0].focus()
@@ -86,18 +113,14 @@ export class PosTransactComponent implements OnInit{
       switch(e.key){
         case 'r' :
         case 'R' :
-          this.text = "Read"; 
-          this.posMode = 'Read';
-          if(!this.inp.nativeElement.value){
-            this.showModal = true;
-          }
-          else{
-            this.CheckItemPrice(this.inp.nativeElement.value.trim())
-          }
+          this.SwitchToRead()
+          break;
+        case 'v' :
+        case 'V' :
+          this.SwitchToVoid()
           break;
           case '+':
-            this.posMode = "SubTotal";
-            this.text = "Total";
+            this.SubTotalMode()
           break;
           case '-':
             this.posMode = "Finalising";
@@ -107,12 +130,19 @@ export class PosTransactComponent implements OnInit{
             this.showModal = true;
           break;
           case 'Escape':
-            this.text = "";
-            this.showModal = false;
+          case 'End':
+              this.EndOperation()
           break;
           case 'Enter':
-            this.CheckItemPrice(this.inp.nativeElement.value)
-            
+            if(this.posMode == 'Read'){
+              this.CheckItemPrice(this.inp.nativeElement.value)
+            }
+            else if(this.posMode == 'Void'){
+              this.VoidItem(this.inp.nativeElement.value)
+            }
+            else{
+              this.AddToCart(this.inp.nativeElement.value)
+            }
           break;
           default:
             console.log(e.key)
@@ -135,7 +165,6 @@ export class PosTransactComponent implements OnInit{
     this.activeMenu = '';
     this.cartService.getSelectedPopular('Burgers');
   }
-  
   SignOut(){
     this.authService.LogOut();
   }
@@ -167,15 +196,5 @@ export class PosTransactComponent implements OnInit{
   }
   TogglePriceModal(){
     this.showPriceModal = !this.showPriceModal;
-  }
-  OnEnter(){
-    switch(this.posMode){
-      case '':
-        break;
-      case '':
-        break;
-      case '':
-        break;
-    }
   }
 }

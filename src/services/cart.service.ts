@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Product } from 'src/models/product';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ProductService } from './product.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class CartService {
   products : Product[] = [];
 
   productService : ProductService = inject(ProductService);
+  notificationService : NotificationService = inject(NotificationService);
 
   filteredProdsSub : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   productsInCart : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
@@ -40,7 +42,24 @@ export class CartService {
   getProducts() : Product[] | []{
     return this.products;
   }
-
+  RemoveItem(short_barcode : string){
+    var selectedProd = this.products.find(product=>product.short_barcode === +short_barcode);
+    if(selectedProd){
+      const i = this.cartProducts.findIndex(product=>product.short_barcode === +short_barcode);
+      if(i != -1){
+        this.cartProducts.splice(i,1);
+      }
+      else{
+        this.notificationService.ShowErrorNotification('An unknown error occured.');
+        return null;
+      }
+      this.productsInCart.next(this.cartProducts);
+      this.cartTotal -= selectedProd.price;
+      this.cartTotalSubject.next(this.cartTotal);
+      return selectedProd;
+    }
+    return null;
+  }
   addToCart(short_barcode : string){
     var selectedProd = this.products.find(product=>product.short_barcode === +short_barcode);
 
