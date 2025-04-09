@@ -22,8 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    PopularProductsComponent,
     AppComponent,
+    PopularProductsComponent,
     PosManagementComponent,
     LoginComponent,
     ProductComponent,

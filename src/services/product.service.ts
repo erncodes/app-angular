@@ -27,15 +27,6 @@ export class ProductService {
       return product;
     }
     return null;
-
-   /* this.httpClient.get<{[key : string] : Product}>('https://urbanstrides-640e5-default-rtdb.europe-west1.firebasedatabase.app/products/'+short_barcode+'.json')
-    .pipe(map((response)=>{
-      let prod = {};
-      prod = {...response, short_barcode : short_barcode};
-      return prod;
-    })).subscribe((product)=>{
-    }) */
-
   }
   EditProduct(){}
   CreateProduct(product : Product){

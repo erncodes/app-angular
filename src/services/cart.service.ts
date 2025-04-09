@@ -3,6 +3,8 @@ import { Product } from 'src/models/product';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ProductService } from './product.service';
 import { NotificationService } from './notification.service';
+import { Sale } from 'src/models/sale';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ export class CartService {
 
   productService : ProductService = inject(ProductService);
   notificationService : NotificationService = inject(NotificationService);
+  httpClient : HttpClient = inject(HttpClient);
 
   filteredProdsSub : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   productsInCart : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
@@ -78,5 +81,11 @@ export class CartService {
     this.cartTotal = 0;
     this.cartTotalSubject.next(this.cartTotal);
     this.productPriceSubject.next(0);
+  }
+  FinalizeSale(sale : Sale){
+    this.httpClient.post('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/sales',sale).subscribe({
+      next: (res)=>{this.notificationService.ShowSuccessNotification('New Sale Added!')},
+      error:(err)=>{this.notificationService.ShowErrorNotification(err.message)}
+    })
   }
 }
