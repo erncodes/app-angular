@@ -72,7 +72,9 @@ export class CartService {
       this.cartTotal += selectedProd.price;
       this.cartTotalSubject.next(this.cartTotal);
       this.productPriceSubject.next(selectedProd.price);
+      return selectedProd;
     }
+    return null;
   }
 
   clearCart(){

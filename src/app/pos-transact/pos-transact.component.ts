@@ -25,6 +25,8 @@ export class PosTransactComponent implements OnInit{
   checkedProduct : Product;
  
   cartTotal : number = 0;
+  change : number = 0;
+  amount : number = 0;
   productPrice : number | string = '';
   loggedUser : LoggedInUser | undefined = undefined;
   productService : ProductService = inject(ProductService);
@@ -63,24 +65,54 @@ export class PosTransactComponent implements OnInit{
     this.cartService.clearCart();
     this.notificationService.ShowInfoNotification("Cart Cleared!")
     this.inp.nativeElement.value = 0;
+    this.text = '';
   }
   VoidItem(barcode : string){
     const itemVoid = this.cartService.RemoveItem(barcode);
     if(itemVoid){
+        setTimeout(()=>{
+        this.inp.nativeElement.value = '';
+        this.EndOperation()
+        },2000);
+      this.inp.nativeElement.value = "-"+ itemVoid.price;
       this.notificationService.ShowInfoNotification(itemVoid.title + ' Removed!');
-      this.EndOperation()
+    }
+    else{
+      this.notificationService.ShowErrorNotification('Item Not Found!');
     }
   }
   CheckItemPrice(barcode : string){
     this.productService.GetProduct(barcode);
     this.TogglePriceModal();
   }
-  FinaliseSale(cartItems : Product[]){
-    const sale = new Sale(this.loggedUser.user.fullName,new Date(),cartItems,cartItems.length);
-    //this.cartService.Finalize(cartItems)
+  FinaliseSale(input : string){
+    if(this.loggedUser){
+      if(+input < this.cartTotal){
+        this.cartTotal -= +input;
+        this.posMode = 'Final';
+      }else{
+        this.change = +this.cartTotal - +input;
+        const sale = new Sale(this.loggedUser.user.fullName,new Date(),this.productsInCart,this.cartTotal,+this.change.toFixed(2));
+        this.cartService.FinalizeSale(sale);
+        this.inp.nativeElement.value = this.change.toFixed(2);
+        this.text = 'Change';
+        this.posMode = 'Ready';
+      }
+
+    }
+
   }
   AddToCart(barcode : string){
-    this.cartService.addToCart(barcode);
+    let item = this.cartService.addToCart(barcode);
+    if(item){
+      setTimeout(()=>{
+      this.inp.nativeElement.value = '';
+      },2000);
+      this.inp.nativeElement.value = item.price;
+    }
+    else{
+      this.notificationService.ShowErrorNotification('Product not found. Please check your barcode!')
+    }
   }
   SwitchToRead(){
     this.text = "Read"; 
@@ -99,9 +131,14 @@ export class PosTransactComponent implements OnInit{
     this.showPriceModal = false;
   }
   SubTotalMode(){
-    this.posMode = "SubTotal";
-    this.text = "Total";
-    this.inp.nativeElement.value = this.cartTotal;
+    this.posMode = "Subtotal";
+    this.inp.nativeElement.value = "";
+    if(this.isPanelExpanded){
+      this.text = "Total : " + this.cartTotal.toFixed(2);
+    }
+    else{
+      this.text = "Total";
+    }
   }
   WaitForInput(){
     let body = document.getElementsByTagName("body");
@@ -119,12 +156,21 @@ export class PosTransactComponent implements OnInit{
         case 'V' :
           this.SwitchToVoid()
           break;
+        case ' ' :
+          this.TogglePanel();
+          break;
           case '+':
             this.SubTotalMode()
           break;
           case '-':
-            this.posMode = "Finalising";
-            this.text = "Change";
+            if(this.posMode == 'Subtotal'){
+              this.posMode = "Finalising";
+              this.text = "Change";
+            }
+            else{
+              this.inp.nativeElement.value = this.cartTotal.toFixed(2);
+              this.notificationService.ShowErrorNotification('Please Enter Subtotal to finalize');
+            }
           break;
           case 'insert':
             this.showModal = true;
@@ -136,6 +182,9 @@ export class PosTransactComponent implements OnInit{
           case 'Enter':
             if(this.posMode == 'Read'){
               this.CheckItemPrice(this.inp.nativeElement.value)
+            }
+            else if(this.posMode == 'Subtotal'){
+              this.FinaliseSale(this.inp.nativeElement.value);
             }
             else if(this.posMode == 'Void'){
               this.VoidItem(this.inp.nativeElement.value)
@@ -158,6 +207,8 @@ export class PosTransactComponent implements OnInit{
     }
     this.isPanelExpanded = !this.isPanelExpanded;
     this.cartService.getSelectedPopular('Burgers');
+    this.posMode = 'Ready';
+    this.text = '';
   }
   ToggleMode(){
     this.isSearchMode = !this.isSearchMode;
