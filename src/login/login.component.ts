@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthResponse } from 'src/models/authResponse';
 import { LoggedInUser } from 'src/models/loggedInUser';
-import { User } from 'src/models/user';
 import { AuthService } from 'src/services/auth-.service';
+import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/services/notification.service';
 
 @Component({
@@ -34,10 +34,6 @@ export class LoginComponent implements OnInit{
   OnFormSubmitted(form : NgForm){
     const email = form.value.email;
     const password = form.value.password;
-    if(!email || !password){
-      this.notificationService.ShowErrorNotification('Please Fill All Required Fields')
-      return;
-    }
     if(this.isLoginMode){
       this.authObs = this.authService.Login(email,password);
     }
@@ -56,5 +52,28 @@ export class LoginComponent implements OnInit{
       error : (error) => { this.notificationService.ShowErrorNotification(error.message)}
     });
     form.reset();
+  }
+  LoginAsCashier(){
+    const email = environment.cashierEmail;
+    const password = environment.cashierPass;
+    this.authObs = this.authService.Login(email,password);
+    this.authObs.subscribe({
+      next : () =>{
+          this.router.navigate(['/PosTransact'])
+      },
+      error : (error) => { this.notificationService.ShowErrorNotification(error.message)}
+    })
+
+  }
+  LoginAsAdmin(){
+    const email = environment.adminEmail;
+    const password = environment.adminPass;
+    this.authObs = this.authService.Login(email,password);
+    this.authObs.subscribe({
+      next : () =>{
+        this.router.navigate(['/PosManagement'])
+      },
+      error : (error) => { this.notificationService.ShowErrorNotification(error.message)}
+    })
   }
 }

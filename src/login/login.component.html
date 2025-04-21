@@ -12,20 +12,24 @@
                 <h2>{{isLoginMode? 'Login' : 'Sign-Up'}}</h2>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input email name="email" ngModel>
+                    <input email name="email" ngModel required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" ngModel>
+                    <input type="password" name="password" ngModel required>
                 </div>
-                <div class="mb-3 text-end">
+                <div class="mb-3 justify-content-end d-flex">
                     <label for="chkbox" class="form-label" id="remember-label">Remember me?</label>
-                    <input type="checkbox" name="remember-chkbox" ngModel>
+                    <input type="checkbox" id="remember-chkbox" name="remember-chkbox" ngModel>
                 </div>
                 <div class="mb-3 text-center">
                     <button class="btn btn-outline-light mb-3" type="submit" [disabled]="authForm.invalid">{{isLoginMode? 'Login' : 'Register'}}</button>
                     <p *ngIf="isLoginMode">Don't have an account ? <br> <a class="message" (click)="SwitchMode()">Click here</a> to register.</p>
                     <p *ngIf="!isLoginMode">Already have an account ? <br> <a class="message" (click)="SwitchMode()">Click here</a> to login.</p>
+                </div>
+                <div class="ease-of-access d-flex justify-content-center align-items-center flex-column">
+                    <button type="button" (click)="LoginAsCashier()" class="btn btn-light mb-3 w-50">Login as Cashier</button>
+                    <button type="button"  (click)="LoginAsAdmin()" class="btn btn-light mb-3 w-50">Login as Admin</button>
                 </div>
             </form>
         </div>
