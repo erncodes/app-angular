@@ -56,6 +56,44 @@ main{
   overflow: hidden;
   transition: 0.5s ease;
 }
+.mod-cover-i{
+  position: absolute;
+  z-index: 4;
+  left: 500px;
+  top: 800px;
+  width: 800px;
+  height: 580px;
+  background-color: rgb(255, 255, 255);
+  transition: 0.5s ease;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.mod-cover-i.active{
+  top: 30px;
+}
+.mod-cover-i .col-7{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: auto;
+}
+.guide{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  margin: 3px 10px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.guide p{
+  margin-bottom: 5px;
+}
+.guide-title{
+  color: rgb(25, 0, 255);
+  font-weight: bold;
+}
 .mod-cover.active{
   top: 25px;
 }
@@ -150,7 +188,7 @@ main{
   box-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #ff0000 0 -3px 0 inset;
 }
 .express-1:nth-child(3){
-  box-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #0fd3ff 0 -3px 0 inset;
+  animation: glow 2s linear alternate infinite;
 }
 .col-2 h3{
   color: white;
@@ -437,6 +475,24 @@ input:checked + .sliding-element::after{
   }
   100%{
       transform: rotate(360deg);
+  }
+}
+@keyframes glow {
+  0%{
+    transform: scale(1);
+    box-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #0fd3ff 0 -3px 0 inset;
+  }
+  33%{
+    transform: scale(1.1);
+    box-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #f00f0f 0 -3px 0 inset;
+  }
+  66%{
+    transform: scale(1.1);
+    box-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #15ff00 0 -3px 0 inset;
+  }
+  100%{
+    transform: scale(1);
+    box-shadow: rgba(255, 255, 255, 0.4) 0 2px 4px, rgba(255, 255, 255, 0.3) 0 7px 13px -3px, #ffffff 0 -3px 0 inset;
   }
 }
 @keyframes toggleMenu {

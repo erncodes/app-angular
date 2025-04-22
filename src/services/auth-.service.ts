@@ -6,6 +6,7 @@ import { AuthResponse } from 'src/models/authResponse';
 import { LoggedInUser } from 'src/models/loggedInUser';
 import { User } from 'src/models/user';
 import { NotificationService } from './notification.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.set('Access-Control-Allow-Origin','*');
     return this.httpClient.post<AuthResponse>
-    ('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC3FWA9y0cah9M6hLirGmYr8lIpF6IMOmk',data).
+    ('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='+ environment.firebaseApiKey,data).
     pipe(catchError(this.HandleError), tap((res)=>{
       this.HandleSignIn(res);
     }));
@@ -37,7 +38,7 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = headers.set('Access-Control-Allow-Origin','*');
     return this.httpClient.post<AuthResponse>
-    ('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC3FWA9y0cah9M6hLirGmYr8lIpF6IMOmk',data).
+    ('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +environment.firebaseApiKey,data).
     pipe(catchError(this.HandleError), tap((res)=>{
       this.HandleSignIn(res);
     }))

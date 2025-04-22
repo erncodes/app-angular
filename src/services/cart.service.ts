@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Product } from 'src/models/product';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { ProductService } from './product.service';
 import { NotificationService } from './notification.service';
 import { Sale } from 'src/models/sale';
@@ -19,6 +19,22 @@ export class CartService {
   cartProducts :Product[]  = [];
   cartTotal : number = 0;
   products : Product[] = [];
+  sales : Sale[] = [];
+  filtered_sales : Sale[] = [];
+
+  pizzaCount = 0;
+  burgerCount = 0;
+  mealCount = 0;
+  pizzaTotal = 0;
+  burgerTotal = 0;
+  mealTotal = 0;
+
+  pizzaTotalSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  mealTotalSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  burgerTotalSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  pizzaCountSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  mealCountSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  burgerCountSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   productService : ProductService = inject(ProductService);
   notificationService : NotificationService = inject(NotificationService);
@@ -26,8 +42,10 @@ export class CartService {
 
   filteredProdsSub : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   productsInCart : BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  salesSubject : BehaviorSubject<Sale[]> = new BehaviorSubject<Sale[]>([]);
   cartTotalSubject : BehaviorSubject<number> = new BehaviorSubject<number>(0); 
   productPriceSubject : Subject<number> = new Subject<number>();
+
 
   getSelectedPopular(filterText? : string){
     if(filterText == ''){
@@ -85,7 +103,6 @@ export class CartService {
     this.productPriceSubject.next(0);
   }
   FinalizeSale(sale : Sale){
-    console.log(sale)
     let headers = new HttpHeaders();
     headers = headers.set('Access-Control-Allow-Origin','*');
     this.httpClient.post('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/sales.json',sale,{headers : headers}).subscribe({
@@ -99,4 +116,55 @@ export class CartService {
       }
     })
   }
-}
+  GetAllSales(){
+    let headers = new HttpHeaders();
+    headers = headers.set('Access-Control-Allow-Origin','*');
+    this.httpClient.get<{ [key : string] : Sale}>('https://dufty-pos-default-rtdb.europe-west1.firebasedatabase.app/sales.json',{headers : headers})
+    .pipe(map((data)=>{
+    let salesArray = [];
+     for(let key in data){
+       if(data.hasOwnProperty(key))
+        {
+         salesArray.push({...data[key],id : key})
+        }
+       }
+       return salesArray;
+      })).subscribe((sales)=>{
+      this.sales = sales;
+      this.filtered_sales = this.sales;
+      this.salesSubject.next(sales);
+      this.GetFilteredSales(sales)
+      });
+      }
+    
+    GetFilteredSales(sales : Sale[]){
+      sales.forEach((sale)=>{
+        this.GetProductsInfo(sale);
+      })
+      this.pizzaCountSubject.next(this.pizzaCount);
+      this.pizzaTotalSubject.next(this.pizzaTotal);
+      this.burgerCountSubject.next(this.burgerCount);
+      this.burgerTotalSubject.next(this.burgerTotal);
+      this.mealCountSubject.next(this.mealCount);
+      this.mealTotalSubject.next(this.mealTotal);
+    return sales;
+    }
+
+    GetProductsInfo(sale : Sale){
+   
+      sale.products.forEach(product => {
+        if(product.category == 'Pizzas'){
+          this.pizzaCount += 1;
+          this.pizzaTotal += product.price;
+        }
+        else if(product.category == 'Meals'){
+          this.burgerCount += 1;
+          this.burgerTotal += product.price
+        }
+        else if(product.category == 'Burgers'){
+          this.mealCount += 1;
+          this.mealTotal += product.price;
+        }
+      });
+    }
+  }

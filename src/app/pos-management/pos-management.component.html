@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    
     <div class="background">
         <div class="cover">
             <i class="fa fa-chess-knight"></i>
@@ -11,7 +12,7 @@
             <a class="logo"><i class="fa fa-chess-knight"></i>POS Management</a>
         </div>
         <div class="user-details">
-            <p>Logged In : Admin</p>
+            <p>Logged In : {{loggedUser.user.fullName}}</p>
         </div>
     </nav>
     <div class="sidebar-menu">
@@ -38,6 +39,11 @@
         </div>
     </div>
     <div class="main-content">
+        <div class="overlay">
+            <h2>Important <i class="fa fa-info-circle text-danger"></i></h2>
+            <p class="title mb-3">Functionality Currently Limited</p>
+            <p class="description mt-5">More updates coming soon</p>
+        </div>
         <div class="row gap-2 px-3" *ngIf="activePanel == 'PosManagement'">
             <h2 class="fw-bold">Welcome To Your Dashboard</h2>
             <button class="button-15 col-2 ms-3" (click)="SwitchActivePanel('ProductPanel')">

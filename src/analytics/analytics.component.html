@@ -40,17 +40,26 @@
             </ejs-accumulationchart>
         </div>
         <div class="box">
-            <ejs-accumulationchart>
+            <ejs-accumulationchart [title]="chartPieTitle2">
                 <e-accumulation-series-collection>
-                    <e-accumulation-series type="Pie" [dataSource]="mockPieData" xName="name" yName="total" >
+                    <e-accumulation-series type="Pie" [dataSource]="mockPieData2" xName="name" yName="total" [dataLabel]="pieLabelSettings" innerRadius="40%">
 
                     </e-accumulation-series>
                 </e-accumulation-series-collection>
             </ejs-accumulationchart>
         </div>
     </div>
-    <div class="col-2 flex-grow-1 promos">
-        <div class="box"></div>
+    <div class="col-2 promos">
+        <div class="box">
+            <h2 class="fw-bold">Balance</h2>
+            <p>R 10 000</p>
+            <h2 class="fw-bold">Stock Value</h2>
+            <p>R 68 000</p>
+            <h2 class="fw-bold">Damage Expenses</h2>
+            <p>R 4 000</p>
+            <h2 class="fw-bold">Projected Profits</h2>
+            <p>R 44 000</p>
+        </div>
         <div class="box"></div>
     </div>
 </div>

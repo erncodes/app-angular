@@ -13,10 +13,47 @@
                <h1>{{checkedProduct? checkedProduct.title : 'No product found'}}</h1>
                <hr>
                <p class="price-tag">Price : {{checkedProduct? checkedProduct.price:'No product found'}}</p>
-               <p class="text-danger">On Ballisto Promo</p>
-               <p>Valid till 26/12/2026</p>
+               <p class="text-danger">No active promotions</p>
+               <p class="text-danger">{{checkedProduct? checkedProduct.category:'No product found'}}</p>
                <div class="d-flex justify-end">
                 <a class="button-15" (click)="TogglePriceModal()">Close</a>
+               </div>
+            </div>
+        </div>
+        <div class="mod-cover-i" [ngClass]="{'mod-cover-i' : true, 'active' : showInfoModal}">
+            <div class="col-7 m-auto">
+                <h1 class="fw-bold ms-2">Quick Action Guide <i class="fa fa-info ms-3 text-info"></i></h1>
+                <div class="mb-1 guide">
+                    <p class="guide-title">Void :</p>
+                    <p class="text-black">To void an item press letter 'v' followed by the item's barcode then press 'Enter'.</p>
+                </div>
+                <div class="mb-1 guide">
+                    <p class="guide-title">Read :</p>
+                    <p class="text-black">To read an item press letter 'r' followed by the item's barcode then press 'Enter'.</p>
+                </div>
+                <div class="mb-1 guide">
+                    <p class="guide-title">Add to cart :</p>
+                    <p class="text-black">To add an item to cart, enter item's barcode on the 'main input' then press 'Enter' or
+                         click on the item in the popular products panel.
+                    </p>
+                </div>
+                <div class="mb-1 guide">
+                    <p class="guide-title">SubTotal Mode :</p>
+                    <p class="text-black">To void an item press '+' on numeric keyboard to enter subtotal mode.</p>
+                </div>
+                <div class="mb-1 guide">
+                    <p class="guide-title">Toggle Panel :</p>
+                    <p class="text-black">Press Space bar to toggle panel or use the UI controls.</p>
+                </div>
+                <div class="mb-1 guide">
+                    <p class="guide-title">Finalise sale :</p>
+                    <p class="text-black">Enter subtotal mode first(press '+') then enter amount followed by '-' to finilise sale. 
+                        If the amount entered is less than the cart's total, then amount will be subtracted and the POS will remail in 
+                        'Final Mode' until the required amount is entered.
+                    </p>
+                </div>
+               <div class="d-flex justify-end">
+                <a class="button-15 ms-auto mt-2 text-danger" (click)="ToggleInfoModal()"><i class="fa fa-xmark"></i></a>
                </div>
             </div>
         </div>
@@ -28,7 +65,7 @@
                 <div class="express-1" (click)="SwitchToVoid()">
                     <i class="fa fa-delete-left" title="void"></i>
                 </div>
-                <div class="express-1">
+                <div class="express-1 info" (click)="ToggleInfoModal()">
                     <i class="fa fa-info" title="info"></i>
                 </div>
             </div>
@@ -63,7 +100,7 @@
         <div class="col-4 output-panel">
             <div class="numeric-output">
                 <span class="text-output">{{text}}</span>
-                <input type="text" placeholder="0.00" #inp>
+                <input type="text" placeholder="0.00" #mainInput>
             </div>
             <div class="output-body" #outputPanel>
                     <div class="container">

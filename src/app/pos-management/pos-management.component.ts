@@ -1,8 +1,10 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoggedInUser } from 'src/models/loggedInUser';
 import { AuthService } from 'src/services/auth-.service';
 import { CategoryService } from 'src/services/category.service';
+import { NotificationService } from 'src/services/notification.service';
 import { PosManagementService } from 'src/services/pos-management.service';
 import { ProductService } from 'src/services/product.service';
 import { PromoService } from 'src/services/promo.service';
@@ -15,6 +17,7 @@ import { PromoService } from 'src/services/promo.service';
 export class PosManagementComponent implements OnInit{
 
   posManagementService : PosManagementService = inject(PosManagementService);
+  notificationService : NotificationService = inject(NotificationService)
   categoryService : CategoryService = inject(CategoryService);
   productService : ProductService = inject(ProductService);
   promoService : PromoService = inject(PromoService);
@@ -23,7 +26,7 @@ export class PosManagementComponent implements OnInit{
   activePanel : string = 'PosManagement';
   isCreateMode : boolean = false;
   emittedValue = '';
-
+  loggedUser : LoggedInUser | undefined = undefined;
   @ViewChild('formi')
   form: NgForm | undefined;
 
@@ -34,6 +37,10 @@ export class PosManagementComponent implements OnInit{
     this.authService.LogOut();
   }
   ngOnInit(): void {
+    this.authService.loggedUserSubject.subscribe({
+      next : (user) =>{ this.loggedUser = user},
+      error: (err) =>{ this.notificationService.ShowErrorNotification(err.message)}
+    })
     this.posManagementService.activePanelSubject.subscribe((text)=>{
       this.activePanel = text;
     })
